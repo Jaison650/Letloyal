@@ -1,0 +1,20 @@
+{
+  "merchants": {
+    "test-merchant-123": {
+      "name": "Chai Tapri",
+      "rewards": [
+        { "name": "Free Tea", "threshold": 500 },
+        { "name": "Discounted Chai", "threshold": 1000 }
+      ]
+    }
+  },
+  "customers": {
+    "test-customer-999": {
+      "phone": "+919999999999",
+      "coins": {
+        "test-merchant-123": 480
+      },
+      "rewards": []
+    }
+  }
+}
