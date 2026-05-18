@@ -8,22 +8,28 @@ import type { DemoHint } from '@/components/merchant/RedemptionValidator';
 
 export default async function ValidatePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const auth = await getMerchantAuthFromCookies();
-  if (!auth || !isMerchant(auth) || auth.slug !== slug) redirect('/merchant/login');
 
-  const merchant = await getMerchantBySlug(slug);
-  if (!merchant) redirect('/merchant/login');
+  let auth, merchant, demoRows;
+  try {
+    auth = await getMerchantAuthFromCookies();
+    if (!auth || !isMerchant(auth) || auth.slug !== slug) redirect('/merchant/login');
 
-  // Find demo customers who currently have pending OTPs for this merchant
-  const demoRows = await query<{ first_name: string; phone_number: string }>(
-    `SELECT DISTINCT cu.first_name, cu.phone_number
-     FROM redemptions r
-     JOIN customers cu ON cu.id = r.customer_id
-     WHERE r.merchant_id = ? AND r.status = 'pending_otp'
-     ORDER BY r.created_at DESC
-     LIMIT 3`,
-    [merchant.id]
-  );
+    merchant = await getMerchantBySlug(slug);
+    if (!merchant) redirect('/merchant/login');
+
+    demoRows = await query<{ first_name: string; phone_number: string }>(
+      `SELECT DISTINCT cu.first_name, cu.phone_number
+       FROM redemptions r
+       JOIN customers cu ON cu.id = r.customer_id
+       WHERE r.merchant_id = ? AND r.status = 'pending_otp'
+       ORDER BY r.created_at DESC
+       LIMIT 3`,
+      [merchant.id]
+    );
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    return <pre style={{padding:'2rem',color:'red'}}>{msg}</pre>;
+  }
 
   const demoHints: DemoHint[] = demoRows.map((row) => ({
     name:  row.first_name || 'Customer',
