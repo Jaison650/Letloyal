@@ -16,7 +16,6 @@ function createPool(): mysql.Pool {
     connectionLimit: 10,
     queueLimit: 0,
     timezone: '+00:00',
-    ssl: { rejectUnauthorized: false },
   });
 }
 
