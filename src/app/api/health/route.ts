@@ -9,10 +9,9 @@ export async function GET() {
       timestamp: new Date().toISOString(),
       db: 'connected',
     });
-  } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : String(err);
+  } catch {
     return NextResponse.json(
-      { status: 'error', timestamp: new Date().toISOString(), db: 'disconnected', error: msg },
+      { status: 'error', timestamp: new Date().toISOString(), db: 'disconnected' },
       { status: 503 }
     );
   }
