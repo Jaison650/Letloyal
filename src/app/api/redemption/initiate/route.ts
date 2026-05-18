@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
       const e = enrollment.rows[0];
 
-      if (e.status !== 'reward_unlocked') {
+      if (e.status !== 'reward_unlocked' && e.status !== 'otp_pending') {
         throw { code: 'not_unlocked', status: 422, message: 'Your reward is not yet unlocked.' };
       }
 

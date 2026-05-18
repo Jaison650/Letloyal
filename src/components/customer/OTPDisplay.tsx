@@ -8,9 +8,10 @@ interface OTPDisplayProps {
   merchantName: string;
   reward: string;
   onCancel: () => void;
+  onRenew?: () => void;
 }
 
-export default function OTPDisplay({ otp, expiresAt, merchantName, reward, onCancel }: OTPDisplayProps) {
+export default function OTPDisplay({ otp, expiresAt, merchantName, reward, onCancel, onRenew }: OTPDisplayProps) {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
@@ -73,6 +74,16 @@ export default function OTPDisplay({ otp, expiresAt, merchantName, reward, onCan
             In live production this code is sent via SMS. For this demo, show this screen.
           </p>
         </div>
+
+        {/* Expired — get new code */}
+        {expired && onRenew && (
+          <button
+            onClick={onRenew}
+            className="w-full py-3 rounded-xl font-bold text-sm text-white bg-accent flex items-center justify-center gap-2 min-h-[44px] hover:opacity-90 active:scale-95 transition-all"
+          >
+            Get New Code →
+          </button>
+        )}
 
         {/* Cancel */}
         <button
