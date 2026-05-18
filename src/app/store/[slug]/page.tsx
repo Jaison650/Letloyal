@@ -101,6 +101,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
       if (scanData.success) {
         return (
           <ScanSuccess
+            merchantId={merchant.id}
             merchantName={merchant.business_name}
             merchantColor={merchant.brand_color}
             rewardDescription={campaign.reward_description}

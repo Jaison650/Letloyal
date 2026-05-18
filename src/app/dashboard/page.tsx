@@ -73,12 +73,13 @@ export default function CustomerDashboard() {
           <Link href="/" className="flex items-center gap-1.5 font-sora font-bold text-primary text-sm">
             <QrCode size={18} /> LetLoyal
           </Link>
-          <div
-            className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold select-none"
+          <Link
+            href="/account"
+            className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold select-none hover:bg-primary/90 transition-colors"
             title="My account"
           >
             {loading ? '·' : initials}
-          </div>
+          </Link>
         </div>
       </header>
 
