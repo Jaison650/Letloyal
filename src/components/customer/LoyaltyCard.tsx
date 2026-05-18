@@ -181,12 +181,14 @@ export default function LoyaltyCard({ enrollment }: { enrollment: Enrollment }) 
           {/* Inline OTP display */}
           {isPending && otpData && (
             <OTPDisplay
+              redemptionId={otpData.redemption_id}
               otp={otpData.otp_code}
               expiresAt={otpData.expires_at}
               merchantName={enrollment.merchant_name}
               reward={enrollment.reward_description}
               onCancel={handleCancel}
               onRenew={async () => { setOtpData(null); await confirmRedeem(); }}
+              onSuccess={() => { setOtpData(null); setLocalStatus('active'); }}
             />
           )}
 
