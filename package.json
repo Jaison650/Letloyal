@@ -1,0 +1,47 @@
+{
+  "name": "letloyal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "start:next": "next start",
+    "lint": "next lint",
+    "seed": "npx ts-node --project tsconfig.seed.json db/seed.ts",
+    "db:schema": "mysql -u letloyal -p letloyal < db/schema.sql"
+  },
+  "dependencies": {
+    "next": "^15.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "mysql2": "^3.11.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "qrcode": "^1.5.4",
+    "html5-qrcode": "^2.3.8",
+    "canvas-confetti": "^1.9.3",
+    "lucide-react": "^0.468.0",
+    "framer-motion": "^11.15.0",
+    "recharts": "^2.14.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/qrcode": "^1.5.5",
+    "@types/canvas-confetti": "^1.9.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^9",
+    "eslint-config-next": "^15.3.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
