@@ -69,16 +69,19 @@ export default function CustomerDashboard() {
     <div className="min-h-screen bg-brand-bg pb-28">
 
       {/* ── Header ───────────────────────────────────────────────── */}
-      <header className="bg-white border-b border-brand-border sticky top-0 z-30">
+      <header className="sticky top-0 z-30" style={{ background: 'linear-gradient(90deg, #014451, #028090)' }}>
         <div className="max-w-[480px] mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-1.5 font-sora font-bold text-primary text-sm">
-            <QrCode size={18} /> LetLoyal
+          <Link href="/" className="flex items-center gap-2 font-sora font-bold text-white text-sm">
+            <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center">
+              <QrCode size={14} className="text-[#012d38]" />
+            </div>
+            LetLoyal
           </Link>
           <div className="flex items-center gap-2">
             <NotificationBell />
             <Link
               href="/account"
-              className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold select-none hover:bg-primary/90 transition-colors"
+              className="w-9 h-9 rounded-full bg-white/20 border-2 border-white/30 flex items-center justify-center text-white text-sm font-bold select-none hover:bg-white/30 transition-colors"
               title="My account"
             >
               {loading ? '·' : initials}
@@ -189,16 +192,20 @@ export default function CustomerDashboard() {
       </div>
 
       {/* ── Bottom nav ───────────────────────────────────────────── */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-brand-border px-6 py-3 flex justify-around z-30">
-        <Link href="/dashboard" className="flex flex-col items-center gap-1 text-primary">
-          <QrCode size={22} />
-          <span className="text-[10px] font-semibold">Cards</span>
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-brand-border px-6 pb-safe py-2 flex justify-around z-30">
+        <Link href="/dashboard" className="flex flex-col items-center gap-1 relative">
+          <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-full" />
+          <QrCode size={20} className="text-primary" />
+          <span className="text-[10px] font-bold text-primary">Cards</span>
         </Link>
-        <Link href="/scan" className="flex flex-col items-center gap-1 text-text-light">
-          <div className="w-12 h-8 bg-accent rounded-full flex items-center justify-center -mt-3">
+        <Link href="/scan" className="flex flex-col items-center gap-1">
+          <div
+            className="w-14 h-9 rounded-full flex items-center justify-center -mt-4 shadow-btn"
+            style={{ background: 'linear-gradient(135deg, #028090, #02C39A)' }}
+          >
             <Camera size={18} className="text-white" />
           </div>
-          <span className="text-[10px] font-semibold text-text-light">Scan</span>
+          <span className="text-[10px] font-semibold text-text-light mt-0.5">Scan</span>
         </Link>
         <LogoutButton />
       </nav>
