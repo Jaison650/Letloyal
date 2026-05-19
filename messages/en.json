@@ -1,0 +1,89 @@
+{
+  "common": {
+    "letloyal": "LetLoyal",
+    "poweredBy": "Powered by LetLoyal",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "cancel": "Cancel",
+    "loading": "Loading…",
+    "back": "Back",
+    "save": "Save changes",
+    "error": "Something went wrong.",
+    "leaveReview": "Leave Feedback",
+    "skip": "Skip"
+  },
+  "nav": {
+    "cards": "Cards",
+    "scan": "Scan",
+    "account": "Account"
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in to your loyalty account",
+    "signupTitle": "Join LetLoyal",
+    "signupSubtitle": "Create your free loyalty account",
+    "phone": "Phone Number",
+    "password": "Password",
+    "firstName": "First Name",
+    "confirmPassword": "Confirm Password",
+    "signInBtn": "Sign In",
+    "signUpBtn": "Create Account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "registerLink": "Register free →",
+    "loginLink": "Sign in →"
+  },
+  "dashboard": {
+    "greetingName": "Hi, {name}!",
+    "greeting": "Hi there!",
+    "subtitleZero": "Scan a QR code below to start earning rewards.",
+    "subtitleOne": "You have 1 loyalty card.",
+    "subtitleMany": "You have {count} loyalty cards.",
+    "myCards": "My Loyalty Cards",
+    "noCards": "No loyalty cards yet",
+    "noCardsHint": "Visit a store and scan their QR code to start earning rewards.",
+    "scanCTA": "Scan a Store QR Code",
+    "scanHint": "Earn rewards at any LetLoyal store",
+    "discoverStores": "Discover Stores",
+    "scanToJoin": "Scan to Join →",
+    "allEnrolled": "You're enrolled in all demo stores!"
+  },
+  "store": {
+    "loyaltyProgram": "Loyalty Rewards Program",
+    "yourReward": "Your Reward",
+    "visitTimes": "Visit {threshold} times to earn your reward",
+    "spendAmount": "Spend €{threshold} to earn your reward",
+    "joinProgram": "Sign In to Earn Points",
+    "registerFree": "Register — It's Free",
+    "noAppNeeded": "No app download needed",
+    "joinIn60": "Join in under 60 seconds",
+    "currentProgress": "Current progress",
+    "rewardReady": "🎉 Ready to redeem!",
+    "moreTo": "{remaining} more {unit}{plural} to go",
+    "rewardUnlocked": "Your reward is unlocked! Go to your dashboard to redeem it.",
+    "earnPoints": "Earn Points Now",
+    "viewDashboard": "View My Dashboard",
+    "goRedeem": "Go to Dashboard to Redeem →",
+    "programPaused": "Program Paused",
+    "programPausedHint": "This loyalty campaign is temporarily paused. Check back soon!",
+    "alreadyRecorded": "Already Recorded!",
+    "alreadyHint": "Points already recorded for this visit to {merchant}. See you next time! 👋"
+  },
+  "scan": {
+    "title": "Scan Loyalty QR",
+    "hint": "Point your camera at the merchant's QR code",
+    "starting": "Starting camera…",
+    "signInFirst": "Please sign in first to earn points.",
+    "signIn": "Sign In"
+  },
+  "loyalty": {
+    "yourReward": "Your Reward",
+    "rewardReady": "🎉 Reward ready!",
+    "redeemNow": "Redeem Now",
+    "redeemBtn": "Redeem Now →",
+    "confirmTitle": "Confirm Redemption",
+    "confirmAt": "Redeem your reward at",
+    "codeHint": "A one-time 6-digit code will appear — show it to the merchant.",
+    "getCode": "Get My Code"
+  }
+}

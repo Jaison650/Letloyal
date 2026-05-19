@@ -6,6 +6,7 @@ import { QrCode, Camera, ChevronRight } from 'lucide-react';
 import LoyaltyCard, { type Enrollment } from '@/components/customer/LoyaltyCard';
 import LogoutButton from '@/components/customer/LogoutButton';
 import NotificationBell from '@/components/customer/NotificationBell';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 interface DemoMerchant {
   slug: string;
@@ -78,6 +79,7 @@ export default function CustomerDashboard() {
             LetLoyal
           </Link>
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             <NotificationBell />
             <Link
               href="/account"

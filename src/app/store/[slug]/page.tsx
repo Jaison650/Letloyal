@@ -8,6 +8,8 @@ import ScanSuccess from '@/components/customer/ScanSuccess';
 import ProgressBar from '@/components/ui/ProgressBar';
 import { ChevronRight, CheckCircle2, AlertCircle, MapPin, QrCode, Gift } from 'lucide-react';
 import MilestoneSteps from '@/components/ui/MilestoneSteps';
+import { getTranslations } from 'next-intl/server';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 interface PageProps {
   params:       Promise<{ slug: string }>;
@@ -17,6 +19,7 @@ interface PageProps {
 export default async function StorePage({ params, searchParams }: PageProps) {
   const { slug }                              = await params;
   const { c: campaignId, a: amountCents, ts, sig } = await searchParams;
+  const t = await getTranslations('store');
 
   // ── merchant + campaign ──────────────────────────────────────────────────
   const merchant = await getMerchantBySlug(slug);
@@ -260,25 +263,25 @@ export default async function StorePage({ params, searchParams }: PageProps) {
               className="flex items-center justify-center gap-2 w-full font-bold text-base text-white rounded-full py-3.5 min-h-[48px] transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
               style={{ background: merchant.brand_color }}
             >
-              Sign In to Earn Points <ChevronRight size={16} />
+              {t('joinProgram')} <ChevronRight size={16} />
             </Link>
             <Link
               href={signUpUrl}
               className="flex items-center justify-center gap-2 w-full font-semibold text-base rounded-full py-3.5 min-h-[48px] border-2 transition-all duration-200 hover:opacity-80"
               style={{ borderColor: merchant.brand_color, color: merchant.brand_color }}
             >
-              Register — It&apos;s Free
+              {t('registerFree')}
             </Link>
 
             {/* Trust badges */}
             <div className="pt-1 space-y-1.5 text-center">
               <p className="text-xs text-text-light flex items-center justify-center gap-1.5">
                 <CheckCircle2 size={12} className="text-accent shrink-0" />
-                No app download needed
+                {t('noAppNeeded')}
               </p>
               <p className="text-xs text-text-light flex items-center justify-center gap-1.5">
                 <CheckCircle2 size={12} className="text-accent shrink-0" />
-                Join in under 60 seconds
+                {t('joinIn60')}
               </p>
             </div>
           </div>
@@ -291,14 +294,14 @@ export default async function StorePage({ params, searchParams }: PageProps) {
             className="flex items-center justify-center gap-2 w-full font-bold text-base text-white rounded-full py-3.5 min-h-[48px]"
             style={{ background: merchant.brand_color }}
           >
-            <Gift size={16} /> Earn Points Now
+            <Gift size={16} /> {t('earnPoints')}
           </Link>
         )}
 
         {/* Logged in — has campaign, not unlocked */}
         {isLoggedIn && campaignId && enrollment?.status !== 'reward_unlocked' && (
           <Link href="/dashboard" className="btn-ghost w-full justify-center text-sm">
-            View My Dashboard
+            {t('viewDashboard')}
           </Link>
         )}
 
@@ -309,15 +312,16 @@ export default async function StorePage({ params, searchParams }: PageProps) {
             className="flex items-center justify-center gap-2 w-full font-bold text-base text-white rounded-full py-3.5 min-h-[48px]"
             style={{ background: merchant.brand_color }}
           >
-            Go to Dashboard to Redeem →
+            {t('goRedeem')}
           </Link>
         )}
 
-        {/* Powered by */}
-        <div className="text-center pt-1">
+        {/* Language + Powered by */}
+        <div className="flex items-center justify-between pt-1">
           <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-text-light hover:text-primary transition-colors">
             <QrCode size={11} /> Powered by LetLoyal
           </Link>
+          <LanguageSwitcher variant="light" />
         </div>
       </div>
     </div>

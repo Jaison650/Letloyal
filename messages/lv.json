@@ -1,0 +1,89 @@
+{
+  "common": {
+    "letloyal": "LetLoyal",
+    "poweredBy": "Darbina LetLoyal",
+    "signIn": "Ieiet",
+    "signUp": "Reģistrēties",
+    "cancel": "Atcelt",
+    "loading": "Ielādē…",
+    "back": "Atpakaļ",
+    "save": "Saglabāt",
+    "error": "Kaut kas nogāja greizi.",
+    "leaveReview": "Atstāt atsauksmi",
+    "skip": "Izlaist"
+  },
+  "nav": {
+    "cards": "Kartes",
+    "scan": "Skenēt",
+    "account": "Konts"
+  },
+  "auth": {
+    "loginTitle": "Laipni lūgti atpakaļ",
+    "loginSubtitle": "Piesakieties savā lojalitātes kontā",
+    "signupTitle": "Pievienojieties LetLoyal",
+    "signupSubtitle": "Izveidojiet savu bezmaksas lojalitātes kontu",
+    "phone": "Tālruņa numurs",
+    "password": "Parole",
+    "firstName": "Vārds",
+    "confirmPassword": "Apstipriniet paroli",
+    "signInBtn": "Ieiet",
+    "signUpBtn": "Izveidot kontu",
+    "noAccount": "Nav konta?",
+    "hasAccount": "Jau ir konts?",
+    "registerLink": "Reģistrēties →",
+    "loginLink": "Ieiet →"
+  },
+  "dashboard": {
+    "greetingName": "Sveiki, {name}!",
+    "greeting": "Sveiki!",
+    "subtitleZero": "Skenējiet QR kodu zemāk, lai sāktu krāt balvas.",
+    "subtitleOne": "Jums ir 1 lojalitātes karte.",
+    "subtitleMany": "Jums ir {count} lojalitātes kartes.",
+    "myCards": "Manas lojalitātes kartes",
+    "noCards": "Vēl nav lojalitātes karšu",
+    "noCardsHint": "Apmeklējiet veikalu un skenējiet to QR kodu, lai sāktu krāt balvas.",
+    "scanCTA": "Skenēt veikala QR kodu",
+    "scanHint": "Pelniet balvas jebkurā LetLoyal veikalā",
+    "discoverStores": "Atklāt veikalus",
+    "scanToJoin": "Skenēt, lai pievienotos →",
+    "allEnrolled": "Jūs esat reģistrēts visos demo veikalos!"
+  },
+  "store": {
+    "loyaltyProgram": "Lojalitātes atlīdzību programma",
+    "yourReward": "Jūsu balva",
+    "visitTimes": "Apmeklējiet {threshold} reizes, lai saņemtu balvu",
+    "spendAmount": "Iztērējiet €{threshold}, lai saņemtu balvu",
+    "joinProgram": "Piesakieties, lai pelnītu punktus",
+    "registerFree": "Reģistrēties — bez maksas",
+    "noAppNeeded": "Nav nepieciešama lietotne",
+    "joinIn60": "Pievienojieties 60 sekundēs",
+    "currentProgress": "Pašreizējais progress",
+    "rewardReady": "🎉 Gatavs izmantošanai!",
+    "moreTo": "Vēl {remaining} {unit}{plural}",
+    "rewardUnlocked": "Jūsu balva ir atbloķēta! Dodieties uz paneli, lai to izmantotu.",
+    "earnPoints": "Pelnīt punktus tagad",
+    "viewDashboard": "Skatīt manu paneli",
+    "goRedeem": "Doties uz paneli, lai izmantotu →",
+    "programPaused": "Programma apturēta",
+    "programPausedHint": "Šī lojalitātes kampaņa ir īslaicīgi apturēta. Pārbaudiet vēlāk!",
+    "alreadyRecorded": "Jau reģistrēts!",
+    "alreadyHint": "Punkti šim apmeklējumam pie {merchant} jau reģistrēti. Uz redzēšanos! 👋"
+  },
+  "scan": {
+    "title": "Skenēt lojalitātes QR",
+    "hint": "Pavērsiet kameru uz tirgotāja QR kodu",
+    "starting": "Ieslēdz kameru…",
+    "signInFirst": "Lūdzu, vispirms piesakieties, lai pelnītu punktus.",
+    "signIn": "Ieiet"
+  },
+  "loyalty": {
+    "yourReward": "Jūsu balva",
+    "rewardReady": "🎉 Balva gatava!",
+    "redeemNow": "Izmantot tagad",
+    "redeemBtn": "Izmantot tagad →",
+    "confirmTitle": "Apstiprināt izmantošanu",
+    "confirmAt": "Izmantot savu balvu pie",
+    "codeHint": "Tiks parādīts vienreizējs 6 ciparu kods — parādiet to tirgotājam.",
+    "getCode": "Iegūt kodu"
+  }
+}
