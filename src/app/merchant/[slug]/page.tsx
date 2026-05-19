@@ -8,6 +8,7 @@ import StatsBar from '@/components/merchant/StatsBar';
 import QRPanel from '@/components/merchant/QRPanel';
 import TransactionFeed from '@/components/merchant/TransactionFeed';
 import ValidatorFAB from '@/components/merchant/ValidatorFAB';
+import InsightsPanel from '@/components/merchant/InsightsPanel';
 import Badge from '@/components/ui/Badge';
 import ProgressBar from '@/components/ui/ProgressBar';
 import { Target, Trophy } from 'lucide-react';
@@ -113,6 +114,8 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
 
         {/* Left column: QR + Active Campaigns */}
         <div className="lg:col-span-1 space-y-6">
+          <InsightsPanel merchantSlug={slug} />
+
           {primaryCampaign && (
             <QRPanel
               merchantSlug={slug}

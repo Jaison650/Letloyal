@@ -185,6 +185,28 @@ export async function POST(req: NextRequest) {
           pointsToAdd, amountEuros, cycleNumber],
       );
 
+      // 10. Create customer notifications (non-blocking, best-effort)
+      const remaining = campaign.reward_threshold - newCount;
+      if (rewardJustUnlocked) {
+        await client.query(
+          `INSERT INTO notifications (recipient_type, recipient_id, type, title, body, action_url, merchant_id)
+           VALUES ('customer', ?, 'reward_unlocked', ?, ?, '/dashboard', ?)`,
+          [auth.sub,
+            '🎉 Reward Unlocked!',
+            `You've unlocked your reward at ${campaign.reward_description}. Visit your dashboard to redeem it.`,
+            campaign.merchant_id]
+        );
+      } else if (remaining === 1) {
+        await client.query(
+          `INSERT INTO notifications (recipient_type, recipient_id, type, title, body, action_url, merchant_id)
+           VALUES ('customer', ?, 'near_reward', ?, ?, '/dashboard', ?)`,
+          [auth.sub,
+            '⭐ Almost there!',
+            `Just 1 more visit to unlock: ${campaign.reward_description}. Come back soon!`,
+            campaign.merchant_id]
+        );
+      }
+
       // 11. Return spec response
       return {
         success: true,

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, Target, Users, CheckCircle2, BarChart3,
-  Settings2, QrCode, LogOut, Menu, X, Zap, Star
+  Settings2, QrCode, LogOut, Menu, X, Zap, Star, Bell
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import Badge from '@/components/ui/Badge';
@@ -60,6 +60,7 @@ export default function DashboardShell({
     { label: 'Validate', icon: <CheckCircle2 size={20} />, href: `/merchant/${slug}/validate` },
     { label: 'Analytics', icon: <BarChart3 size={20} />, href: `/merchant/${slug}/analytics` },
     { label: 'Feedback', icon: <Star size={20} />, href: `/merchant/${slug}/feedback` },
+    { label: 'Notify', icon: <Bell size={20} />, href: `/merchant/${slug}/notifications` },
   ];
 
   const isActive = (href: string) => {

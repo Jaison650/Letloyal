@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { QrCode, Camera, ChevronRight } from 'lucide-react';
 import LoyaltyCard, { type Enrollment } from '@/components/customer/LoyaltyCard';
 import LogoutButton from '@/components/customer/LogoutButton';
+import NotificationBell from '@/components/customer/NotificationBell';
 
 interface DemoMerchant {
   slug: string;
@@ -73,13 +74,16 @@ export default function CustomerDashboard() {
           <Link href="/" className="flex items-center gap-1.5 font-sora font-bold text-primary text-sm">
             <QrCode size={18} /> LetLoyal
           </Link>
-          <Link
-            href="/account"
-            className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold select-none hover:bg-primary/90 transition-colors"
-            title="My account"
-          >
-            {loading ? '·' : initials}
-          </Link>
+          <div className="flex items-center gap-2">
+            <NotificationBell />
+            <Link
+              href="/account"
+              className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold select-none hover:bg-primary/90 transition-colors"
+              title="My account"
+            >
+              {loading ? '·' : initials}
+            </Link>
+          </div>
         </div>
       </header>
 
