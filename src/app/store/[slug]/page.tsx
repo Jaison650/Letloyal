@@ -7,6 +7,7 @@ import { getAuthFromCookies, isCustomer } from '@/lib/auth';
 import ScanSuccess from '@/components/customer/ScanSuccess';
 import ProgressBar from '@/components/ui/ProgressBar';
 import { ChevronRight, CheckCircle2, AlertCircle, MapPin, QrCode, Gift } from 'lucide-react';
+import MilestoneSteps from '@/components/ui/MilestoneSteps';
 
 interface PageProps {
   params:       Promise<{ slug: string }>;
@@ -164,49 +165,91 @@ export default async function StorePage({ params, searchParams }: PageProps) {
           </p>
         </div>
 
-        {/* Campaign card */}
-        <div className="bg-white rounded-[20px] border border-brand-border shadow-card p-5 space-y-4">
-          {/* Reward headline */}
-          <div className="flex items-start gap-3">
-            <span className="text-2xl leading-none mt-0.5">🎁</span>
-            <div>
-              <p className="font-sora font-bold text-base text-text-dark">{campaign.reward_description}</p>
-              <p className="text-text-medium text-xs mt-0.5">
-                {campaign.campaign_type === 'visit_based'
-                  ? `Visit ${campaign.reward_threshold} times to earn your reward`
-                  : `Spend €${campaign.reward_threshold} to earn your reward`}
-              </p>
+        {/* Loyalty card */}
+        <div className="bg-white rounded-[20px] border border-brand-border shadow-card overflow-hidden">
+          {/* Card header — branded gradient */}
+          <div
+            className="px-5 py-4 text-white"
+            style={{ background: `linear-gradient(135deg, ${merchant.brand_color}, ${merchant.brand_color}bb)` }}
+          >
+            <div className="flex items-center gap-2 mb-0.5">
+              <Gift size={14} className="text-white/80" />
+              <p className="text-xs font-semibold text-white/80 uppercase tracking-wide">Your Reward</p>
             </div>
+            <p className="font-sora font-bold text-base leading-snug">{campaign.reward_description}</p>
+            <p className="text-white/70 text-xs mt-1">
+              {campaign.campaign_type === 'visit_based'
+                ? `${campaign.reward_threshold} visits to unlock`
+                : `€${campaign.reward_threshold} spend to unlock`}
+            </p>
           </div>
 
-          {/* Progress (logged-in) */}
-          {enrollment ? (
-            <div className="space-y-2 pt-1">
-              <div className="flex justify-between text-xs font-medium text-text-medium mb-1">
-                <span>{current} / {campaign.reward_threshold} {unit}s</span>
-                <span style={{ color: merchant.brand_color }}>
-                  {enrollment.status === 'reward_unlocked'
-                    ? '🎉 Ready to redeem!'
-                    : `${remaining} more ${unit}${remaining !== 1 ? 's' : ''} to go`}
-                </span>
+          {/* Card body — progress */}
+          <div className="px-5 py-4 space-y-4">
+            {enrollment ? (
+              <>
+                {/* Milestone dots or progress bar */}
+                {campaign.reward_threshold <= 12 ? (
+                  <div className="flex flex-col items-center gap-2 py-1">
+                    <MilestoneSteps
+                      current={current}
+                      total={campaign.reward_threshold}
+                      color={merchant.brand_color}
+                      size="lg"
+                      showLabels
+                    />
+                    <p className="text-xs font-semibold" style={{ color: merchant.brand_color }}>
+                      {enrollment.status === 'reward_unlocked'
+                        ? '🎉 Reward ready to redeem!'
+                        : `${remaining} more ${unit}${remaining !== 1 ? 's' : ''} to go`}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-2 pt-1">
+                    <div className="flex justify-between text-xs font-medium text-text-medium mb-1">
+                      <span>{current} / {campaign.reward_threshold} {unit}s</span>
+                      <span style={{ color: merchant.brand_color }}>
+                        {enrollment.status === 'reward_unlocked'
+                          ? '🎉 Ready to redeem!'
+                          : `${remaining} more ${unit}${remaining !== 1 ? 's' : ''} to go`}
+                      </span>
+                    </div>
+                    <ProgressBar value={pct} />
+                  </div>
+                )}
+
+                {enrollment.status === 'reward_unlocked' && (
+                  <div
+                    className="text-center py-2 rounded-xl text-white text-xs font-bold"
+                    style={{ background: merchant.brand_color }}
+                  >
+                    🎉 Go to your dashboard to redeem your reward!
+                  </div>
+                )}
+              </>
+            ) : (
+              /* Greyed-out preview for guests */
+              <div className="opacity-30 pointer-events-none select-none space-y-3 py-1">
+                {campaign.reward_threshold <= 12 ? (
+                  <MilestoneSteps
+                    current={0}
+                    total={campaign.reward_threshold}
+                    color={merchant.brand_color}
+                    size="lg"
+                    showLabels
+                  />
+                ) : (
+                  <>
+                    <div className="flex justify-between text-xs text-text-light mb-1">
+                      <span>0 / {campaign.reward_threshold} {unit}s</span>
+                      <span>{campaign.reward_threshold} more to go</span>
+                    </div>
+                    <ProgressBar value={0} />
+                  </>
+                )}
               </div>
-              <ProgressBar value={pct} />
-              {enrollment.status === 'reward_unlocked' && (
-                <p className="text-xs font-semibold text-center pt-1" style={{ color: merchant.brand_color }}>
-                  Your reward is unlocked! Go to your dashboard to redeem it.
-                </p>
-              )}
-            </div>
-          ) : (
-            /* Greyed-out placeholder for non-logged-in users */
-            <div className="space-y-2 pt-1 opacity-30 pointer-events-none select-none">
-              <div className="flex justify-between text-xs text-text-light mb-1">
-                <span>0 / {campaign.reward_threshold} {unit}s</span>
-                <span>{campaign.reward_threshold} more to go</span>
-              </div>
-              <ProgressBar value={0} />
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {/* CTAs */}

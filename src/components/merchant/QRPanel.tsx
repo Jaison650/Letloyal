@@ -1,25 +1,33 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import { Download, Printer, Clock, RefreshCw } from 'lucide-react';
+import { Download, Printer, Clock, RefreshCw, Maximize2 } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import QRKioskOverlay from '@/components/merchant/QRKioskOverlay';
 import { QR_SPEND_EXPIRY_SECONDS } from '@/lib/constants';
 
 interface QRPanelProps {
   merchantSlug: string;
+  merchantName: string;
+  logoSvg: string;
   campaignType: 'visit_based' | 'spend_based';
   campaignId: string;
   rewardDescription: string;
+  rewardThreshold: number;
   brandColor: string;
   staticQrDataUrl: string;
 }
 
 const SPEND_AMOUNTS = [500, 1000, 1500, 2000]; // cents
 
-export default function QRPanel({ merchantSlug, campaignType, rewardDescription, brandColor, staticQrDataUrl }: QRPanelProps) {
+export default function QRPanel({
+  merchantSlug, merchantName, logoSvg, campaignType, rewardDescription,
+  rewardThreshold, brandColor, staticQrDataUrl,
+}: QRPanelProps) {
   const [spendQr, setSpendQr] = useState<{ dataUrl: string; expiresAt: number } | null>(null);
   const [countdown, setCountdown] = useState(0);
   const [generating, setGenerating] = useState(false);
   const [customAmount, setCustomAmount] = useState('');
+  const [kioskOpen, setKioskOpen] = useState(false);
 
   const currentQr = campaignType === 'visit_based' ? staticQrDataUrl : spendQr?.dataUrl;
 
@@ -68,22 +76,55 @@ export default function QRPanel({ merchantSlug, campaignType, rewardDescription,
   const isExpiringSoon = countdown > 0 && countdown < 60;
 
   return (
+    <>
+      <QRKioskOverlay
+        isOpen={kioskOpen}
+        onClose={() => setKioskOpen(false)}
+        qrDataUrl={currentQr ?? ''}
+        merchantName={merchantName}
+        logoSvg={logoSvg}
+        brandColor={brandColor}
+        rewardDescription={rewardDescription}
+        campaignType={campaignType}
+        rewardThreshold={rewardThreshold}
+      />
+
     <div className="card space-y-5">
       <div className="flex items-center justify-between">
         <h3 className="font-sora font-bold text-lg">Your Loyalty QR Code</h3>
-        {campaignType === 'visit_based' && (
-          <span className="text-xs text-text-light bg-brand-bg px-3 py-1 rounded-full border border-brand-border">
-            Valid for all visits
-          </span>
-        )}
+        <div className="flex items-center gap-2">
+          {currentQr && (
+            <button
+              onClick={() => setKioskOpen(true)}
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-brand-border text-text-medium hover:bg-brand-bg transition-colors"
+              title="Show full-screen QR for customers to scan"
+            >
+              <Maximize2 size={12} /> Kiosk Mode
+            </button>
+          )}
+          {campaignType === 'visit_based' && (
+            <span className="text-xs text-text-light bg-brand-bg px-3 py-1 rounded-full border border-brand-border">
+              All visits
+            </span>
+          )}
+        </div>
       </div>
 
       {/* QR Display */}
       <div className="flex flex-col items-center gap-4">
         <div
-          className="rounded-2xl p-4 flex items-center justify-center"
+          className="rounded-2xl p-4 flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity relative group"
           style={{ background: `${brandColor}15`, border: `3px solid ${brandColor}30` }}
+          onClick={() => currentQr && setKioskOpen(true)}
+          title="Click to expand"
         >
+          {currentQr && (
+            <div className="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center">
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 rounded-full px-3 py-1.5 flex items-center gap-1.5 text-xs font-semibold text-text-dark">
+                <Maximize2 size={12} /> Expand
+              </div>
+            </div>
+          )}
           {currentQr ? (
             <img src={currentQr} alt="Loyalty QR Code" className="w-64 h-64 rounded-xl" />
           ) : (
@@ -167,5 +208,6 @@ export default function QRPanel({ merchantSlug, campaignType, rewardDescription,
         </button>
       </div>
     </div>
+    </>
   );
 }

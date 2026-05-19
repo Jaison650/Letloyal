@@ -1,1 +1,1 @@
-﻿{"version":"0.0.1","configurations":[{"name":"letloyal","runtimeExecutable":"npm","runtimeArgs":["run","dev"],"port":3000}]}
+{"version":"0.0.1","configurations":[{"name":"LetLoyal — Dev Server","runtimeExecutable":"npm","runtimeArgs":["run","dev"],"port":3000},{"name":"LetLoyal — Production Server","runtimeExecutable":"npm","runtimeArgs":["run","start"],"port":3000}]}

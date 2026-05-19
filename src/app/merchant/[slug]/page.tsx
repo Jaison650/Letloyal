@@ -116,9 +116,12 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
           {primaryCampaign && (
             <QRPanel
               merchantSlug={slug}
+              merchantName={merchant.business_name}
+              logoSvg={merchant.logo_svg}
               campaignType={primaryCampaign.campaign_type as 'visit_based' | 'spend_based'}
               campaignId={primaryCampaign.id}
               rewardDescription={primaryCampaign.reward_description}
+              rewardThreshold={primaryCampaign.reward_threshold}
               brandColor={merchant.brand_color}
               staticQrDataUrl={staticQrDataUrl}
             />
