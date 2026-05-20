@@ -142,4 +142,10 @@ declare module 'lucide-react' {
   export const MapPinned: LucideIcon;
   export const ScanQrCode: LucideIcon;
   export const ScanBarcode: LucideIcon;
+  export const Globe: LucideIcon;
+  export const Save: LucideIcon;
+  export const Image: LucideIcon;
+  export const ExternalLink: LucideIcon;
+  export const Phone: LucideIcon;
+  export const Clock: LucideIcon;
 }

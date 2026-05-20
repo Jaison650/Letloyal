@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, Target, Users, CheckCircle2, BarChart3,
   QrCode, LogOut, Menu, X, Zap, Star, Bell, ChevronRight,
-  MoreHorizontal, Maximize2
+  MoreHorizontal, Maximize2, Settings
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import Badge from '@/components/ui/Badge';
@@ -75,6 +75,7 @@ export default function DashboardShell({
     { label: 'Analytics',  icon: <BarChart3      size={18} />, href: `/merchant/${slug}/analytics` },
     { label: 'Feedback',   icon: <Star           size={18} />, href: `/merchant/${slug}/feedback` },
     { label: 'Notify',     icon: <Bell           size={18} />, href: `/merchant/${slug}/notifications` },
+    { label: 'Settings',   icon: <Settings       size={18} />, href: `/merchant/${slug}/settings` },
   ];
 
   const isActive = (href: string) => {
@@ -357,7 +358,8 @@ export default function DashboardShell({
               { label: 'Campaigns', icon: <Target size={18} />, href: `/merchant/${slug}/campaigns` },
               { label: 'Analytics', icon: <BarChart3 size={18} />, href: `/merchant/${slug}/analytics` },
               { label: 'Feedback',  icon: <Star size={18} />,   href: `/merchant/${slug}/feedback` },
-              { label: 'Notify',    icon: <Bell size={18} />,   href: `/merchant/${slug}/notifications` },
+              { label: 'Notify',    icon: <Bell size={18} />,     href: `/merchant/${slug}/notifications` },
+              { label: 'Settings',  icon: <Settings size={18} />, href: `/merchant/${slug}/settings` },
             ].map((item) => (
               <Link
                 key={item.href}

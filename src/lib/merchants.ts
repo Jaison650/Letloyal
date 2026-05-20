@@ -5,14 +5,35 @@ export interface Merchant {
   slug: string;
   business_name: string;
   category: string;
-  tagline: string;
-  address: string;
+  tagline: string | null;
+  address: string | null;
   city: string;
   logo_svg: string;
+  logo_url: string | null;
+  banner_url: string | null;
+  contact_phone: string | null;
+  website: string | null;
+  map_url: string | null;
+  working_hours: WorkingHours | null;
   brand_color: string;
   plan_tier: string;
   is_demo: boolean;
 }
+
+export interface DayHours {
+  open: string;   // "09:00"
+  close: string;  // "18:00"
+}
+
+export type WorkingHours = {
+  mon: DayHours | null;
+  tue: DayHours | null;
+  wed: DayHours | null;
+  thu: DayHours | null;
+  fri: DayHours | null;
+  sat: DayHours | null;
+  sun: DayHours | null;
+};
 
 export interface Campaign {
   id: string;
@@ -31,12 +52,20 @@ export interface Campaign {
 }
 
 export async function getMerchantBySlug(slug: string): Promise<Merchant | null> {
-  return queryOne<Merchant>(
+  const row = await queryOne<Omit<Merchant, 'working_hours'> & { working_hours: string | null }>(
     `SELECT id, slug, business_name, category, tagline, address, city,
-            logo_svg, brand_color, plan_tier, is_demo
+            logo_svg, logo_url, banner_url, contact_phone, website, map_url,
+            working_hours, brand_color, plan_tier, is_demo
        FROM merchants WHERE slug = ?`,
     [slug],
   );
+  if (!row) return null;
+  return {
+    ...row,
+    working_hours: row.working_hours
+      ? (typeof row.working_hours === 'string' ? JSON.parse(row.working_hours) : row.working_hours)
+      : null,
+  };
 }
 
 export async function getMerchantWithAuth(
