@@ -207,7 +207,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
 
         {/* Tagline */}
         {merchant.tagline && (
-          <p className="text-sm text-text-medium text-center italic">"{merchant.tagline}"</p>
+          <p className="text-sm text-text-medium text-center italic">&ldquo;{merchant.tagline}&rdquo;</p>
         )}
 
         {/* Open now indicator */}
@@ -219,7 +219,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
                 ? `Open now${todayHours ? ` · Closes ${todayHours.close}` : ''}`
                 : todayHours
                   ? `Closed · Opens today ${todayHours.open}`
-                  : "Closed today"}
+                  : 'Closed today'}
             </span>
           </div>
         )}

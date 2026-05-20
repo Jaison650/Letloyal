@@ -219,7 +219,7 @@ export default function ProfileEditor({ merchant }: ProfileEditorProps) {
             />
           </div>
           <p className="text-xs text-text-light mt-1">
-            Paste the link from Google Maps "Share" button. Customers can tap to open directions.
+            Paste the link from Google Maps &ldquo;Share&rdquo; button. Customers can tap to open directions.
           </p>
         </div>
       </section>
