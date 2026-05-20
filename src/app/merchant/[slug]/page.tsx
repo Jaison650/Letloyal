@@ -9,9 +9,10 @@ import QRPanel from '@/components/merchant/QRPanel';
 import TransactionFeed from '@/components/merchant/TransactionFeed';
 import ValidatorFAB from '@/components/merchant/ValidatorFAB';
 import InsightsPanel from '@/components/merchant/InsightsPanel';
+import CampaignRulesCard from '@/components/merchant/CampaignRulesCard';
 import Badge from '@/components/ui/Badge';
 import ProgressBar from '@/components/ui/ProgressBar';
-import { Target, Trophy } from 'lucide-react';
+import { Trophy, Gift } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function MerchantDashboard({ params }: { params: Promise<{ slug: string }> }) {
@@ -98,6 +99,11 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
       planTier={merchant.plan_tier}
       logoSvg={merchant.logo_svg}
       brandColor={merchant.brand_color}
+      qrDataUrl={staticQrDataUrl}
+      campaignId={primaryCampaign?.id}
+      rewardDescription={primaryCampaign?.reward_description}
+      rewardThreshold={primaryCampaign?.reward_threshold}
+      campaignType={primaryCampaign?.campaign_type as 'visit_based' | 'spend_based' | undefined}
     >
       {/* Stats bar */}
       <div className="mb-8">
@@ -112,24 +118,28 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
       {/* Main grid */}
       <div className="grid lg:grid-cols-3 gap-6">
 
-        {/* Left column: QR + Active Campaigns */}
+        {/* Left column: Insights + QR (desktop only) + Campaigns */}
         <div className="lg:col-span-1 space-y-6">
           <InsightsPanel merchantSlug={slug} />
 
+          {/* QR Panel — hidden on mobile (use the bottom nav QR button instead) */}
           {primaryCampaign && (
-            <QRPanel
-              merchantSlug={slug}
-              merchantName={merchant.business_name}
-              logoSvg={merchant.logo_svg}
-              campaignType={primaryCampaign.campaign_type as 'visit_based' | 'spend_based'}
-              campaignId={primaryCampaign.id}
-              rewardDescription={primaryCampaign.reward_description}
-              rewardThreshold={primaryCampaign.reward_threshold}
-              brandColor={merchant.brand_color}
-              staticQrDataUrl={staticQrDataUrl}
-            />
+            <div className="hidden lg:block">
+              <QRPanel
+                merchantSlug={slug}
+                merchantName={merchant.business_name}
+                logoSvg={merchant.logo_svg}
+                campaignType={primaryCampaign.campaign_type as 'visit_based' | 'spend_based'}
+                campaignId={primaryCampaign.id}
+                rewardDescription={primaryCampaign.reward_description}
+                rewardThreshold={primaryCampaign.reward_threshold}
+                brandColor={merchant.brand_color}
+                staticQrDataUrl={staticQrDataUrl}
+              />
+            </div>
           )}
 
+          {/* Campaigns — click to expand rules */}
           <div className="card">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-sora font-bold text-lg">Campaigns</h3>
@@ -141,28 +151,59 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
               {campaigns.length === 0 ? (
                 <p className="text-sm text-text-light text-center py-4">No active campaigns.</p>
               ) : campaigns.map((c) => (
-                <div key={c.id} className="bg-brand-bg rounded-xl p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <p className="font-semibold text-sm">{c.name}</p>
-                    <div className="flex items-center gap-1.5">
-                      <Badge variant={c.campaign_type === 'visit_based' ? 'visit' : 'spend'}>
-                        <Target size={10} /> {c.campaign_type === 'visit_based' ? 'Visits' : 'Spend'}
-                      </Badge>
-                      <Badge variant="active">Active</Badge>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 text-xs text-text-medium">
-                    <span>{c.participants_count} participants</span>
-                    <span>{c.redemptions_count} redeemed</span>
-                  </div>
-                </div>
+                <CampaignRulesCard
+                  key={c.id}
+                  campaign={{
+                    id: c.id,
+                    name: c.name,
+                    campaign_type: c.campaign_type,
+                    participants_count: c.participants_count,
+                    redemptions_count: c.redemptions_count,
+                    reward_description: c.reward_description,
+                    reward_threshold: c.reward_threshold,
+                  }}
+                  merchantSlug={slug}
+                  brandColor={merchant.brand_color}
+                />
               ))}
             </div>
           </div>
         </div>
 
-        {/* Right column: Transaction feed + Near reward */}
+        {/* Right column: Active campaign summary → Transactions → Near reward */}
         <div className="lg:col-span-2 space-y-6">
+
+          {/* Active campaign highlight */}
+          {primaryCampaign && (
+            <div
+              className="rounded-2xl p-5 text-white"
+              style={{ background: `linear-gradient(135deg, #012d38, ${merchant.brand_color})` }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-1">Running Campaign</p>
+                  <h3 className="font-sora font-bold text-lg leading-tight">{primaryCampaign.name}</h3>
+                  <div className="flex items-center gap-2 mt-2">
+                    <Gift size={14} className="text-white/70 shrink-0" />
+                    <p className="text-sm text-white/85">{primaryCampaign.reward_description}</p>
+                  </div>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="text-2xl font-sora font-bold">{primaryCampaign.participants_count}</p>
+                  <p className="text-[10px] text-white/60 font-medium">participants</p>
+                </div>
+              </div>
+              <div className="mt-4 flex items-center justify-between text-xs text-white/70">
+                <span>
+                  {primaryCampaign.campaign_type === 'visit_based'
+                    ? `${primaryCampaign.reward_threshold} visits to unlock`
+                    : `€${primaryCampaign.reward_threshold} spend to unlock`}
+                </span>
+                <span>{primaryCampaign.redemptions_count} redeemed</span>
+              </div>
+            </div>
+          )}
+
           <TransactionFeed merchantSlug={slug} initialTransactions={recentTxns} />
 
           {nearReward.length > 0 && (
@@ -176,7 +217,7 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
                   href={`/merchant/${slug}/customers?filter=near_reward`}
                   className="text-xs text-primary font-semibold hover:underline"
                 >
-                  View All Customers →
+                  View All →
                 </Link>
               </div>
               <div className="space-y-3">
@@ -194,7 +235,7 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
                         >
                           {c.status === 'reward_unlocked'
                             ? '🎁 Ready!'
-                            : `${Math.max(0, c.threshold - c.current)} away from reward`}
+                            : `${Math.max(0, c.threshold - c.current)} to go`}
                         </p>
                       </div>
                       <ProgressBar value={Math.min(100, c.progress_pct ?? 0)} height="sm" />

@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { X, Gift, Smartphone, UserCheck, Trophy, ShieldCheck } from 'lucide-react';
+import { X, Gift, Smartphone, Trophy, ShieldCheck } from 'lucide-react';
 import MilestoneSteps from '@/components/ui/MilestoneSteps';
 import OfferRules from '@/components/ui/OfferRules';
 
@@ -18,23 +18,6 @@ interface QRKioskOverlayProps {
   rewardThreshold: number;
 }
 
-const HOW_IT_WORKS = [
-  {
-    icon: Smartphone,
-    title: 'Scan the QR Code',
-    desc: 'Point your phone camera at this code — no app needed.',
-  },
-  {
-    icon: UserCheck,
-    title: 'Join for Free',
-    desc: 'Create your loyalty account in under 60 seconds.',
-  },
-  {
-    icon: Trophy,
-    title: 'Earn & Redeem',
-    desc: 'Collect stamps or points and claim your reward automatically.',
-  },
-];
 
 export default function QRKioskOverlay({
   isOpen, onClose, qrDataUrl, merchantName, merchantSlug, campaignId,
@@ -152,44 +135,12 @@ export default function QRKioskOverlay({
                 style={{ background: `${brandColor}18`, color: brandColor }}
               >
                 <Smartphone size={15} />
-                Scan to join &amp; earn {unit}s — it&apos;s free!
+                Point your camera here — free to join!
               </div>
-            </div>
 
-            {/* Divider */}
-            <div className="flex items-center gap-3">
-              <div className="flex-1 h-px bg-brand-border" />
-              <span className="text-[10px] font-bold text-text-light uppercase tracking-widest">How It Works</span>
-              <div className="flex-1 h-px bg-brand-border" />
-            </div>
-
-            {/* How It Works steps */}
-            <div className="space-y-3">
-              {HOW_IT_WORKS.map((step, i) => {
-                const Icon = step.icon;
-                return (
-                  <div key={i} className="flex items-start gap-3">
-                    <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ background: `${brandColor}18` }}
-                    >
-                      <Icon size={17} style={{ color: brandColor }} />
-                    </div>
-                    <div className="flex-1 pt-0.5">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="text-[10px] font-bold px-1.5 py-0.5 rounded text-white"
-                          style={{ background: brandColor }}
-                        >
-                          {i + 1}
-                        </span>
-                        <p className="text-sm font-semibold text-text-dark">{step.title}</p>
-                      </div>
-                      <p className="text-xs text-text-medium mt-0.5 leading-relaxed">{step.desc}</p>
-                    </div>
-                  </div>
-                );
-              })}
+              <p className="text-xs text-text-light mt-2">
+                1&nbsp;Scan · 2&nbsp;Create account · 3&nbsp;Earn &amp; redeem
+              </p>
             </div>
 
             {/* Offer rules */}

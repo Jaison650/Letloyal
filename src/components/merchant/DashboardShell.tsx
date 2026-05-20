@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import Badge from '@/components/ui/Badge';
+import QRKioskOverlay from '@/components/merchant/QRKioskOverlay';
 
 interface NavItem {
   label: string;
@@ -24,23 +25,29 @@ interface DashboardShellProps {
   logoSvg: string;
   brandColor: string;
   children: React.ReactNode;
-  /** Optional: pass qrDataUrl so the mobile bottom-nav QR button can open the kiosk overlay */
+  /** Pass these so the mobile QR bottom-nav button opens the full kiosk overlay */
   qrDataUrl?: string;
+  campaignId?: string;
+  rewardDescription?: string;
+  rewardThreshold?: number;
+  campaignType?: 'visit_based' | 'spend_based';
   qrOverlayNode?: React.ReactNode;
 }
 
 export default function DashboardShell({
-  slug, merchantName, planTier, logoSvg, brandColor, children, qrDataUrl, qrOverlayNode,
+  slug, merchantName, planTier, logoSvg, brandColor, children,
+  qrDataUrl, campaignId, rewardDescription = '', rewardThreshold = 0,
+  campaignType = 'visit_based', qrOverlayNode,
 }: DashboardShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [kioskOpen, setKioskOpen] = useState(false);
   const [demoToastDismissed, setDemoToastDismissed] = useState(false);
   const [clock, setClock] = useState('');
   const [greeting, setGreeting] = useState('');
   const [dateStr, setDateStr] = useState('');
-  const [qrOpen, setQrOpen] = useState(false);
 
   useEffect(() => {
     const dismissed = localStorage.getItem('letloyal_demo_dismissed') === '1';
@@ -256,8 +263,25 @@ export default function DashboardShell({
         </div>
       </main>
 
-      {/* ── QR Kiosk Overlay (passed from parent) ───────────────────────── */}
+      {/* ── QR Kiosk Overlay (passed from parent, or opened by mobile QR btn) */}
       {qrOverlayNode}
+
+      {/* Mobile QR kiosk — opened by bottom nav button */}
+      {campaignId && (
+        <QRKioskOverlay
+          isOpen={kioskOpen}
+          onClose={() => setKioskOpen(false)}
+          qrDataUrl={qrDataUrl ?? ''}
+          merchantName={merchantName}
+          merchantSlug={slug}
+          campaignId={campaignId}
+          logoSvg={logoSvg}
+          brandColor={brandColor}
+          rewardDescription={rewardDescription}
+          campaignType={campaignType}
+          rewardThreshold={rewardThreshold}
+        />
+      )}
 
       {/* ── Mobile Bottom Nav — 4 slots ─────────────────────────────────── */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-brand-border">
@@ -291,7 +315,7 @@ export default function DashboardShell({
           {/* ── QR CENTER BUTTON ── */}
           <div className="flex flex-col items-center -mt-5">
             <button
-              onClick={() => setQrOpen(true)}
+              onClick={() => setKioskOpen(true)}
               className="w-16 h-16 rounded-2xl shadow-btn-hover flex flex-col items-center justify-center gap-0.5 text-white transition-all active:scale-95 hover:opacity-90"
               style={{ background: 'linear-gradient(135deg, #014451, #028090)' }}
               aria-label="Show QR code"
@@ -359,35 +383,6 @@ export default function DashboardShell({
         </div>
       )}
 
-      {/* ── QR Kiosk bottom sheet (mobile inline) ────────────────────────── */}
-      {qrOpen && !qrOverlayNode && (
-        <div className="lg:hidden fixed inset-0 z-50 flex flex-col justify-end">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setQrOpen(false)} />
-          <div className="relative bg-white rounded-t-3xl px-6 py-6 text-center max-h-[90dvh] overflow-y-auto">
-            <div className="w-10 h-1 bg-brand-border rounded-full mx-auto mb-4" />
-            <div
-              className="w-14 h-14 rounded-2xl mx-auto mb-3 overflow-hidden flex items-center justify-center"
-              style={{ background: `${brandColor}25` }}
-              dangerouslySetInnerHTML={{ __html: logoSvg }}
-            />
-            <h3 className="font-sora font-bold text-lg">{merchantName}</h3>
-            <p className="text-xs text-text-medium mb-4">Show this QR to your customers</p>
-            {qrDataUrl ? (
-              <img src={qrDataUrl} alt="QR" className="w-56 h-56 mx-auto rounded-2xl border-2"
-                style={{ borderColor: `${brandColor}30` }} />
-            ) : (
-              <div className="w-56 h-56 mx-auto rounded-2xl bg-brand-bg flex items-center justify-center text-text-light">
-                <p className="text-sm">No active campaign</p>
-              </div>
-            )}
-            <p className="text-xs text-text-medium mt-4">Scan to join the loyalty program</p>
-            <button onClick={() => setQrOpen(false)}
-              className="mt-4 w-full py-3 rounded-xl border border-brand-border text-sm font-semibold text-text-medium hover:bg-brand-bg transition-colors">
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
