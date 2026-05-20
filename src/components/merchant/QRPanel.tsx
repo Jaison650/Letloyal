@@ -191,30 +191,29 @@ export default function QRPanel({
       />
 
       {/* ── Dashboard QR card ── */}
-      <div className="card space-y-5">
-        <div className="flex items-center justify-between">
-          <h3 className="font-sora font-bold text-lg">Your Loyalty QR Code</h3>
-          <div className="flex items-center gap-2">
-            {currentQr && (
-              <button
-                onClick={() => setKioskOpen(true)}
-                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-brand-border text-text-medium hover:bg-brand-bg transition-colors"
-              >
-                <Maximize2 size={12} /> Kiosk Mode
-              </button>
-            )}
-            {campaignType === 'visit_based' && (
-              <span className="text-xs text-text-light bg-brand-bg px-3 py-1 rounded-full border border-brand-border">
-                All visits
-              </span>
-            )}
-          </div>
+      <div className="card space-y-4">
+        {/* Header — title + Kiosk button on same row, shrink safely */}
+        <div className="flex items-center gap-2 min-w-0">
+          <h3 className="font-jakarta font-bold text-base sm:text-lg flex-1 min-w-0 truncate">Loyalty QR Code</h3>
+          {currentQr && (
+            <button
+              onClick={() => setKioskOpen(true)}
+              className="shrink-0 flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full border border-brand-border text-text-medium hover:bg-brand-bg transition-colors"
+            >
+              <Maximize2 size={11} /> Kiosk
+            </button>
+          )}
+          {campaignType === 'visit_based' && (
+            <span className="shrink-0 text-[10px] text-text-light bg-brand-bg px-2 py-1 rounded-full border border-brand-border hidden sm:inline">
+              All visits
+            </span>
+          )}
         </div>
 
-        {/* QR Display */}
-        <div className="flex flex-col items-center gap-4">
+        {/* QR Display — full-width responsive */}
+        <div className="flex flex-col items-center gap-3">
           <div
-            className="rounded-2xl p-4 flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity relative group"
+            className="w-full rounded-2xl p-3 sm:p-4 flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity relative group"
             style={{ background: `${brandColor}15`, border: `3px solid ${brandColor}30` }}
             onClick={() => currentQr && setKioskOpen(true)}
           >
@@ -226,9 +225,9 @@ export default function QRPanel({
               </div>
             )}
             {currentQr ? (
-              <img src={currentQr} alt="Loyalty QR Code" className="w-64 h-64 rounded-xl" />
+              <img src={currentQr} alt="Loyalty QR Code" className="w-full max-w-[240px] aspect-square rounded-xl" />
             ) : (
-              <div className="w-64 h-64 bg-brand-bg rounded-xl flex flex-col items-center justify-center gap-3 text-text-light">
+              <div className="w-full max-w-[240px] aspect-square bg-brand-bg rounded-xl flex flex-col items-center justify-center gap-3 text-text-light">
                 <RefreshCw size={32} />
                 <p className="text-sm text-center px-4">
                   {campaignType === 'spend_based'
@@ -239,7 +238,7 @@ export default function QRPanel({
             )}
           </div>
 
-          <p className="text-sm text-text-medium text-center font-medium">{rewardDescription}</p>
+          <p className="text-xs sm:text-sm text-text-medium text-center font-medium">{rewardDescription}</p>
 
           {campaignType === 'spend_based' && countdown > 0 && (
             <div className={`flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full ${isExpiringSoon ? 'bg-red-50 text-status-error' : 'bg-primary-light text-primary'}`}>

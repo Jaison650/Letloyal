@@ -17,7 +17,7 @@ export default function MerchantBenefits() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">Why LetLoyal</p>
-          <h2 className="font-sora font-extrabold text-3xl sm:text-4xl text-text-dark">
+          <h2 className="font-jakarta font-extrabold text-3xl sm:text-4xl text-text-dark">
             Everything You Need, Nothing You Don&apos;t
           </h2>
         </div>
@@ -34,7 +34,7 @@ export default function MerchantBenefits() {
               <div className="w-11 h-11 bg-primary-light rounded-xl flex items-center justify-center text-primary mb-4">
                 {f.icon}
               </div>
-              <h3 className="font-sora font-bold text-base text-text-dark mb-2">{f.title}</h3>
+              <h3 className="font-jakarta font-bold text-base text-text-dark mb-2">{f.title}</h3>
               <p className="text-sm text-text-medium leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}

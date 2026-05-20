@@ -28,7 +28,7 @@ export default async function SettingsPage({ params }: { params: Promise<{ slug:
             <Settings size={20} style={{ color: merchant.brand_color }} />
           </div>
           <div>
-            <h1 className="font-sora font-bold text-2xl text-text-dark">Store Profile</h1>
+            <h1 className="font-jakarta font-bold text-2xl text-text-dark">Store Profile</h1>
             <p className="text-sm text-text-medium">Manage your public store page, contact details and opening hours</p>
           </div>
         </div>

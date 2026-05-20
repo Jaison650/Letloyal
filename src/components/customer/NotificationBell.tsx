@@ -91,7 +91,7 @@ export default function NotificationBell() {
       {open && (
         <div className="absolute right-0 top-11 w-80 bg-white rounded-2xl shadow-2xl border border-brand-border z-50 overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 border-b border-brand-border">
-            <h3 className="font-sora font-bold text-sm">Notifications</h3>
+            <h3 className="font-jakarta font-bold text-sm">Notifications</h3>
             <button onClick={() => setOpen(false)} className="p-1 rounded-full hover:bg-brand-bg transition-colors">
               <X size={14} className="text-text-light" />
             </button>

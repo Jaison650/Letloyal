@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
-  QrCode, TrendingUp, Settings2, BarChart3, Star, Smartphone,
+  TrendingUp, Settings2, BarChart3, Star, Smartphone, Scan,
   Target, ShieldCheck, MapPin, CheckCircle2,
   Coffee, Scissors, Dumbbell, ShoppingBag, Pizza, Sparkles,
   ArrowRight, Users, ChevronRight, RotateCcw, Gift,
@@ -58,7 +58,7 @@ const FEATURES = [
 
 const STEPS = [
   { num: '01', icon: <Settings2 size={28} />, title: 'Set Up Your Program',    desc: 'Sign up, choose visit-based or spend-based rewards, and set your threshold. Your QR code is ready instantly.' },
-  { num: '02', icon: <QrCode size={28} />,    title: 'Display Your QR',        desc: 'Print it, frame it, or show it on your phone. Customers scan and automatically join — no app needed.' },
+  { num: '02', icon: <Scan size={28} />,  title: 'Display Your QR',        desc: 'Print it, frame it, or show it on your phone. Customers scan and automatically join — no app needed.' },
   { num: '03', icon: <TrendingUp size={28} />, title: 'Watch Customers Return', desc: 'Your dashboard shows who\'s earning, who\'s close to a reward, and your real re-scan rate.' },
 ];
 
@@ -114,7 +114,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08 }}
-            className="font-sora font-extrabold text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.08] text-text-dark mb-6"
+            className="font-jakarta font-extrabold text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.08] text-text-dark mb-6"
           >
             Give Every Customer<br />
             <span className="text-gradient">a Reason to Come Back</span>
@@ -178,20 +178,20 @@ export default function HomePage() {
                   <Coffee size={14} className="text-white" />
                 </div>
                 <div>
-                  <p className="font-sora font-bold text-sm">BrewHouse Café</p>
+                  <p className="font-jakarta font-bold text-sm">BrewHouse Café</p>
                   <p className="text-xs text-text-light">Live Dashboard</p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2 mb-3">
                 {[{ label: 'Scans Today', val: '14' }, { label: 'Active Customers', val: '87' }].map((s) => (
                   <div key={s.label} className="bg-primary-light rounded-xl p-3">
-                    <p className="text-xl font-sora font-bold text-primary">{s.val}</p>
+                    <p className="text-xl font-jakarta font-bold text-primary">{s.val}</p>
                     <p className="text-xs text-text-light">{s.label}</p>
                   </div>
                 ))}
               </div>
               <div className="h-2 bg-brand-border rounded-full overflow-hidden">
-                <div className="h-full w-3/4 rounded-full" style={{ background: 'linear-gradient(90deg,#02C39A,#028090)' }} />
+                <div className="h-full w-3/4 rounded-full" style={{ background: 'linear-gradient(90deg,#5EEAD4,#0D9488)' }} />
               </div>
               <p className="text-xs text-text-light mt-1">Campaign progress</p>
             </motion.div>
@@ -202,7 +202,11 @@ export default function HomePage() {
               className="relative w-32 h-32 shrink-0"
             >
               <div className="absolute inset-0 bg-gradient-brand rounded-full flex items-center justify-center shadow-xl animate-pulse-glow">
-                <QrCode size={48} className="text-white" />
+                <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 8h6v18h10v5H10V8z" fill="white"/>
+                  <path d="M26 21l6 6-6 6" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M32 27H21" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
+                </svg>
               </div>
               <div className="absolute -top-3 -right-3 bg-accent text-white text-xs font-bold px-2 py-1 rounded-full">SCAN</div>
             </motion.div>
@@ -213,10 +217,10 @@ export default function HomePage() {
               className="bg-white rounded-2xl shadow-card-hover border-2 border-accent p-5 w-full max-w-xs text-left animate-float"
               style={{ animationDelay: '1s' }}
             >
-              <p className="font-sora font-bold text-sm mb-1">Anna O.</p>
+              <p className="font-jakarta font-bold text-sm mb-1">Anna O.</p>
               <p className="text-xs text-text-light mb-3">BrewHouse Café · 8/10 visits</p>
               <div className="h-2.5 bg-brand-border rounded-full overflow-hidden mb-2">
-                <div className="h-full w-4/5 rounded-full" style={{ background: 'linear-gradient(90deg,#02C39A,#028090)' }} />
+                <div className="h-full w-4/5 rounded-full" style={{ background: 'linear-gradient(90deg,#5EEAD4,#0D9488)' }} />
               </div>
               <p className="text-xs text-accent font-semibold">2 more visits to Free Flat White! ☕</p>
             </motion.div>
@@ -257,7 +261,7 @@ export default function HomePage() {
       <section className="py-24 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <FadeUp>
-            <h2 className="font-sora font-bold text-3xl sm:text-4xl mb-4">
+            <h2 className="font-jakarta font-bold text-3xl sm:text-4xl mb-4">
               Paper Stamp Cards Are Killing Your Retention
             </h2>
             <p className="text-text-medium text-lg mb-14">Three reasons local businesses lose loyal customers every day.</p>
@@ -276,7 +280,7 @@ export default function HomePage() {
             ].map((p) => (
               <motion.div key={p.title} variants={fadeUp} className="card text-left hover:-translate-y-1 transition-transform duration-200">
                 <div className="text-4xl mb-4">{p.icon}</div>
-                <h3 className="font-sora font-bold text-xl mb-2">{p.title}</h3>
+                <h3 className="font-jakarta font-bold text-xl mb-2">{p.title}</h3>
                 <p className="text-text-medium">{p.desc}</p>
               </motion.div>
             ))}
@@ -288,7 +292,7 @@ export default function HomePage() {
       <section id="how-it-works" className="py-24 px-4 bg-white">
         <div className="max-w-5xl mx-auto text-center">
           <FadeUp>
-            <h2 className="font-sora font-bold text-3xl sm:text-4xl mb-4">Up and Running in 3 Steps</h2>
+            <h2 className="font-jakarta font-bold text-3xl sm:text-4xl mb-4">Up and Running in 3 Steps</h2>
             <p className="text-text-medium text-lg mb-16">From signup to your first customer scan in under 10 minutes.</p>
           </FadeUp>
 
@@ -311,7 +315,7 @@ export default function HomePage() {
                   {step.icon}
                 </div>
                 <p className="text-xs font-bold text-accent uppercase tracking-widest mb-2">{step.num}</p>
-                <h3 className="font-sora font-bold text-xl mb-3">{step.title}</h3>
+                <h3 className="font-jakarta font-bold text-xl mb-3">{step.title}</h3>
                 <p className="text-text-medium leading-relaxed">{step.desc}</p>
               </motion.div>
             ))}
@@ -323,7 +327,7 @@ export default function HomePage() {
       <section className="py-24 px-4">
         <div className="max-w-5xl mx-auto">
           <FadeUp className="text-center mb-16">
-            <h2 className="font-sora font-bold text-3xl sm:text-4xl mb-4">Everything You Need. Nothing You Don&apos;t.</h2>
+            <h2 className="font-jakarta font-bold text-3xl sm:text-4xl mb-4">Everything You Need. Nothing You Don&apos;t.</h2>
             <p className="text-text-medium text-lg">Built specifically for local SMB merchants.</p>
           </FadeUp>
           <motion.div
@@ -338,7 +342,7 @@ export default function HomePage() {
                 <div className="w-11 h-11 bg-primary-light rounded-xl flex items-center justify-center text-primary mb-4">
                   {f.icon}
                 </div>
-                <h3 className="font-sora font-bold text-lg mb-2">{f.title}</h3>
+                <h3 className="font-jakarta font-bold text-lg mb-2">{f.title}</h3>
                 <p className="text-text-medium text-sm leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
@@ -350,7 +354,7 @@ export default function HomePage() {
       <section className="py-24 px-4 bg-white">
         <div className="max-w-5xl mx-auto text-center">
           <FadeUp>
-            <h2 className="font-sora font-bold text-3xl sm:text-4xl mb-4">Two Proven Loyalty Models</h2>
+            <h2 className="font-jakarta font-bold text-3xl sm:text-4xl mb-4">Two Proven Loyalty Models</h2>
             <p className="text-text-medium text-lg mb-14">Choose the one that fits your business — or run both.</p>
           </FadeUp>
           <motion.div
@@ -367,14 +371,14 @@ export default function HomePage() {
                   <RotateCcw size={20} />
                 </div>
                 <div>
-                  <p className="font-sora font-bold text-lg">Stamp Card — Reimagined</p>
+                  <p className="font-jakarta font-bold text-lg">Stamp Card — Reimagined</p>
                   <p className="text-xs text-text-light">Visit-based</p>
                 </div>
               </div>
               <p className="text-text-medium mb-4">Reward customers for every visit. Classic loyalty, made digital. Perfect for cafés, salons, and gyms.</p>
               <div className="bg-primary-light rounded-xl p-4 mb-4">
                 <p className="text-xs font-semibold text-text-medium mb-2">Example:</p>
-                <p className="font-sora font-bold text-primary">Visit 10 times → Free coffee</p>
+                <p className="font-jakarta font-bold text-primary">Visit 10 times → Free coffee</p>
                 <div className="mt-3 flex gap-1.5">
                   {[...Array(10)].map((_, i) => (
                     <div key={i} className={`flex-1 h-3 rounded-full ${i < 7 ? 'bg-primary' : 'bg-brand-border'}`} />
@@ -392,14 +396,14 @@ export default function HomePage() {
                   <Gift size={20} />
                 </div>
                 <div>
-                  <p className="font-sora font-bold text-lg">Spend to Earn</p>
+                  <p className="font-jakarta font-bold text-lg">Spend to Earn</p>
                   <p className="text-xs text-text-light">Spend-based</p>
                 </div>
               </div>
               <p className="text-text-medium mb-4">Customers earn points on every purchase. Perfect for restaurants and delis where basket size matters.</p>
               <div className="bg-accent/10 rounded-xl p-4 mb-4">
                 <p className="text-xs font-semibold text-text-medium mb-2">Example:</p>
-                <p className="font-sora font-bold text-accent">Spend €100 → Get €10 reward</p>
+                <p className="font-jakarta font-bold text-accent">Spend €100 → Get €10 reward</p>
                 <div className="mt-3 h-3 bg-brand-border rounded-full overflow-hidden">
                   <div className="h-full w-3/4 rounded-full bg-accent" />
                 </div>
@@ -415,7 +419,7 @@ export default function HomePage() {
       <section className="py-24 px-4 bg-gradient-brand">
         <div className="max-w-5xl mx-auto text-center text-white">
           <FadeUp>
-            <h2 className="font-sora font-bold text-3xl sm:text-4xl mb-4">See It In Action</h2>
+            <h2 className="font-jakarta font-bold text-3xl sm:text-4xl mb-4">See It In Action</h2>
             <p className="text-white/80 text-lg mb-12">Six real demo merchants with live data. No signup required.</p>
           </FadeUp>
           <motion.div
@@ -434,7 +438,7 @@ export default function HomePage() {
                   <div className="w-8 h-8 rounded-lg mb-3 flex items-center justify-center" style={{ background: m.color }}>
                     <Coffee size={16} className="text-white" />
                   </div>
-                  <p className="font-sora font-bold text-sm">{m.name}</p>
+                  <p className="font-jakarta font-bold text-sm">{m.name}</p>
                   <p className="text-white/60 text-xs mt-1">{m.reward}</p>
                 </Link>
               </motion.div>
@@ -455,7 +459,7 @@ export default function HomePage() {
       <section id="pricing" className="py-24 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <FadeUp>
-            <h2 className="font-sora font-bold text-3xl sm:text-4xl mb-3">Simple, Transparent Pricing</h2>
+            <h2 className="font-jakarta font-bold text-3xl sm:text-4xl mb-3">Simple, Transparent Pricing</h2>
             <p className="text-text-medium text-lg mb-14">Start free. Upgrade when you grow.</p>
           </FadeUp>
           <motion.div
@@ -477,9 +481,9 @@ export default function HomePage() {
                   </div>
                 )}
                 <div className="mb-6">
-                  <p className="font-sora font-bold text-lg mb-1">{plan.name}</p>
+                  <p className="font-jakarta font-bold text-lg mb-1">{plan.name}</p>
                   <div className="flex items-end gap-1">
-                    <span className="text-4xl font-sora font-extrabold">{plan.price}</span>
+                    <span className="text-4xl font-jakarta font-extrabold">{plan.price}</span>
                     <span className="text-text-light text-sm mb-1">{plan.period}</span>
                   </div>
                 </div>
@@ -508,7 +512,7 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 bg-yellow-50 text-yellow-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-yellow-200 mb-6">
               Beta Merchants
             </div>
-            <h2 className="font-sora font-bold text-3xl sm:text-4xl mb-14">What Merchants Are Saying</h2>
+            <h2 className="font-jakarta font-bold text-3xl sm:text-4xl mb-14">What Merchants Are Saying</h2>
           </FadeUp>
           <motion.div
             variants={staggerContainer(0.12)}
@@ -520,7 +524,7 @@ export default function HomePage() {
             {TESTIMONIALS.map((t) => (
               <motion.div key={t.name} variants={fadeUp} className="card text-left">
                 <div className="flex gap-0.5 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#02C39A" stroke="#02C39A" />)}
+                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#5EEAD4" stroke="#5EEAD4" />)}
                 </div>
                 <p className="text-text-dark leading-relaxed mb-5 italic">&ldquo;{t.quote}&rdquo;</p>
                 <div>
@@ -537,7 +541,7 @@ export default function HomePage() {
       <section id="faq" className="py-24 px-4">
         <div className="max-w-3xl mx-auto">
           <FadeUp className="text-center mb-14">
-            <h2 className="font-sora font-bold text-3xl sm:text-4xl">Frequently Asked Questions</h2>
+            <h2 className="font-jakarta font-bold text-3xl sm:text-4xl">Frequently Asked Questions</h2>
           </FadeUp>
           <FaqAccordion />
         </div>
@@ -552,7 +556,7 @@ export default function HomePage() {
         />
         <div className="max-w-3xl mx-auto text-center text-white relative">
           <FadeUp>
-            <h2 className="font-sora font-bold text-3xl sm:text-5xl mb-5 leading-tight">
+            <h2 className="font-jakarta font-bold text-3xl sm:text-5xl mb-5 leading-tight">
               Ready to Turn First-Time Visitors Into Loyal Customers?
             </h2>
             <p className="text-white/80 text-lg mb-10">Join 200+ Baltic merchants already using LetLoyal.</p>
@@ -571,8 +575,14 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
             <div>
-              <div className="flex items-center gap-2 font-sora font-extrabold text-xl text-white mb-2">
-                <QrCode size={22} className="text-accent" /> LetLoyal
+              <div className="flex items-center gap-2 mb-2">
+                <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.15"/>
+                  <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
+                  <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
+                </svg>
+                <span className="font-jakarta font-extrabold text-xl text-white">LetLoyal</span>
               </div>
               <p className="text-sm max-w-xs leading-relaxed">QR-first loyalty for local merchants.<br />No app. No hardware. Just loyal customers.</p>
             </div>

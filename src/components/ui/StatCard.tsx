@@ -30,7 +30,7 @@ function useCountUp(target: number, duration = 1200) {
 }
 
 export default function StatCard({
-  label, value, icon, delta, prefix = '', suffix = '', loading, accentColor = '#028090',
+  label, value, icon, delta, prefix = '', suffix = '', loading, accentColor = '#0D9488',
 }: StatCardProps) {
   const displayed = useCountUp(value);
 
@@ -49,25 +49,25 @@ export default function StatCard({
 
   return (
     <div
-      className="bg-white rounded-2xl p-5 border border-brand-border shadow-card overflow-hidden relative"
+      className="bg-white rounded-2xl p-3 sm:p-4 md:p-5 border border-brand-border shadow-card overflow-hidden relative"
       style={{ borderTop: `3px solid ${accentColor}` }}
     >
       {/* Subtle bg tint */}
       <div
-        className="absolute top-0 right-0 w-20 h-20 rounded-full -translate-y-6 translate-x-6 opacity-[0.06]"
+        className="absolute top-0 right-0 w-16 h-16 rounded-full -translate-y-4 translate-x-4 opacity-[0.06]"
         style={{ background: accentColor }}
       />
 
-      <div className="flex items-start justify-between mb-3 relative">
+      <div className="flex items-start justify-between mb-2 relative">
         <div
-          className="p-2.5 rounded-xl"
+          className="p-2 rounded-xl"
           style={{ background: `${accentColor}18`, color: accentColor }}
         >
           {icon}
         </div>
         {delta !== undefined && (
-          <div className={`flex items-center gap-1 text-xs font-semibold ${trendColor}`}>
-            <TrendIcon size={13} />
+          <div className={`flex items-center gap-0.5 text-[10px] font-semibold ${trendColor}`}>
+            <TrendIcon size={11} />
             <span>{Math.abs(delta)}</span>
           </div>
         )}
@@ -75,12 +75,12 @@ export default function StatCard({
 
       <div className="relative">
         <div
-          className="text-3xl font-bold font-sora"
-          style={{ color: '#1A1A1A' }}
+          className="text-2xl sm:text-3xl font-bold font-jakarta leading-none"
+          style={{ color: '#0F172A' }}
         >
           {prefix}{displayed.toLocaleString()}{suffix}
         </div>
-        <div className="text-xs font-semibold text-text-medium mt-1 uppercase tracking-wide">{label}</div>
+        <div className="text-[10px] sm:text-xs font-semibold text-text-medium mt-1 uppercase tracking-wide leading-tight">{label}</div>
       </div>
     </div>
   );

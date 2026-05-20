@@ -28,7 +28,7 @@ export default function Modal({ open, onClose, title, children, size = 'md' }: M
       <div className={clsx('relative w-full bg-white rounded-3xl shadow-2xl animate-slide-up', sizes[size])}>
         {title && (
           <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-brand-border">
-            <h3 className="text-lg font-bold font-sora">{title}</h3>
+            <h3 className="text-lg font-bold font-jakarta">{title}</h3>
             <button
               onClick={onClose}
               aria-label="Close modal"

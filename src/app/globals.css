@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,27 +6,31 @@
 
 @layer base {
   :root {
-    --primary: #028090;
-    --primary-dark: #014451;
-    --accent: #02C39A;
-    --brand-bg: #FAFBFC;
+    --primary: #0D9488;
+    --primary-dark: #134E4A;
+    --accent: #5EEAD4;
+    --brand-bg: #F8FAFC;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
-    font-family: 'DM Sans', sans-serif;
-    background-color: #FAFBFC;
-    color: #1A1A1A;
+    font-family: 'Inter', sans-serif;
+    background-color: #F8FAFC;
+    color: #0F172A;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   * {
@@ -40,24 +44,24 @@
 
 @layer components {
   .card {
-    @apply bg-white rounded-2xl p-7 border border-brand-border shadow-card;
+    @apply bg-white rounded-xl p-4 sm:p-5 md:p-6 border border-brand-border shadow-card;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-accent text-text-dark font-bold rounded-full px-9 py-3.5 text-base shadow-btn transition-all duration-200 hover:-translate-y-0.5 hover:shadow-btn-hover active:translate-y-0 cursor-pointer min-h-[44px];
+    @apply inline-flex items-center justify-center gap-2 bg-primary text-white font-bold rounded-lg px-9 py-3.5 text-base shadow-btn transition-all duration-200 hover:bg-accent-mid hover:-translate-y-0.5 hover:shadow-btn-hover active:translate-y-0 cursor-pointer min-h-[44px];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 border-2 border-primary text-primary font-semibold rounded-full px-8 py-3 text-base transition-all duration-200 hover:bg-primary hover:text-white cursor-pointer min-h-[44px];
+    @apply inline-flex items-center justify-center gap-2 border-2 border-primary text-primary font-semibold rounded-lg px-8 py-3 text-base transition-all duration-200 hover:bg-primary hover:text-white cursor-pointer min-h-[44px];
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 text-primary font-semibold rounded-full px-6 py-3 text-base transition-all duration-200 hover:bg-primary-light cursor-pointer min-h-[44px];
+    @apply inline-flex items-center justify-center gap-2 text-primary font-semibold rounded-lg px-6 py-3 text-base transition-all duration-200 hover:bg-primary-light cursor-pointer min-h-[44px];
   }
 
   .form-input {
-    @apply w-full px-4 py-3.5 border-2 border-brand-border rounded-xl text-base font-sans transition-all duration-200
-           focus:border-primary focus:shadow-[0_0_0_4px_rgba(2,128,144,0.10)] focus:outline-none
+    @apply w-full px-4 py-3.5 border-2 border-brand-border rounded-lg text-base font-sans transition-all duration-200
+           focus:border-primary focus:shadow-[0_0_0_4px_rgba(13,148,136,0.10)] focus:outline-none
            placeholder:text-text-light;
   }
 
@@ -88,7 +92,7 @@
 
   .progress-fill {
     @apply h-full rounded-full;
-    background: linear-gradient(90deg, #02C39A, #028090);
+    background: linear-gradient(90deg, #5EEAD4, #0D9488);
     transition: width 800ms ease;
   }
 
@@ -119,20 +123,20 @@
   }
 
   .otp-display {
-    @apply text-5xl font-bold tracking-[0.35em] text-text-dark font-sora;
+    @apply text-5xl font-bold tracking-[0.35em] text-text-dark font-jakarta;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, #028090 0%, #02C39A 100%);
+    background: linear-gradient(135deg, #0D9488 0%, #5EEAD4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .bg-gradient-brand {
-    background: linear-gradient(135deg, #014451 0%, #028090 50%, #02C39A 100%);
+    background: linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%);
   }
 
   .scrollbar-hide {
@@ -174,10 +178,10 @@
   padding: 8px 0 0 !important;
 }
 #qr-reader__dashboard_section_csr button {
-  background: #02C39A !important;
+  background: #0D9488 !important;
   border: none !important;
   border-radius: 50px !important;
-  color: #1A1A1A !important;
+  color: #ffffff !important;
   font-weight: 700 !important;
   padding: 12px 24px !important;
   cursor: pointer !important;
@@ -202,7 +206,7 @@
   /* ── Thermal layout ── */
   .print-wrap {
     width: 72mm;       /* 80mm - 4mm margins each side */
-    font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-size: 10pt;
     color: #111;
     -webkit-print-color-adjust: exact;

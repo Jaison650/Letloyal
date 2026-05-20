@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { QrCode, Camera, ChevronRight } from 'lucide-react';
+import { Camera, ChevronRight, CreditCard } from 'lucide-react';
 import LoyaltyCard, { type Enrollment } from '@/components/customer/LoyaltyCard';
 import LogoutButton from '@/components/customer/LogoutButton';
 import NotificationBell from '@/components/customer/NotificationBell';
@@ -25,7 +25,7 @@ interface DashboardData {
 
 function SkeletonCard() {
   return (
-    <div className="bg-white rounded-[20px] border border-brand-border shadow-card p-5 space-y-4 animate-pulse">
+    <div className="bg-white rounded-xl border border-brand-border shadow-card p-5 space-y-4 animate-pulse">
       <div className="flex items-center gap-3">
         <div className="w-12 h-12 rounded-xl bg-gray-200 shrink-0" />
         <div className="flex-1 space-y-2">
@@ -70,13 +70,16 @@ export default function CustomerDashboard() {
     <div className="min-h-screen bg-brand-bg pb-28">
 
       {/* ── Header ───────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-30" style={{ background: 'linear-gradient(90deg, #014451, #028090)' }}>
+      <header className="sticky top-0 z-30" style={{ background: 'linear-gradient(90deg, #134E4A, #0D9488)' }}>
         <div className="max-w-[480px] mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-sora font-bold text-white text-sm">
-            <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center">
-              <QrCode size={14} className="text-[#012d38]" />
-            </div>
-            LetLoyal
+          <Link href="/" className="flex items-center gap-2">
+            <svg width="26" height="26" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.15"/>
+              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
+              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
+            </svg>
+            <span className="font-jakarta font-bold text-white text-sm tracking-tight">LetLoyal</span>
           </Link>
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
@@ -103,7 +106,7 @@ export default function CustomerDashboard() {
             </>
           ) : (
             <>
-              <h1 className="font-sora font-bold text-2xl">
+              <h1 className="font-jakarta font-bold text-2xl">
                 Hi{firstName ? `, ${firstName}` : ' there'}! 👋
               </h1>
               <p className="text-text-medium text-sm mt-1">
@@ -124,7 +127,7 @@ export default function CustomerDashboard() {
           </section>
         ) : count > 0 ? (
           <section className="space-y-4">
-            <h2 className="font-sora font-bold text-lg">My Loyalty Cards</h2>
+            <h2 className="font-jakarta font-bold text-lg">My Loyalty Cards</h2>
             {data!.enrollments.map((e) => (
               <LoyaltyCard key={e.enrollment_id} enrollment={e} />
             ))}
@@ -133,7 +136,7 @@ export default function CustomerDashboard() {
           /* Empty state */
           <div className="flex flex-col items-center text-center py-8 space-y-3">
             <p className="text-5xl">🏪</p>
-            <p className="font-sora font-bold text-lg">No loyalty cards yet</p>
+            <p className="font-jakarta font-bold text-lg">No loyalty cards yet</p>
             <p className="text-text-medium text-sm max-w-xs">
               Visit a store and scan their QR code to start earning rewards.
             </p>
@@ -144,13 +147,13 @@ export default function CustomerDashboard() {
         <section>
           <Link
             href="/scan"
-            className="flex items-center gap-4 bg-white rounded-[20px] border border-brand-border shadow-card p-5 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 active:scale-[0.98]"
+            className="flex items-center gap-4 bg-white rounded-xl border border-brand-border shadow-card p-5 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 active:scale-[0.98]"
           >
             <div className="w-14 h-14 bg-primary-light rounded-2xl flex items-center justify-center shrink-0">
               <Camera size={28} className="text-primary" />
             </div>
             <div className="flex-1">
-              <p className="font-sora font-bold text-base">Scan a Store QR Code</p>
+              <p className="font-jakarta font-bold text-base">Scan a Store QR Code</p>
               <p className="text-text-medium text-sm mt-0.5">Earn rewards at any LetLoyal store</p>
             </div>
             <ChevronRight size={20} className="text-text-light shrink-0" />
@@ -160,7 +163,7 @@ export default function CustomerDashboard() {
         {/* ── Demo stores (unenrolled) ──────────────────────────────── */}
         {!loading && (data?.demo_merchants.length ?? 0) > 0 && (
           <section>
-            <h2 className="font-sora font-bold text-lg mb-3">Discover Stores</h2>
+            <h2 className="font-jakarta font-bold text-lg mb-3">Discover Stores</h2>
             <div className="grid grid-cols-2 gap-3">
               {data!.demo_merchants.map((m) => (
                 <Link
@@ -197,13 +200,13 @@ export default function CustomerDashboard() {
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-brand-border px-6 pb-safe py-2 flex justify-around z-30">
         <Link href="/dashboard" className="flex flex-col items-center gap-1 relative">
           <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-full" />
-          <QrCode size={20} className="text-primary" />
+          <CreditCard size={20} className="text-primary" />
           <span className="text-[10px] font-bold text-primary">Cards</span>
         </Link>
         <Link href="/scan" className="flex flex-col items-center gap-1">
           <div
             className="w-14 h-9 rounded-full flex items-center justify-center -mt-4 shadow-btn"
-            style={{ background: 'linear-gradient(135deg, #028090, #02C39A)' }}
+            style={{ background: 'linear-gradient(135deg, #0D9488, #5EEAD4)' }}
           >
             <Camera size={18} className="text-white" />
           </div>

@@ -28,7 +28,7 @@ export default function ScanSuccess({
 
   useEffect(() => {
     if (rewardUnlocked) {
-      confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, colors: ['#02C39A', '#028090', '#05FFCE', '#FFFFFF'] });
+      confetti({ particleCount: 150, spread: 80, origin: { y: 0.5 }, colors: ['#5EEAD4', '#0D9488', '#CCFBF1', '#FFFFFF'] });
     }
   }, [rewardUnlocked]);
 
@@ -46,7 +46,7 @@ export default function ScanSuccess({
 
           {/* Title */}
           <div>
-            <h1 className="font-sora font-bold text-2xl">
+            <h1 className="font-jakarta font-bold text-2xl">
               {rewardUnlocked ? '🎉 Reward Unlocked!' : '✓ Visit Recorded!'}
             </h1>
             <p className="text-text-medium mt-1">

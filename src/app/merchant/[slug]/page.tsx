@@ -106,7 +106,7 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
       campaignType={primaryCampaign?.campaign_type as 'visit_based' | 'spend_based' | undefined}
     >
       {/* Stats bar */}
-      <div className="mb-8">
+      <div className="mb-5 sm:mb-8">
         <StatsBar
           todayScans={parseInt(todayScans?.count || '0')}
           activeCustomers={parseInt(activeCustomers?.count || '0')}
@@ -116,7 +116,7 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
       </div>
 
       {/* Main grid */}
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
 
         {/* Left column: QR first, then Insights, then Campaigns */}
         <div className="lg:col-span-1 space-y-6">
@@ -140,9 +140,9 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
 
           {/* Campaigns — click to expand rules */}
           <div className="card">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-sora font-bold text-lg">Campaigns</h3>
-              <Link href={`/merchant/${slug}/campaigns`} className="text-xs text-primary font-semibold hover:underline">
+            <div className="flex items-center justify-between mb-4 gap-2 min-w-0">
+              <h3 className="font-jakarta font-bold text-base sm:text-lg truncate">Campaigns</h3>
+              <Link href={`/merchant/${slug}/campaigns`} className="shrink-0 text-xs text-primary font-semibold hover:underline">
                 View all
               </Link>
             </div>
@@ -175,24 +175,24 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
           {/* Active campaign highlight */}
           {primaryCampaign && (
             <div
-              className="rounded-2xl p-5 text-white"
-              style={{ background: `linear-gradient(135deg, #012d38, ${merchant.brand_color})` }}
+              className="rounded-2xl p-4 sm:p-5 text-white"
+              style={{ background: `linear-gradient(135deg, #0F172A, ${merchant.brand_color})` }}
             >
-              <div className="flex items-start justify-between gap-3">
+              <p className="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-1">Running Campaign</p>
+              <div className="flex items-start justify-between gap-2 min-w-0">
                 <div className="flex-1 min-w-0">
-                  <p className="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-1">Running Campaign</p>
-                  <h3 className="font-sora font-bold text-lg leading-tight">{primaryCampaign.name}</h3>
-                  <div className="flex items-center gap-2 mt-2">
-                    <Gift size={14} className="text-white/70 shrink-0" />
-                    <p className="text-sm text-white/85">{primaryCampaign.reward_description}</p>
+                  <h3 className="font-jakarta font-bold text-base sm:text-lg leading-tight truncate">{primaryCampaign.name}</h3>
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <Gift size={13} className="text-white/70 shrink-0" />
+                    <p className="text-xs sm:text-sm text-white/85 truncate">{primaryCampaign.reward_description}</p>
                   </div>
                 </div>
-                <div className="text-right shrink-0">
-                  <p className="text-2xl font-sora font-bold">{primaryCampaign.participants_count}</p>
-                  <p className="text-[10px] text-white/60 font-medium">participants</p>
+                <div className="text-right shrink-0 pl-2">
+                  <p className="text-xl font-jakarta font-bold">{primaryCampaign.participants_count}</p>
+                  <p className="text-[9px] text-white/60 font-medium">members</p>
                 </div>
               </div>
-              <div className="mt-4 flex items-center justify-between text-xs text-white/70">
+              <div className="mt-3 flex items-center justify-between text-[11px] text-white/70">
                 <span>
                   {primaryCampaign.campaign_type === 'visit_based'
                     ? `${primaryCampaign.reward_threshold} visits to unlock`
@@ -207,38 +207,36 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
 
           {nearReward.length > 0 && (
             <div className="card">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Trophy size={18} className="text-accent" />
-                  <h3 className="font-sora font-bold text-lg">Customers Near Their Reward</h3>
-                </div>
+              <div className="flex items-center gap-2 mb-4 min-w-0">
+                <Trophy size={16} className="text-accent shrink-0" />
+                <h3 className="font-jakarta font-bold text-base sm:text-lg flex-1 min-w-0 truncate">Near Reward</h3>
                 <Link
                   href={`/merchant/${slug}/customers?filter=near_reward`}
-                  className="text-xs text-primary font-semibold hover:underline"
+                  className="shrink-0 text-xs text-primary font-semibold hover:underline"
                 >
-                  View All →
+                  View All
                 </Link>
               </div>
               <div className="space-y-3">
                 {nearReward.map((c, i) => (
-                  <div key={i} className="flex items-center gap-4">
-                    <div className="w-9 h-9 bg-primary-light rounded-full flex items-center justify-center text-primary font-bold text-sm shrink-0">
+                  <div key={i} className="flex items-center gap-3 min-w-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 bg-primary-light rounded-full flex items-center justify-center text-primary font-bold text-sm shrink-0">
                       {c.name.charAt(0)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-1">
-                        <p className="font-semibold text-sm">{c.name}</p>
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="font-semibold text-sm truncate">{c.name}</p>
                         <p
-                          className="text-xs font-bold"
-                          style={{ color: c.status === 'reward_unlocked' ? '#02C39A' : '#028090' }}
+                          className="text-xs font-bold shrink-0"
+                          style={{ color: c.status === 'reward_unlocked' ? '#5EEAD4' : '#0D9488' }}
                         >
                           {c.status === 'reward_unlocked'
                             ? '🎁 Ready!'
-                            : `${Math.max(0, c.threshold - c.current)} to go`}
+                            : `${Math.max(0, c.threshold - c.current)} left`}
                         </p>
                       </div>
                       <ProgressBar value={Math.min(100, c.progress_pct ?? 0)} height="sm" />
-                      <p className="text-xs text-text-light mt-1">
+                      <p className="text-[10px] text-text-light mt-0.5">
                         {c.current} / {c.threshold}
                       </p>
                     </div>

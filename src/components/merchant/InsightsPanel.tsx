@@ -23,18 +23,18 @@ export default function InsightsPanel({ merchantSlug }: { merchantSlug: string }
       .finally(() => setLoading(false));
   }, [merchantSlug]);
 
-  const priorityColor = { high: '#02C39A', medium: '#F57C00', low: '#028090' };
-  const priorityBg = { high: '#02C39A12', medium: '#F57C0012', low: '#02809012' };
+  const priorityColor = { high: '#5EEAD4', medium: '#F57C00', low: '#0D9488' };
+  const priorityBg = { high: '#5EEAD412', medium: '#F57C0012', low: '#0D948812' };
 
   if (loading) {
     return (
       <div className="card space-y-3">
         <div className="flex items-center gap-2">
-          <Zap size={18} className="text-accent" />
-          <h3 className="font-sora font-bold text-lg">Customer Insights</h3>
+          <Zap size={16} className="text-accent shrink-0" />
+          <h3 className="font-jakarta font-bold text-base sm:text-lg">Customer Insights</h3>
         </div>
         {[1, 2].map(i => (
-          <div key={i} className="h-16 bg-brand-bg rounded-xl animate-pulse" />
+          <div key={i} className="h-14 bg-brand-bg rounded-xl animate-pulse" />
         ))}
       </div>
     );
@@ -45,7 +45,7 @@ export default function InsightsPanel({ merchantSlug }: { merchantSlug: string }
       <div className="card">
         <div className="flex items-center gap-2 mb-3">
           <Zap size={18} className="text-accent" />
-          <h3 className="font-sora font-bold text-lg">Customer Insights</h3>
+          <h3 className="font-jakarta font-bold text-lg">Customer Insights</h3>
         </div>
         <div className="text-center py-6">
           <p className="text-4xl mb-2">📊</p>
@@ -57,16 +57,14 @@ export default function InsightsPanel({ merchantSlug }: { merchantSlug: string }
 
   return (
     <div className="card space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Zap size={18} className="text-accent" />
-          <h3 className="font-sora font-bold text-lg">Customer Insights</h3>
-        </div>
+      <div className="flex items-center gap-2 min-w-0">
+        <Zap size={16} className="text-accent shrink-0" />
+        <h3 className="font-jakarta font-bold text-base sm:text-lg flex-1 min-w-0 truncate">Customer Insights</h3>
         <Link
           href={`/merchant/${merchantSlug}/notifications`}
-          className="flex items-center gap-1 text-xs text-primary font-semibold hover:underline"
+          className="shrink-0 flex items-center gap-1 text-[11px] text-primary font-semibold hover:underline"
         >
-          <Bell size={12} /> Send Campaign
+          <Bell size={11} /> <span className="hidden sm:inline">Send </span>Campaign
         </Link>
       </div>
 
@@ -77,11 +75,11 @@ export default function InsightsPanel({ merchantSlug }: { merchantSlug: string }
             className="rounded-xl px-4 py-3 space-y-1"
             style={{ background: priorityBg[insight.priority] }}
           >
-            <div className="flex items-center gap-2">
-              <span>{insight.icon}</span>
-              <p className="font-semibold text-sm text-text-dark">{insight.title}</p>
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="shrink-0">{insight.icon}</span>
+              <p className="font-semibold text-sm text-text-dark flex-1 min-w-0 line-clamp-1">{insight.title}</p>
               <span
-                className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full text-white"
+                className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full text-white"
                 style={{ background: priorityColor[insight.priority] }}
               >
                 {insight.priority.toUpperCase()}

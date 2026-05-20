@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, Target, Users, CheckCircle2, BarChart3,
-  QrCode, LogOut, Menu, X, Zap, Star, Bell, ChevronRight,
+  LogOut, Menu, X, Zap, Star, Bell, ChevronRight,
   MoreHorizontal, Maximize2, Settings
 } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -123,14 +123,17 @@ export default function DashboardShell({
       {/* ── Desktop Sidebar ─────────────────────────────────────────────── */}
       <aside
         className="hidden lg:flex fixed left-0 top-0 h-full w-64 flex-col z-40"
-        style={{ background: 'linear-gradient(180deg, #012d38 0%, #014451 40%, #028090 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%)' }}
       >
         <div className="px-6 py-5 border-b border-white/10">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center">
-              <QrCode size={15} className="text-[#012d38]" />
-            </div>
-            <span className="font-sora font-bold text-lg text-white tracking-tight">LetLoyal</span>
+            <svg width="28" height="28" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+              <line x1="13" y1="9" x2="13" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
+              <line x1="13" y1="44" x2="34" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
+              <line x1="22" y1="35" x2="46" y2="10" stroke="#CCFBF1" strokeWidth="5.5" strokeLinecap="round"/>
+              <polyline points="35,10 46,10 46,22" stroke="#CCFBF1" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span className="font-jakarta font-bold text-lg text-white tracking-tight"><span className="font-medium text-[#5EEAD4]">Let</span>Loyal</span>
           </Link>
         </div>
 
@@ -170,14 +173,18 @@ export default function DashboardShell({
 
       {/* ── Mobile top bar ───────────────────────────────────────────────── */}
       <div
-        className="lg:hidden fixed top-0 left-0 right-0 z-40 px-4 h-14 flex items-center justify-between border-b border-white/10"
-        style={{ background: 'linear-gradient(90deg, #014451, #028090)' }}
+        className="lg:hidden fixed top-0 left-0 right-0 z-40 px-3 h-14 flex items-center justify-between border-b border-white/10"
+        style={{ background: 'linear-gradient(135deg, #134E4A, #0D9488)' }}
       >
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center">
-            <QrCode size={14} className="text-[#012d38]" />
-          </div>
-          <span className="font-sora font-bold text-white text-sm">{merchantName}</span>
+          <svg width="32" height="32" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+            <rect width="56" height="56" rx="13" fill="#0D9488"/>
+            <line x1="13" y1="9" x2="13" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
+            <line x1="13" y1="44" x2="34" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
+            <line x1="22" y1="35" x2="46" y2="10" stroke="#CCFBF1" strokeWidth="5.5" strokeLinecap="round"/>
+            <polyline points="35,10 46,10 46,22" stroke="#CCFBF1" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span className="font-jakarta font-bold text-white text-sm">{merchantName}</span>
         </div>
         <button onClick={() => setMobileOpen(true)} aria-label="Open menu" className="p-2 text-white/80">
           <Menu size={22} />
@@ -190,14 +197,17 @@ export default function DashboardShell({
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
           <div
             className="absolute left-0 top-0 h-full w-72 flex flex-col shadow-2xl"
-            style={{ background: 'linear-gradient(180deg, #012d38 0%, #014451 40%, #028090 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%)' }}
           >
             <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center">
-                  <QrCode size={14} className="text-[#012d38]" />
-                </div>
-                <span className="font-sora font-bold text-white">LetLoyal</span>
+                <svg width="28" height="28" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13" y1="9" x2="13" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
+                  <line x1="13" y1="44" x2="34" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
+                  <line x1="22" y1="35" x2="46" y2="10" stroke="#CCFBF1" strokeWidth="5.5" strokeLinecap="round"/>
+                  <polyline points="35,10 46,10 46,22" stroke="#CCFBF1" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="font-jakarta font-bold text-white"><span className="font-medium text-[#5EEAD4]">Let</span>Loyal</span>
               </div>
               <button onClick={() => setMobileOpen(false)} className="text-white/70 hover:text-white">
                 <X size={22} />
@@ -227,7 +237,7 @@ export default function DashboardShell({
       )}
 
       {/* ── Main content ─────────────────────────────────────────────────── */}
-      <main className="flex-1 lg:ml-64 pt-14 lg:pt-0 min-h-screen overflow-x-hidden">
+      <main className="flex-1 min-w-0 lg:ml-64 pt-14 lg:pt-0 min-h-screen overflow-x-hidden">
         {!demoToastDismissed && (
           <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5 flex items-center justify-between gap-3">
             <p className="text-xs text-amber-800 font-medium">
@@ -242,24 +252,24 @@ export default function DashboardShell({
 
         <div className="hidden lg:flex items-center justify-between px-8 py-4 bg-white border-b border-brand-border sticky top-0 z-20">
           <div>
-            <h2 className="font-sora font-bold text-xl text-text-dark">
+            <h2 className="font-jakarta font-bold text-xl text-text-dark">
               {greeting ? `${greeting}, ${merchantName}!` : `Welcome, ${merchantName}!`}
             </h2>
             <p className="text-sm text-text-medium mt-0.5">{dateStr}</p>
           </div>
           <div className="flex items-center gap-3">
-            <p className="font-sora font-bold text-2xl text-primary tabular-nums tracking-tight">{clock}</p>
+            <p className="font-jakarta font-bold text-2xl text-primary tabular-nums tracking-tight">{clock}</p>
             <Link
               href={`/merchant/${slug}/validate`}
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-95"
-              style={{ background: 'linear-gradient(135deg, #028090, #02C39A)' }}
+              style={{ background: 'linear-gradient(135deg, #0D9488, #5EEAD4)' }}
             >
               <CheckCircle2 size={15} /> Validate
             </Link>
           </div>
         </div>
 
-        <div className="p-4 lg:p-8 max-w-7xl mx-auto pb-28 lg:pb-8">
+        <div className="p-3 xs:p-4 lg:p-8 max-w-7xl mx-auto pb-28 lg:pb-8">
           {children}
         </div>
       </main>
@@ -285,12 +295,12 @@ export default function DashboardShell({
       )}
 
       {/* ── Mobile Bottom Nav — 4 slots ─────────────────────────────────── */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-brand-border">
-        <div className="flex items-end justify-around px-2 pb-2 pt-1">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-brand-border safe-bottom">
+        <div className="flex items-end justify-around px-1 pb-safe pt-1" style={{ paddingBottom: 'max(8px, env(safe-area-inset-bottom))' }}>
 
           {/* Dashboard */}
           <Link href={`/merchant/${slug}`}
-            className={clsx('flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors relative min-w-[52px]',
+            className={clsx('flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-colors relative',
               isActive(`/merchant/${slug}`) ? 'text-primary' : 'text-text-light')}>
             {isActive(`/merchant/${slug}`) && (
               <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
@@ -301,7 +311,7 @@ export default function DashboardShell({
 
           {/* Validate */}
           <Link href={`/merchant/${slug}/validate`}
-            className={clsx('flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors relative min-w-[52px]',
+            className={clsx('flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-colors relative',
               isActive(`/merchant/${slug}/validate`) ? 'text-primary' : 'text-text-light')}>
             {isActive(`/merchant/${slug}/validate`) && (
               <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
@@ -314,22 +324,22 @@ export default function DashboardShell({
           </Link>
 
           {/* ── QR CENTER BUTTON ── */}
-          <div className="flex flex-col items-center -mt-5">
+          <div className="flex flex-col items-center flex-1 -mt-5">
             <button
               onClick={() => setKioskOpen(true)}
-              className="w-16 h-16 rounded-2xl shadow-btn-hover flex flex-col items-center justify-center gap-0.5 text-white transition-all active:scale-95 hover:opacity-90"
-              style={{ background: 'linear-gradient(135deg, #014451, #028090)' }}
+              className="w-14 h-14 rounded-2xl shadow-btn-hover flex flex-col items-center justify-center gap-0.5 text-white transition-all active:scale-95 hover:opacity-90"
+              style={{ background: 'linear-gradient(135deg, #134E4A, #0D9488)' }}
               aria-label="Show QR code"
             >
-              <Maximize2 size={20} className="text-accent" />
-              <span className="text-[8px] font-bold text-white/80">SHOW QR</span>
+              <Maximize2 size={18} className="text-accent" />
+              <span className="text-[8px] font-bold text-white/80">QR</span>
             </button>
             <span className="text-[9px] font-semibold text-primary mt-1">QR Code</span>
           </div>
 
           {/* Customers */}
           <Link href={`/merchant/${slug}/customers`}
-            className={clsx('flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors relative min-w-[52px]',
+            className={clsx('flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-colors relative',
               isActive(`/merchant/${slug}/customers`) ? 'text-primary' : 'text-text-light')}>
             {isActive(`/merchant/${slug}/customers`) && (
               <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
@@ -341,7 +351,7 @@ export default function DashboardShell({
           {/* More drawer */}
           <button
             onClick={() => setMoreOpen(true)}
-            className={clsx('flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors min-w-[52px] text-text-light hover:text-primary')}>
+            className={clsx('flex flex-col items-center gap-0.5 flex-1 py-1.5 rounded-xl transition-colors text-text-light hover:text-primary')}>
             <MoreHorizontal size={20} />
             <span className="text-[9px] font-semibold">More</span>
           </button>

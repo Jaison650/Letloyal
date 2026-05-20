@@ -103,7 +103,7 @@ function OtpBoxes({
           onKeyDown={(e) => handleKeyDown(i, e)}
           onFocus={(e) => e.target.select()}
           aria-label={`Digit ${i + 1}`}
-          className={`w-12 h-14 text-center text-2xl font-bold font-sora rounded-xl border-2 transition-all outline-none
+          className={`w-12 h-14 text-center text-2xl font-bold font-jakarta rounded-xl border-2 transition-all outline-none
             ${hasError
               ? 'border-status-error bg-red-50 text-status-error'
               : d
@@ -210,7 +210,7 @@ export default function RedemptionValidator({ merchantSlug, demoHints = [] }: Pr
         particleCount: 120,
         spread:        70,
         origin:        { y: 0.6 },
-        colors:        ['#02C39A', '#028090', '#05FFCE', '#FFFFFF'],
+        colors:        ['#5EEAD4', '#0D9488', '#CCFBF1', '#FFFFFF'],
       });
     } finally {
       setLoading(false);
@@ -230,7 +230,7 @@ export default function RedemptionValidator({ merchantSlug, demoHints = [] }: Pr
               <div className="w-14 h-14 bg-primary-light rounded-2xl flex items-center justify-center mx-auto mb-3">
                 <CheckCircle2 size={26} className="text-primary" />
               </div>
-              <h2 className="font-sora font-bold text-xl">Validate Customer Reward</h2>
+              <h2 className="font-jakarta font-bold text-xl">Validate Customer Reward</h2>
               <p className="text-sm text-text-medium mt-1">Enter the customer&apos;s phone number to find their pending reward</p>
             </div>
 
@@ -321,7 +321,7 @@ export default function RedemptionValidator({ merchantSlug, demoHints = [] }: Pr
           {/* Customer info */}
           <div className="bg-primary-light rounded-2xl p-5 space-y-2">
             <p className="text-xs font-semibold text-text-light uppercase tracking-wide">Customer</p>
-            <p className="font-sora font-bold text-2xl">{pending.customer_name}</p>
+            <p className="font-jakarta font-bold text-2xl">{pending.customer_name}</p>
             <p className="text-sm text-text-medium">{pending.campaign_name}</p>
             <p className="font-semibold text-primary">{pending.reward_description}</p>
             <div className="flex items-center justify-between pt-2">
@@ -373,7 +373,7 @@ export default function RedemptionValidator({ merchantSlug, demoHints = [] }: Pr
             <CheckCircle2 size={44} className="text-status-success" />
           </div>
           <div>
-            <h2 className="font-sora font-bold text-2xl text-status-success">✓ Reward Redeemed!</h2>
+            <h2 className="font-jakarta font-bold text-2xl text-status-success">✓ Reward Redeemed!</h2>
             <p className="text-lg font-semibold mt-2">{successData.name}</p>
             <p className="text-accent font-bold mt-0.5">{successData.reward}</p>
             <p className="text-xs text-text-light mt-3">
@@ -399,7 +399,7 @@ export default function RedemptionValidator({ merchantSlug, demoHints = [] }: Pr
           {errorCode === 'otp_expired' ? (
             <>
               <div>
-                <h2 className="font-sora font-bold text-xl">Code Expired</h2>
+                <h2 className="font-jakarta font-bold text-xl">Code Expired</h2>
                 <p className="text-sm text-text-medium mt-2">
                   The OTP has expired. Ask the customer to open the LetLoyal app and request a new redemption code.
                 </p>
@@ -409,7 +409,7 @@ export default function RedemptionValidator({ merchantSlug, demoHints = [] }: Pr
           ) : errorCode === 'otp_voided' ? (
             <>
               <div>
-                <h2 className="font-sora font-bold text-xl">Code Locked</h2>
+                <h2 className="font-jakarta font-bold text-xl">Code Locked</h2>
                 <p className="text-sm text-text-medium mt-2">
                   The code was voided after too many failed attempts. The customer must open the app and request a new redemption code.
                 </p>
@@ -419,7 +419,7 @@ export default function RedemptionValidator({ merchantSlug, demoHints = [] }: Pr
           ) : (
             <>
               <div>
-                <h2 className="font-sora font-bold text-xl">Redemption Failed</h2>
+                <h2 className="font-jakarta font-bold text-xl">Redemption Failed</h2>
                 <p className="text-sm text-text-medium mt-2">{errorMsg}</p>
               </div>
               <Button onClick={reset} fullWidth>Start Over</Button>

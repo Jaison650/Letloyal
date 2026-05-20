@@ -34,7 +34,7 @@ export default function ProgressBar({ value, height = 'md', className, animate =
           className="h-full rounded-full"
           style={{
             width: `${displayed}%`,
-            background: 'linear-gradient(90deg, #02C39A, #028090)',
+            background: 'linear-gradient(90deg, #5EEAD4, #0D9488)',
             transition: animate ? 'width 800ms ease' : 'none',
           }}
         />

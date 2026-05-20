@@ -12,7 +12,7 @@ interface OfferRulesProps {
 export default function OfferRules({
   rules,
   mode = 'accordion',
-  color = '#028090',
+  color = '#0D9488',
   title = 'Offer Terms & Conditions',
 }: OfferRulesProps) {
   const [open, setOpen] = useState(false);

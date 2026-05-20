@@ -58,16 +58,16 @@ export default async function FeedbackPage({ params }: { params: Promise<{ slug:
       brandColor={merchant.brand_color}
     >
       <div className="mb-8">
-        <h1 className="font-sora font-bold text-2xl lg:text-3xl">Customer Feedback</h1>
+        <h1 className="font-jakarta font-bold text-2xl lg:text-3xl">Customer Feedback</h1>
         <p className="text-text-medium mt-1">
           See what customers are saying about {merchant.business_name}.
         </p>
       </div>
 
       {feedbackRows.length === 0 ? (
-        <div className="bg-white rounded-[20px] border border-brand-border shadow-card p-12 text-center space-y-3">
+        <div className="bg-white rounded-xl border border-brand-border shadow-card p-12 text-center space-y-3">
           <p className="text-5xl">💬</p>
-          <p className="font-sora font-bold text-xl">No feedback yet</p>
+          <p className="font-jakarta font-bold text-xl">No feedback yet</p>
           <p className="text-text-medium text-sm">
             Feedback from customers will appear here after they scan your QR code.
           </p>
@@ -77,7 +77,7 @@ export default async function FeedbackPage({ params }: { params: Promise<{ slug:
           {feedbackRows.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-[20px] border border-brand-border shadow-card p-5 space-y-3"
+              className="bg-white rounded-xl border border-brand-border shadow-card p-5 space-y-3"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-2">

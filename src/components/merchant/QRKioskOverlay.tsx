@@ -76,7 +76,7 @@ export default function QRKioskOverlay({
             dangerouslySetInnerHTML={{ __html: logoSvg }}
           />
 
-          <h2 className="font-sora font-bold text-xl leading-tight">{merchantName}</h2>
+          <h2 className="font-jakarta font-bold text-xl leading-tight">{merchantName}</h2>
           <p className="text-white/80 text-xs mt-1 font-medium uppercase tracking-widest">Loyalty Rewards Program</p>
 
           {/* Reward pill */}
@@ -84,7 +84,7 @@ export default function QRKioskOverlay({
             <Gift size={16} className="text-white shrink-0" />
             <div>
               <p className="text-[10px] font-semibold text-white/70 uppercase tracking-wide">Earn this reward</p>
-              <p className="font-sora font-bold text-sm text-white leading-tight">{rewardDescription}</p>
+              <p className="font-jakarta font-bold text-sm text-white leading-tight">{rewardDescription}</p>
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@
     "db:schema": "mysql -u letloyal -p letloyal < db/schema.sql"
   },
   "dependencies": {
+    "@vercel/blob": "^2.4.0",
     "bcryptjs": "^2.4.3",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",

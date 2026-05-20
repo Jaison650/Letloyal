@@ -27,7 +27,7 @@ export default function PricingSection() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">Pricing</p>
-          <h2 className="font-sora font-extrabold text-3xl sm:text-4xl text-text-dark mb-4">
+          <h2 className="font-jakarta font-extrabold text-3xl sm:text-4xl text-text-dark mb-4">
             Simple, Transparent Pricing
           </h2>
           <p className="text-text-medium max-w-xl mx-auto">
@@ -48,11 +48,11 @@ export default function PricingSection() {
                   : 'border-brand-border bg-white shadow-card'
               }`}
             >
-              <p className={`font-sora font-bold text-lg mb-1 ${plan.highlight ? 'text-white' : 'text-text-dark'}`}>
+              <p className={`font-jakarta font-bold text-lg mb-1 ${plan.highlight ? 'text-white' : 'text-text-dark'}`}>
                 {plan.name}
               </p>
               <div className="flex items-baseline gap-1 mb-6">
-                <span className={`font-sora font-extrabold text-4xl ${plan.highlight ? 'text-white' : 'text-text-dark'}`}>
+                <span className={`font-jakarta font-extrabold text-4xl ${plan.highlight ? 'text-white' : 'text-text-dark'}`}>
                   {plan.price}
                 </span>
                 <span className={`text-sm ${plan.highlight ? 'text-white/70' : 'text-text-light'}`}>{plan.period}</span>

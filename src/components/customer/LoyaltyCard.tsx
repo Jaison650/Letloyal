@@ -76,7 +76,7 @@ export default function LoyaltyCard({ enrollment }: { enrollment: Enrollment }) 
         particleCount: 80,
         spread:        60,
         origin:        { y: 0.6 },
-        colors:        ['#02C39A', '#028090', '#05FFCE', '#FFFFFF'],
+        colors:        ['#5EEAD4', '#0D9488', '#CCFBF1', '#FFFFFF'],
       });
     } finally {
       setLoading(false);
@@ -98,7 +98,7 @@ export default function LoyaltyCard({ enrollment }: { enrollment: Enrollment }) 
     <>
       <div
         className={clsx(
-          'bg-white rounded-[20px] border-2 overflow-hidden transition-all duration-300',
+          'bg-white rounded-xl border-2 overflow-hidden transition-all duration-300',
           (isUnlocked || isPending) ? 'shadow-lg' : 'border-brand-border shadow-card'
         )}
         style={
@@ -118,7 +118,7 @@ export default function LoyaltyCard({ enrollment }: { enrollment: Enrollment }) 
             dangerouslySetInnerHTML={{ __html: enrollment.merchant_logo_svg }}
           />
           <div className="flex-1 min-w-0">
-            <p className="font-sora font-semibold text-base truncate">{enrollment.merchant_name}</p>
+            <p className="font-jakarta font-semibold text-base truncate">{enrollment.merchant_name}</p>
             <p className="text-xs text-text-light capitalize">{enrollment.merchant_category}</p>
           </div>
           {/* Cycle badge */}
@@ -143,7 +143,7 @@ export default function LoyaltyCard({ enrollment }: { enrollment: Enrollment }) 
           {/* Reward headline */}
           <div className="flex items-start gap-2">
             <Gift size={15} className="text-accent shrink-0 mt-0.5" />
-            <p className="font-sora font-bold text-base text-text-dark leading-snug">
+            <p className="font-jakarta font-bold text-base text-text-dark leading-snug">
               {enrollment.reward_description}
             </p>
           </div>
@@ -244,7 +244,7 @@ export default function LoyaltyCard({ enrollment }: { enrollment: Enrollment }) 
 
             <div className="text-center space-y-3">
               <p className="text-4xl">🎁</p>
-              <h3 className="font-sora font-bold text-xl">Confirm Redemption</h3>
+              <h3 className="font-jakarta font-bold text-xl">Confirm Redemption</h3>
               <p className="text-text-medium text-sm">
                 Redeem your reward at{' '}
                 <strong>{enrollment.merchant_name}</strong>?

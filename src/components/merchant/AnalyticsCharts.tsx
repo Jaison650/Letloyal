@@ -8,10 +8,10 @@ import StatCard from '@/components/ui/StatCard';
 import { TrendingUp, Users, Target, RotateCcw } from 'lucide-react';
 
 const STATUS_COLORS: Record<string, string> = {
-  active:         '#028090',
-  reward_unlocked:'#02C39A',
+  active:         '#0D9488',
+  reward_unlocked:'#5EEAD4',
   otp_pending:    '#F57C00',
-  completed:      '#A0AEC0',
+  completed:      '#94A3B8',
 };
 
 const STATUS_LABELS: Record<string, string> = {
@@ -76,7 +76,7 @@ export default function AnalyticsCharts({
 
       {/* Row 2 — Daily scans bar chart (full width) */}
       <div className="card">
-        <h3 className="font-sora font-bold text-lg mb-5">Daily Scans — Last 30 Days</h3>
+        <h3 className="font-jakarta font-bold text-lg mb-5">Daily Scans — Last 30 Days</h3>
         {barData.length === 0 ? (
           <div className="flex items-center justify-center h-48 text-text-light text-sm">No scan data yet.</div>
         ) : (
@@ -84,13 +84,13 @@ export default function AnalyticsCharts({
             <BarChart data={barData} margin={{ top: 0, right: 4, left: -20, bottom: 0 }}>
               <XAxis
                 dataKey="date"
-                tick={{ fontSize: 11, fill: '#A0AEC0' }}
+                tick={{ fontSize: 11, fill: '#94A3B8' }}
                 tickLine={false}
                 axisLine={false}
                 interval={Math.floor(barData.length / 8)}
               />
               <YAxis
-                tick={{ fontSize: 11, fill: '#A0AEC0' }}
+                tick={{ fontSize: 11, fill: '#94A3B8' }}
                 tickLine={false}
                 axisLine={false}
                 allowDecimals={false}
@@ -103,7 +103,7 @@ export default function AnalyticsCharts({
                 dataKey="scans"
                 fill={brandColor}
                 radius={[6, 6, 0, 0]}
-                activeBar={{ fill: '#02C39A' }}
+                activeBar={{ fill: '#5EEAD4' }}
               />
             </BarChart>
           </ResponsiveContainer>
@@ -115,7 +115,7 @@ export default function AnalyticsCharts({
 
         {/* Donut: customer status */}
         <div className="card">
-          <h3 className="font-sora font-bold text-lg mb-5">Customer Status Breakdown</h3>
+          <h3 className="font-jakarta font-bold text-lg mb-5">Customer Status Breakdown</h3>
           {pieData.length === 0 ? (
             <div className="flex items-center justify-center h-48 text-text-light text-sm">No customer data yet.</div>
           ) : (
@@ -138,7 +138,7 @@ export default function AnalyticsCharts({
                 <Legend
                   iconType="circle"
                   iconSize={8}
-                  formatter={(value) => <span style={{ fontSize: 12, color: '#4A5568' }}>{value}</span>}
+                  formatter={(value) => <span style={{ fontSize: 12, color: '#64748B' }}>{value}</span>}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -147,7 +147,7 @@ export default function AnalyticsCharts({
 
         {/* Line: cumulative enrollments */}
         <div className="card">
-          <h3 className="font-sora font-bold text-lg mb-5">Cumulative Enrollments</h3>
+          <h3 className="font-jakarta font-bold text-lg mb-5">Cumulative Enrollments</h3>
           {lineData.length === 0 ? (
             <div className="flex items-center justify-center h-48 text-text-light text-sm">No enrollment data yet.</div>
           ) : (
@@ -156,13 +156,13 @@ export default function AnalyticsCharts({
                 <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
                 <XAxis
                   dataKey="date"
-                  tick={{ fontSize: 11, fill: '#A0AEC0' }}
+                  tick={{ fontSize: 11, fill: '#94A3B8' }}
                   tickLine={false}
                   axisLine={false}
                   interval={Math.floor(lineData.length / 5) || 0}
                 />
                 <YAxis
-                  tick={{ fontSize: 11, fill: '#A0AEC0' }}
+                  tick={{ fontSize: 11, fill: '#94A3B8' }}
                   tickLine={false}
                   axisLine={false}
                   allowDecimals={false}
@@ -171,10 +171,10 @@ export default function AnalyticsCharts({
                 <Line
                   type="monotone"
                   dataKey="total"
-                  stroke="#02C39A"
+                  stroke="#5EEAD4"
                   strokeWidth={2.5}
                   dot={false}
-                  activeDot={{ r: 5, fill: '#028090' }}
+                  activeDot={{ r: 5, fill: '#0D9488' }}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -185,7 +185,7 @@ export default function AnalyticsCharts({
       {/* Row 4 — Campaign performance table */}
       <div className="card overflow-hidden p-0">
         <div className="px-6 py-4 border-b border-brand-border">
-          <h3 className="font-sora font-bold text-lg">Campaign Performance</h3>
+          <h3 className="font-jakarta font-bold text-lg">Campaign Performance</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">

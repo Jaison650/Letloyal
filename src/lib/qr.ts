@@ -4,7 +4,7 @@ import crypto from 'crypto';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://letloyal.com';
 const QR_SPEND_EXPIRY = Number(process.env.QR_SPEND_EXPIRY_SECONDS) || 300;
 
-export async function generateVisitQR(merchantSlug: string, campaignId: string, brandColor = '#028090'): Promise<string> {
+export async function generateVisitQR(merchantSlug: string, campaignId: string, brandColor = '#0D9488'): Promise<string> {
   const url = `${BASE_URL}/store/${merchantSlug}?c=${campaignId}`;
   return QRCode.toDataURL(url, {
     errorCorrectionLevel: 'M',
@@ -22,7 +22,7 @@ export async function generateSpendQR(
   campaignId: string,
   amountCents: number,
   secret: string,
-  brandColor = '#028090'
+  brandColor = '#0D9488'
 ): Promise<{ dataUrl: string; expiresAt: number }> {
   const timestamp = Math.floor(Date.now() / 1000);
   const sig = hmacSign(campaignId, amountCents, timestamp, secret);

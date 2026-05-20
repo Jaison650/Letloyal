@@ -20,7 +20,7 @@ export default function CTABanner() {
         >
           <div className="absolute -top-16 -right-16 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
           <div className="relative">
-            <h2 className="font-sora font-extrabold text-3xl sm:text-4xl text-white mb-4">
+            <h2 className="font-jakarta font-extrabold text-3xl sm:text-4xl text-white mb-4">
               Ready to Build Loyal Customers?
             </h2>
             <p className="text-white/75 text-lg mb-8 max-w-xl mx-auto">

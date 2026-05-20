@@ -7,27 +7,36 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      xs: '375px',   // iPhone SE / small Android
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#028090',
-          dark: '#014451',
-          light: '#e6f4f6',
+          DEFAULT: '#0D9488',
+          dark: '#134E4A',
+          light: '#CCFBF1',
         },
         accent: {
-          DEFAULT: '#02C39A',
-          light: '#05FFCE',
-          muted: 'rgba(2,195,154,0.15)',
+          DEFAULT: '#5EEAD4',
+          mid: '#14B8A6',
+          muted: 'rgba(94,234,212,0.15)',
         },
         brand: {
-          bg: '#FAFBFC',
+          bg: '#F8FAFC',
           white: '#FFFFFF',
           border: '#E2E8F0',
+          navy: '#0F172A',
         },
         text: {
-          dark: '#1A1A1A',
-          medium: '#4A5568',
-          light: '#A0AEC0',
+          dark: '#0F172A',
+          medium: '#64748B',
+          light: '#94A3B8',
         },
         status: {
           success: '#2E7D32',
@@ -36,19 +45,19 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sora: ['Sora', 'sans-serif'],
-        sans: ['DM Sans', 'sans-serif'],
+        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       },
       borderRadius: {
-        '2xl': '20px',
+        '2xl': '14px',
         '3xl': '28px',
         '4xl': '36px',
       },
       boxShadow: {
-        card: '0 4px 25px rgba(2,128,144,0.08)',
-        'card-hover': '0 8px 40px rgba(2,128,144,0.15)',
-        btn: '0 8px 25px rgba(2,195,154,0.30)',
-        'btn-hover': '0 12px 30px rgba(2,195,154,0.40)',
+        card: '0 4px 25px rgba(13,148,136,0.08)',
+        'card-hover': '0 8px 40px rgba(13,148,136,0.15)',
+        btn: '0 8px 25px rgba(94,234,212,0.30)',
+        'btn-hover': '0 12px 30px rgba(94,234,212,0.40)',
       },
       animation: {
         shimmer: 'shimmer 1.5s infinite',
@@ -64,8 +73,8 @@ const config: Config = {
           '100%': { backgroundPosition: '200% 0' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 0 0 rgba(2,195,154,0.4)' },
-          '50%': { boxShadow: '0 0 0 12px rgba(2,195,154,0)' },
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(94,234,212,0.4)' },
+          '50%': { boxShadow: '0 0 0 12px rgba(94,234,212,0)' },
         },
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },

@@ -8,7 +8,7 @@ import ScanSuccess from '@/components/customer/ScanSuccess';
 import ProgressBar from '@/components/ui/ProgressBar';
 import MilestoneSteps from '@/components/ui/MilestoneSteps';
 import {
-  ChevronRight, CheckCircle2, AlertCircle, MapPin, QrCode, Gift,
+  ChevronRight, CheckCircle2, AlertCircle, MapPin, Gift,
   Phone, Globe, Clock, ExternalLink,
 } from 'lucide-react';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
@@ -161,7 +161,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
         ) : (
           <div
             className="w-full h-full"
-            style={{ background: `linear-gradient(135deg, #012d38, ${merchant.brand_color})` }}
+            style={{ background: `linear-gradient(135deg, #0F172A, ${merchant.brand_color})` }}
           />
         )}
         {/* gradient overlay for text legibility */}
@@ -180,7 +180,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
             )}
           </div>
           <div>
-            <h1 className="font-sora font-bold text-2xl text-white leading-tight drop-shadow-md">
+            <h1 className="font-jakarta font-bold text-2xl text-white leading-tight drop-shadow-md">
               {merchant.business_name}
             </h1>
             <div className="flex items-center gap-2 mt-0.5">
@@ -226,7 +226,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
 
         {/* ── Loyalty card ── */}
         {campaign ? (
-          <div className="bg-white rounded-[20px] border border-brand-border shadow-card overflow-hidden">
+          <div className="bg-white rounded-xl border border-brand-border shadow-card overflow-hidden">
             <div
               className="px-5 py-4 text-white"
               style={{ background: `linear-gradient(135deg, ${merchant.brand_color}, ${merchant.brand_color}bb)` }}
@@ -235,7 +235,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
                 <Gift size={14} className="text-white/80" />
                 <p className="text-xs font-semibold text-white/80 uppercase tracking-wide">Your Reward</p>
               </div>
-              <p className="font-sora font-bold text-base leading-snug">{campaign.reward_description}</p>
+              <p className="font-jakarta font-bold text-base leading-snug">{campaign.reward_description}</p>
               <p className="text-white/70 text-xs mt-1">
                 {campaign.campaign_type === 'visit_based'
                   ? `${campaign.reward_threshold} visits to unlock`
@@ -290,9 +290,9 @@ export default async function StorePage({ params, searchParams }: PageProps) {
             </div>
           </div>
         ) : (
-          <div className="bg-white rounded-[20px] border border-brand-border shadow-card p-6 flex flex-col items-center gap-3 text-center">
+          <div className="bg-white rounded-xl border border-brand-border shadow-card p-6 flex flex-col items-center gap-3 text-center">
             <AlertCircle size={36} className="text-status-warning" />
-            <p className="font-sora font-bold text-lg">No active campaign</p>
+            <p className="font-jakarta font-bold text-lg">No active campaign</p>
             <p className="text-sm text-text-medium">Check back soon — a new rewards program is coming!</p>
           </div>
         )}
@@ -335,7 +335,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
 
         {/* ── Business info ── */}
         {(merchant.address || merchant.contact_phone || merchant.website || merchant.working_hours || merchant.map_url) && (
-          <div className="bg-white rounded-[20px] border border-brand-border shadow-card overflow-hidden">
+          <div className="bg-white rounded-xl border border-brand-border shadow-card overflow-hidden">
             <div className="px-5 py-3 border-b border-brand-border"
               style={{ background: `${merchant.brand_color}08` }}>
               <p className="text-xs font-bold text-text-medium uppercase tracking-widest">Store Info</p>
@@ -415,7 +415,13 @@ export default async function StorePage({ params, searchParams }: PageProps) {
         {/* Powered by */}
         <div className="flex items-center justify-between pt-1 pb-4">
           <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-text-light hover:text-primary transition-colors">
-            <QrCode size={11} /> Powered by LetLoyal
+            <svg width="12" height="12" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-60">
+              <rect width="40" height="40" rx="10" fill="#0D9488"/>
+              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
+              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
+            Powered by LetLoyal
           </Link>
           <LanguageSwitcher variant="light" />
         </div>
@@ -437,12 +443,12 @@ function AlreadyScanned({ merchantName, merchantColor, current, threshold, campa
           <CheckCircle2 size={36} style={{ color: merchantColor }} />
         </div>
         <div>
-          <h2 className="font-sora font-bold text-xl text-text-dark">Already Recorded!</h2>
+          <h2 className="font-jakarta font-bold text-xl text-text-dark">Already Recorded!</h2>
           <p className="text-text-medium text-sm mt-1.5">
             Points already recorded for this visit to <strong>{merchantName}</strong>. See you next time! 👋
           </p>
         </div>
-        <div className="bg-white rounded-[20px] border border-brand-border shadow-card p-5 space-y-3">
+        <div className="bg-white rounded-xl border border-brand-border shadow-card p-5 space-y-3">
           <div className="flex justify-between text-xs font-medium text-text-medium">
             <span>Current progress</span>
             <span style={{ color: merchantColor }}>{current} / {threshold} {unit}s</span>

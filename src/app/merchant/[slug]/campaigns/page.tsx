@@ -25,7 +25,7 @@ export default async function CampaignsPage({ params }: { params: Promise<{ slug
     >
       <div className="mb-8 flex items-center justify-between gap-4">
         <div>
-          <h1 className="font-sora font-bold text-2xl lg:text-3xl">Campaigns</h1>
+          <h1 className="font-jakarta font-bold text-2xl lg:text-3xl">Campaigns</h1>
           <p className="text-text-medium mt-1">
             {campaigns.length} campaign{campaigns.length !== 1 ? 's' : ''} · {campaigns.filter(c => c.status === 'active').length} active
           </p>

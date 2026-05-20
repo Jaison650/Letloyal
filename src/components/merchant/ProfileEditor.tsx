@@ -1,6 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { Save, Globe, Phone, MapPin, Clock, Image, CheckCircle2, ExternalLink } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Save, Globe, Phone, MapPin, Clock, CheckCircle2, ExternalLink, Upload, X } from 'lucide-react';
 import type { Merchant, WorkingHours, DayHours } from '@/lib/merchants';
 
 const DAYS: { key: keyof WorkingHours; label: string }[] = [
@@ -27,6 +27,111 @@ interface ProfileEditorProps {
   merchant: Merchant;
 }
 
+// ── Image upload helper ──────────────────────────────────────────────────────
+function useImageUpload(type: 'logo' | 'banner') {
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+
+  async function upload(file: File): Promise<string | null> {
+    setUploading(true);
+    setUploadError('');
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('type', type);
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error((body as { error?: string }).error || 'Upload failed');
+      }
+      const { url } = await res.json() as { url: string };
+      return url;
+    } catch (err: unknown) {
+      setUploadError(err instanceof Error ? err.message : 'Upload failed');
+      return null;
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  return { upload, uploading, uploadError, clearError: () => setUploadError('') };
+}
+
+// ── ImageField component ─────────────────────────────────────────────────────
+interface ImageFieldProps {
+  label: string;
+  hint: string;
+  value: string;
+  type: 'logo' | 'banner';
+  previewClass?: string;
+  fallback?: React.ReactNode;
+  onChange: (url: string) => void;
+}
+
+function ImageField({ label, hint, value, type, previewClass, fallback, onChange }: ImageFieldProps) {
+  const { upload, uploading, uploadError, clearError } = useImageUpload(type);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = await upload(file);
+    if (url) onChange(url);
+    // reset so same file can be re-selected
+    e.target.value = '';
+  }
+
+  return (
+    <div className="space-y-2">
+      <label className="form-label">{label}</label>
+
+      {/* Preview */}
+      {value ? (
+        <div className={`relative group ${previewClass}`}>
+          <img src={value} alt={label} className="w-full h-full object-cover" />
+          <button
+            onClick={() => { onChange(''); clearError(); }}
+            className="absolute top-1 right-1 bg-black/50 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+            title="Remove image"
+          >
+            <X size={12} />
+          </button>
+        </div>
+      ) : (
+        fallback && <div>{fallback}</div>
+      )}
+
+      {/* Upload button */}
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFile}
+      />
+      <button
+        type="button"
+        onClick={() => inputRef.current?.click()}
+        disabled={uploading}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg border border-brand-border bg-brand-bg text-sm font-medium text-text-medium hover:border-primary hover:text-primary transition-colors disabled:opacity-60"
+      >
+        {uploading ? (
+          <span className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+        ) : (
+          <Upload size={14} />
+        )}
+        {uploading ? 'Uploading…' : value ? 'Replace image' : 'Choose image'}
+      </button>
+
+      {uploadError && (
+        <p className="text-xs text-status-error">{uploadError}</p>
+      )}
+      <p className="text-xs text-text-light">{hint}</p>
+    </div>
+  );
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
 export default function ProfileEditor({ merchant }: ProfileEditorProps) {
   const [form, setForm] = useState({
     tagline:       merchant.tagline       ?? '',
@@ -89,57 +194,42 @@ export default function ProfileEditor({ merchant }: ProfileEditorProps) {
     <div className="space-y-8 max-w-2xl">
 
       {/* ── Brand images ── */}
-      <section className="card space-y-5">
-        <h2 className="font-sora font-bold text-lg flex items-center gap-2">
-          <Image size={18} className="text-primary" /> Brand Images
+      <section className="card space-y-6">
+        <h2 className="font-jakarta font-bold text-lg flex items-center gap-2">
+          <Upload size={18} className="text-primary" /> Brand Images
         </h2>
 
-        {/* Banner preview */}
-        {form.banner_url && (
-          <div className="w-full h-32 rounded-xl overflow-hidden border border-brand-border">
-            <img src={form.banner_url} alt="Banner" className="w-full h-full object-cover" />
-          </div>
-        )}
-        <div>
-          <label className="form-label">Banner Image URL</label>
-          <input
-            type="url"
-            placeholder="https://example.com/banner.jpg  (1200×400 recommended)"
-            value={form.banner_url}
-            onChange={e => setField('banner_url', e.target.value)}
-            className="form-input"
-          />
-          <p className="text-xs text-text-light mt-1">Shown at the top of your customer store page. Landscape image works best.</p>
-        </div>
+        {/* Banner */}
+        <ImageField
+          label="Banner Image"
+          hint="Shown at the top of your store page. Landscape works best (1200×400 recommended, max 5 MB)."
+          value={form.banner_url}
+          type="banner"
+          previewClass="w-full h-32 rounded-xl overflow-hidden border border-brand-border"
+          onChange={url => { setField('banner_url', url); setSaved(false); }}
+        />
 
-        {/* Logo preview */}
-        <div className="flex items-start gap-4">
-          {form.logo_url ? (
-            <img src={form.logo_url} alt="Logo" className="w-16 h-16 rounded-2xl object-cover border border-brand-border shrink-0" />
-          ) : (
+        {/* Logo */}
+        <ImageField
+          label="Logo Image"
+          hint="Square image, min 200×200. Leave empty to use your current icon logo."
+          value={form.logo_url}
+          type="logo"
+          previewClass="w-16 h-16 rounded-2xl overflow-hidden border border-brand-border"
+          fallback={
             <div
-              className="w-16 h-16 rounded-2xl shrink-0 flex items-center justify-center overflow-hidden"
+              className="w-16 h-16 rounded-2xl flex items-center justify-center overflow-hidden"
               style={{ background: `${merchant.brand_color}18` }}
               dangerouslySetInnerHTML={{ __html: merchant.logo_svg }}
             />
-          )}
-          <div className="flex-1">
-            <label className="form-label">Logo Image URL</label>
-            <input
-              type="url"
-              placeholder="https://example.com/logo.png  (square, min 200×200)"
-              value={form.logo_url}
-              onChange={e => setField('logo_url', e.target.value)}
-              className="form-input"
-            />
-            <p className="text-xs text-text-light mt-1">Leave blank to use your current icon logo.</p>
-          </div>
-        </div>
+          }
+          onChange={url => { setField('logo_url', url); setSaved(false); }}
+        />
       </section>
 
       {/* ── Business details ── */}
       <section className="card space-y-4">
-        <h2 className="font-sora font-bold text-lg flex items-center gap-2">
+        <h2 className="font-jakarta font-bold text-lg flex items-center gap-2">
           <MapPin size={18} className="text-primary" /> Business Details
         </h2>
 
@@ -226,7 +316,7 @@ export default function ProfileEditor({ merchant }: ProfileEditorProps) {
 
       {/* ── Working hours ── */}
       <section className="card space-y-4">
-        <h2 className="font-sora font-bold text-lg flex items-center gap-2">
+        <h2 className="font-jakarta font-bold text-lg flex items-center gap-2">
           <Clock size={18} className="text-primary" /> Opening Hours
         </h2>
 
@@ -236,7 +326,6 @@ export default function ProfileEditor({ merchant }: ProfileEditorProps) {
             const isOpen  = dayData !== null;
             return (
               <div key={key} className="flex items-center gap-3">
-                {/* Day toggle */}
                 <button
                   onClick={() => toggleDay(key)}
                   className={`w-24 text-xs font-semibold py-1.5 rounded-lg border transition-colors shrink-0 ${

@@ -46,7 +46,7 @@ export default function OTPDisplay({
             particleCount: 150,
             spread: 80,
             origin: { y: 0.5 },
-            colors: ['#02C39A', '#028090', '#05FFCE', '#FFFFFF', '#FFD700'],
+            colors: ['#5EEAD4', '#0D9488', '#CCFBF1', '#FFFFFF', '#FFD700'],
           });
           setTimeout(() => onSuccess?.(), 2500);
         }
@@ -66,13 +66,13 @@ export default function OTPDisplay({
     return (
       <div className="mt-4 rounded-2xl overflow-hidden border-2 border-accent/50 bg-white">
         <div className="bg-gradient-brand px-4 py-3 text-white text-center">
-          <p className="font-sora font-bold text-base">{merchantName}</p>
+          <p className="font-jakarta font-bold text-base">{merchantName}</p>
         </div>
         <div className="px-4 py-6 flex flex-col items-center gap-3 text-center">
           <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center animate-bounce-in">
             <CheckCircle2 size={40} className="text-status-success" />
           </div>
-          <h3 className="font-sora font-bold text-xl text-status-success">Reward Redeemed! 🎉</h3>
+          <h3 className="font-jakarta font-bold text-xl text-status-success">Reward Redeemed! 🎉</h3>
           <p className="text-sm font-semibold text-accent">{reward}</p>
           <p className="text-xs text-text-light">Enjoy your reward. See you next time!</p>
         </div>
@@ -85,7 +85,7 @@ export default function OTPDisplay({
     <div className="mt-4 rounded-2xl overflow-hidden border-2 border-accent/30">
       <div className="bg-gradient-brand px-4 py-3 text-white text-center">
         <p className="text-xs font-semibold text-white/80">Show this code to</p>
-        <p className="font-sora font-bold text-base">{merchantName}</p>
+        <p className="font-jakarta font-bold text-base">{merchantName}</p>
         <p className="text-xs text-white/70 mt-0.5 truncate">{reward}</p>
       </div>
 
@@ -95,7 +95,7 @@ export default function OTPDisplay({
           {otp.split('').map((digit, i) => (
             <div
               key={i}
-              className={`w-10 h-12 rounded-xl flex items-center justify-center text-2xl font-bold font-sora border-2 select-none transition-all ${
+              className={`w-10 h-12 rounded-xl flex items-center justify-center text-2xl font-bold font-jakarta border-2 select-none transition-all ${
                 expired
                   ? 'bg-red-50 border-red-200 text-status-error opacity-50'
                   : 'bg-primary-light border-primary/20 text-primary'

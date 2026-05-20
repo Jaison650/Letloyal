@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Settings2, QrCode, TrendingUp } from 'lucide-react';
+import { Settings2, Scan, TrendingUp } from 'lucide-react';
 
 const STEPS = [
   {
@@ -11,7 +11,7 @@ const STEPS = [
   },
   {
     num: '02',
-    icon: <QrCode size={28} />,
+    icon: <Scan size={28} />,
     title: 'Display Your QR',
     desc: 'Print it, frame it, or show it on your phone. Customers scan and automatically join — no app needed.',
   },
@@ -29,7 +29,7 @@ export default function HowItWorks() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-sm font-semibold text-accent uppercase tracking-widest mb-3">How It Works</p>
-          <h2 className="font-sora font-extrabold text-3xl sm:text-4xl text-text-dark">
+          <h2 className="font-jakarta font-extrabold text-3xl sm:text-4xl text-text-dark">
             Live in 10 Minutes Flat
           </h2>
         </div>
@@ -47,7 +47,7 @@ export default function HowItWorks() {
                 {step.icon}
               </div>
               <p className="text-xs font-bold text-accent uppercase tracking-widest mb-2">{step.num}</p>
-              <h3 className="font-sora font-bold text-lg text-text-dark mb-3">{step.title}</h3>
+              <h3 className="font-jakarta font-bold text-lg text-text-dark mb-3">{step.title}</h3>
               <p className="text-text-medium text-sm leading-relaxed">{step.desc}</p>
             </motion.div>
           ))}

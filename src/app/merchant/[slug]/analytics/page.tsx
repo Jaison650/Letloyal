@@ -75,7 +75,7 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ slug
       brandColor={merchant.brand_color}
     >
       <div className="mb-8">
-        <h1 className="font-sora font-bold text-2xl lg:text-3xl">Analytics</h1>
+        <h1 className="font-jakarta font-bold text-2xl lg:text-3xl">Analytics</h1>
         <p className="text-text-medium mt-1">Performance overview for your loyalty program.</p>
       </div>
 

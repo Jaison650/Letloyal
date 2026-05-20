@@ -1,5 +1,5 @@
 'use client';
-import { QrCode, Users, TrendingUp, Star } from 'lucide-react';
+import { Scan, Users, TrendingUp, Star } from 'lucide-react';
 import StatCard from '@/components/ui/StatCard';
 
 interface StatsBarProps {
@@ -20,8 +20,8 @@ export default function StatsBar({
       <StatCard
         label="Scans Today"
         value={todayScans}
-        icon={<QrCode size={20} />}
-        accentColor="#028090"
+        icon={<Scan size={20} />}
+        accentColor="#0D9488"
       />
       <StatCard
         label="Active Customers"
@@ -39,7 +39,7 @@ export default function StatsBar({
         label="Redeemed This Week"
         value={redemptionsThisWeek}
         icon={<Star size={20} />}
-        accentColor="#02C39A"
+        accentColor="#5EEAD4"
       />
     </div>
   );

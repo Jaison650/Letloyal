@@ -11,7 +11,7 @@ interface MilestoneStepsProps {
 export default function MilestoneSteps({
   current,
   total,
-  color = '#028090',
+  color = '#0D9488',
   size = 'md',
   showLabels = false,
 }: MilestoneStepsProps) {

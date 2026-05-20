@@ -56,7 +56,7 @@ export default function FeedbackForm({ merchantId, merchantName, onClose }: Feed
       <div className="bg-white w-full sm:max-w-md rounded-t-[24px] sm:rounded-[24px] p-6 space-y-5 animate-slide-up shadow-2xl">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h2 className="font-sora font-bold text-lg">Leave Feedback</h2>
+          <h2 className="font-jakarta font-bold text-lg">Leave Feedback</h2>
           <button onClick={onClose} className="p-1.5 text-text-light hover:text-text-dark rounded-lg">
             <X size={20} />
           </button>
@@ -65,7 +65,7 @@ export default function FeedbackForm({ merchantId, merchantName, onClose }: Feed
         {done ? (
           <div className="text-center py-6 space-y-2">
             <p className="text-4xl">🙏</p>
-            <p className="font-sora font-bold text-xl text-primary">Thank you!</p>
+            <p className="font-jakarta font-bold text-xl text-primary">Thank you!</p>
             <p className="text-text-medium text-sm">Your feedback has been sent to {merchantName}.</p>
           </div>
         ) : (

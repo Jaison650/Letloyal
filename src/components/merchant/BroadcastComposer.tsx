@@ -61,7 +61,7 @@ export default function BroadcastComposer({ merchantSlug }: { merchantSlug: stri
     <div className="space-y-6">
       {/* Composer */}
       <div className="card space-y-5">
-        <h2 className="font-sora font-bold text-lg">New Campaign Message</h2>
+        <h2 className="font-jakarta font-bold text-lg">New Campaign Message</h2>
 
         {success && (
           <div className="flex items-center gap-3 px-4 py-3 bg-green-50 border border-green-200 rounded-xl">
@@ -135,7 +135,7 @@ export default function BroadcastComposer({ merchantSlug }: { merchantSlug: stri
         <div className="card space-y-4">
           <div className="flex items-center gap-2">
             <Clock size={18} className="text-text-light" />
-            <h2 className="font-sora font-bold text-lg">Past Campaigns</h2>
+            <h2 className="font-jakarta font-bold text-lg">Past Campaigns</h2>
           </div>
           <div className="space-y-3">
             {history.map(b => (

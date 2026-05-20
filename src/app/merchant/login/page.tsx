@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { QrCode, Lock, Eye, EyeOff, ChevronDown, AlertCircle, Info } from 'lucide-react';
+import { Lock, Eye, EyeOff, ChevronDown, AlertCircle, Info } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
 const DEMO_MERCHANTS = [
@@ -53,10 +53,18 @@ export default function MerchantLoginPage() {
 
         {/* Logo */}
         <div className="text-center">
-          <Link href="/" className="inline-flex items-center gap-2 font-sora font-extrabold text-2xl text-primary">
-            <QrCode size={28} /> LetLoyal
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="10" fill="#0D9488"/>
+              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
+              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
+            </svg>
+            <span className="font-jakarta font-bold text-xl text-text-dark tracking-tight">
+              <span className="text-primary">Let</span>Loyal
+            </span>
           </Link>
-          <h1 className="font-sora font-bold text-[28px] mt-5 text-text-dark">Merchant Login</h1>
+          <h1 className="font-jakarta font-bold text-[26px] mt-5 text-text-dark">Merchant Login</h1>
           <p className="text-text-medium mt-1.5 text-sm">Access your loyalty dashboard</p>
         </div>
 
@@ -72,7 +80,7 @@ export default function MerchantLoginPage() {
         </div>
 
         {/* Form card */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-[20px] p-7 border border-brand-border shadow-card space-y-5">
+        <form onSubmit={handleSubmit} className="bg-white rounded-xl p-6 border border-brand-border shadow-card space-y-5">
 
           {/* Store selector */}
           <div>

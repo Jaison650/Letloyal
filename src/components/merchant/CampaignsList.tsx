@@ -66,7 +66,7 @@ export default function CampaignsList({ initialCampaigns }: { initialCampaigns: 
             <Target size={28} className="text-primary opacity-50" />
           </div>
           <div>
-            <p className="font-sora font-bold text-lg text-text-dark">
+            <p className="font-jakarta font-bold text-lg text-text-dark">
               {tab === 'all' ? 'No campaigns yet' : `No ${tab} campaigns`}
             </p>
             <p className="text-text-medium text-sm mt-1 max-w-xs">
@@ -97,7 +97,7 @@ export default function CampaignsList({ initialCampaigns }: { initialCampaigns: 
                 {/* Header */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
-                    <p className="font-sora font-bold text-lg truncate">{c.name}</p>
+                    <p className="font-jakarta font-bold text-lg truncate">{c.name}</p>
                     <p className="text-sm text-text-medium mt-0.5 line-clamp-2">{c.reward_description}</p>
                   </div>
                   <div className="flex flex-col gap-1.5 items-end shrink-0">
@@ -123,15 +123,15 @@ export default function CampaignsList({ initialCampaigns }: { initialCampaigns: 
                 {/* Stats row */}
                 <div className="grid grid-cols-3 gap-3 bg-brand-bg rounded-xl p-4">
                   <div className="text-center">
-                    <p className="text-xl font-sora font-bold text-primary">{c.participants_count}</p>
+                    <p className="text-xl font-jakarta font-bold text-primary">{c.participants_count}</p>
                     <p className="text-xs text-text-light mt-0.5">Participants</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-xl font-sora font-bold text-accent">{c.redemptions_count}</p>
+                    <p className="text-xl font-jakarta font-bold text-accent">{c.redemptions_count}</p>
                     <p className="text-xs text-text-light mt-0.5">Redeemed</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-xl font-sora font-bold text-text-dark">{redemptionRate}%</p>
+                    <p className="text-xl font-jakarta font-bold text-text-dark">{redemptionRate}%</p>
                     <p className="text-xs text-text-light mt-0.5">Rate</p>
                   </div>
                 </div>

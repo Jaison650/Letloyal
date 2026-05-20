@@ -40,7 +40,7 @@ export default async function ValidatePage({ params }: { params: Promise<{ slug:
       brandColor={merchant.brand_color}
     >
       <div className="mb-8">
-        <h1 className="font-sora font-bold text-2xl lg:text-3xl">Validate Redemption</h1>
+        <h1 className="font-jakarta font-bold text-2xl lg:text-3xl">Validate Redemption</h1>
         <p className="text-text-medium mt-1">
           Enter the customer&apos;s phone number and verify their 6-digit code to redeem their reward.
         </p>

@@ -32,7 +32,7 @@ export default function CampaignCard({
     <div className="bg-white rounded-2xl border border-brand-border shadow-card p-5">
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1 min-w-0">
-          <p className="font-sora font-bold text-base text-text-dark truncate">{name}</p>
+          <p className="font-jakarta font-bold text-base text-text-dark truncate">{name}</p>
           <p className="text-xs text-text-light mt-0.5">{reward_description}</p>
         </div>
         <div className="flex items-center gap-1.5 ml-3 shrink-0">

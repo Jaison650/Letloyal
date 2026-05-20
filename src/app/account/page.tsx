@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { QrCode, ArrowLeft, User, Clock, Lock, Star } from 'lucide-react';
+import { ArrowLeft, User, Clock, Lock } from 'lucide-react';
 
 type Tab = 'profile' | 'history' | 'settings';
 
@@ -150,17 +150,23 @@ export default function AccountPage() {
           <Link href="/dashboard" className="p-1.5 -ml-1.5 text-text-medium hover:text-text-dark">
             <ArrowLeft size={20} />
           </Link>
-          <Link href="/" className="flex items-center gap-1.5 font-sora font-bold text-primary text-sm">
-            <QrCode size={18} /> LetLoyal
+          <Link href="/" className="flex items-center gap-1.5 font-jakarta font-bold text-primary text-sm">
+            <svg width="18" height="18" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="10" fill="#0D9488"/>
+              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
+              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
+            LetLoyal
           </Link>
           <span className="text-text-light mx-1">/</span>
-          <span className="font-sora font-bold text-sm text-text-dark">My Account</span>
+          <span className="font-jakarta font-bold text-sm text-text-dark">My Account</span>
         </div>
       </header>
 
       <div className="max-w-[480px] mx-auto px-4 py-6 space-y-6">
         {/* Tab bar */}
-        <div className="flex gap-2 bg-white rounded-[20px] border border-brand-border shadow-card p-2">
+        <div className="flex gap-2 bg-white rounded-xl border border-brand-border shadow-card p-2">
           {tabBtn('profile',  <User  size={16} />, 'Profile')}
           {tabBtn('history',  <Clock size={16} />, 'History')}
           {tabBtn('settings', <Lock  size={16} />, 'Password')}
@@ -168,8 +174,8 @@ export default function AccountPage() {
 
         {/* ── Profile tab ─────────────────────────────────────────────────── */}
         {tab === 'profile' && (
-          <div className="bg-white rounded-[20px] border border-brand-border shadow-card p-5">
-            <h2 className="font-sora font-bold text-xl mb-5">Profile</h2>
+          <div className="bg-white rounded-xl border border-brand-border shadow-card p-5">
+            <h2 className="font-jakarta font-bold text-xl mb-5">Profile</h2>
             {profileLoading ? (
               <div className="space-y-3 animate-pulse">
                 {[1,2,3,4].map(i => <div key={i} className="h-10 bg-gray-100 rounded-xl" />)}
@@ -236,20 +242,20 @@ export default function AccountPage() {
         {/* ── History tab ─────────────────────────────────────────────────── */}
         {tab === 'history' && (
           <div className="space-y-4">
-            <h2 className="font-sora font-bold text-xl">Redemption History</h2>
+            <h2 className="font-jakarta font-bold text-xl">Redemption History</h2>
             {historyLoading ? (
               <div className="space-y-3">
                 {[1,2,3].map(i => (
-                  <div key={i} className="bg-white rounded-[20px] border border-brand-border p-5 animate-pulse space-y-2">
+                  <div key={i} className="bg-white rounded-xl border border-brand-border p-5 animate-pulse space-y-2">
                     <div className="h-4 bg-gray-100 rounded w-2/3" />
                     <div className="h-3 bg-gray-100 rounded w-1/3" />
                   </div>
                 ))}
               </div>
             ) : !history || history.length === 0 ? (
-              <div className="bg-white rounded-[20px] border border-brand-border shadow-card p-8 text-center space-y-2">
+              <div className="bg-white rounded-xl border border-brand-border shadow-card p-8 text-center space-y-2">
                 <p className="text-4xl">🎁</p>
-                <p className="font-sora font-bold text-lg">No history yet</p>
+                <p className="font-jakarta font-bold text-lg">No history yet</p>
                 <p className="text-text-medium text-sm">
                   Redeem a reward at a store to see it here.
                 </p>
@@ -258,7 +264,7 @@ export default function AccountPage() {
               history.map(item => (
                 <div
                   key={item.id}
-                  className="bg-white rounded-[20px] border border-brand-border shadow-card p-5 flex gap-4"
+                  className="bg-white rounded-xl border border-brand-border shadow-card p-5 flex gap-4"
                 >
                   <div
                     className="w-12 h-12 rounded-xl shrink-0 flex items-center justify-center overflow-hidden"
@@ -266,7 +272,7 @@ export default function AccountPage() {
                     dangerouslySetInnerHTML={{ __html: item.logo_svg }}
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="font-sora font-bold text-sm truncate">{item.merchant_name}</p>
+                    <p className="font-jakarta font-bold text-sm truncate">{item.merchant_name}</p>
                     <p className="text-text-medium text-xs mt-0.5 line-clamp-2">{item.reward_description}</p>
                     <div className="flex items-center gap-3 mt-2">
                       <span
@@ -292,8 +298,8 @@ export default function AccountPage() {
 
         {/* ── Password tab ────────────────────────────────────────────────── */}
         {tab === 'settings' && (
-          <div className="bg-white rounded-[20px] border border-brand-border shadow-card p-5">
-            <h2 className="font-sora font-bold text-xl mb-5">Change Password</h2>
+          <div className="bg-white rounded-xl border border-brand-border shadow-card p-5">
+            <h2 className="font-jakarta font-bold text-xl mb-5">Change Password</h2>
             <form onSubmit={changePassword} className="space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-text-dark mb-1">Current Password</label>

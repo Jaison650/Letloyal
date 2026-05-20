@@ -46,24 +46,29 @@ export default function CampaignRulesCard({ campaign, merchantSlug, brandColor }
       {/* Header row — always visible */}
       <button
         onClick={toggle}
-        className="w-full flex items-center justify-between p-4 bg-brand-bg hover:bg-white transition-colors text-left"
+        className="w-full flex items-center gap-2 p-3 sm:p-4 bg-brand-bg hover:bg-white transition-colors text-left min-w-0"
       >
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1.5">
-            <p className="font-semibold text-sm truncate">{campaign.name}</p>
-            <Badge variant={campaign.campaign_type === 'visit_based' ? 'visit' : 'spend'}>
-              <Target size={10} /> {campaign.campaign_type === 'visit_based' ? 'Visits' : 'Spend'}
-            </Badge>
-            <Badge variant="active">Active</Badge>
+          {/* Name + type badge on one line */}
+          <div className="flex items-center gap-1.5 mb-1 min-w-0">
+            <p className="font-semibold text-sm truncate flex-1 min-w-0">{campaign.name}</p>
+            <span className="shrink-0 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-primary-light text-primary">
+              <Target size={8} /> {campaign.campaign_type === 'visit_based' ? 'Visits' : 'Spend'}
+            </span>
+            <span className="shrink-0 inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-green-50 text-status-success">
+              Active
+            </span>
           </div>
-          <div className="flex items-center gap-3 text-xs text-text-medium">
-            <span className="flex items-center gap-1"><Users size={10} /> {campaign.participants_count}</span>
-            <span className="flex items-center gap-1"><Gift size={10} /> {campaign.redemptions_count} redeemed</span>
+          {/* Stats row */}
+          <div className="flex items-center gap-2 text-[11px] text-text-medium">
+            <span className="flex items-center gap-0.5"><Users size={9} /> {campaign.participants_count}</span>
+            <span className="text-text-light">·</span>
+            <span className="flex items-center gap-0.5"><Gift size={9} /> {campaign.redemptions_count} redeemed</span>
           </div>
         </div>
         <ChevronDown
-          size={16}
-          className="text-text-light shrink-0 ml-3 transition-transform duration-200"
+          size={15}
+          className="text-text-light shrink-0 transition-transform duration-200"
           style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
         />
       </button>

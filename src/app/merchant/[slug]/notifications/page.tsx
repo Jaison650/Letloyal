@@ -21,7 +21,7 @@ export default async function NotificationsPage({ params }: { params: Promise<{ 
       brandColor={merchant.brand_color}
     >
       <div className="mb-8">
-        <h1 className="font-sora font-bold text-2xl lg:text-3xl">Customer Campaigns</h1>
+        <h1 className="font-jakarta font-bold text-2xl lg:text-3xl">Customer Campaigns</h1>
         <p className="text-text-medium mt-1">
           Send targeted messages to your loyalty customers.
         </p>

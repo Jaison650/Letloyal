@@ -23,7 +23,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.08 }}
-          className="font-sora font-extrabold text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.08] text-text-dark mb-6"
+          className="font-jakarta font-extrabold text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.08] text-text-dark mb-6"
         >
           Give Every Customer<br />
           <span className="text-gradient">a Reason to Come Back</span>

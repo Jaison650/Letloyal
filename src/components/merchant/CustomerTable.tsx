@@ -59,7 +59,7 @@ function SlideOver({ customer, onClose }: { customer: Customer; onClose: () => v
       <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-2xl flex flex-col animate-slide-up lg:animate-none">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-brand-border">
-          <h3 className="font-sora font-bold text-lg">Customer Details</h3>
+          <h3 className="font-jakarta font-bold text-lg">Customer Details</h3>
           <button
             onClick={onClose}
             aria-label="Close"
@@ -72,11 +72,11 @@ function SlideOver({ customer, onClose }: { customer: Customer; onClose: () => v
         <div className="flex-1 overflow-y-auto p-5 space-y-5">
           {/* Identity */}
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-primary-light flex items-center justify-center text-primary font-bold text-2xl font-sora shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-primary-light flex items-center justify-center text-primary font-bold text-2xl font-jakarta shrink-0">
               {customer.name.charAt(0)}
             </div>
             <div>
-              <p className="font-sora font-bold text-xl">{customer.name}</p>
+              <p className="font-jakarta font-bold text-xl">{customer.name}</p>
               <p className="text-sm text-text-medium">{customer.masked_phone}</p>
             </div>
           </div>
