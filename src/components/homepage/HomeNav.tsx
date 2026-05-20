@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 
 const NAV_LINKS = [
   { label: 'How It Works', href: '#how-it-works' },
@@ -31,16 +32,8 @@ export default function HomeNav() {
     >
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="40" height="40" rx="10" fill="#0D9488"/>
-            <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
-            <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
-          </svg>
-          <span className="font-jakarta font-bold text-lg text-text-dark tracking-tight">
-            <span className="text-primary">Let</span>Loyal
-          </span>
+        <Link href="/" className="shrink-0">
+          <Logo variant="light" size={26} />
         </Link>
 
         {/* Desktop nav */}

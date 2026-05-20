@@ -3,6 +3,7 @@ import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Phone, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 import Button from '@/components/ui/Button';
 
 function LoginForm() {
@@ -40,17 +41,7 @@ function LoginForm() {
     <div className="min-h-screen bg-brand-bg flex flex-col items-center justify-center px-4 py-12">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-          <Link href="/" className="inline-flex items-center gap-2.5 justify-center">
-            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="40" height="40" rx="10" fill="#0D9488"/>
-              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
-              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
-            </svg>
-            <span className="font-jakarta font-bold text-xl text-text-dark tracking-tight">
-              <span className="text-primary">Let</span>Loyal
-            </span>
-          </Link>
+          <Link href="/"><Logo variant="light" size={30} /></Link>
           <h1 className="font-jakarta font-bold text-3xl mt-6">Welcome Back</h1>
           <p className="text-text-medium mt-2">Sign in to your loyalty account</p>
         </div>

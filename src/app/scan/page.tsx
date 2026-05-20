@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Camera, AlertCircle, Coffee } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 
 const DEMO_STORES = [
   { slug: 'brewhouse-cafe', name: 'BrewHouse Café', color: '#6B3F2A' },
@@ -62,15 +63,7 @@ export default function ScanPage() {
       <div className="w-full max-w-sm space-y-6">
         {/* Header */}
         <div className="text-center pt-8">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="40" height="40" rx="10" fill="#0D9488"/>
-              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
-              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
-            </svg>
-            <span className="font-jakarta font-bold text-xl text-text-dark tracking-tight"><span className="text-primary">Let</span>Loyal</span>
-          </Link>
+          <Link href="/"><Logo variant="light" size={26} /></Link>
           <h1 className="font-jakarta font-bold text-2xl mt-5">Scan a QR Code</h1>
           <p className="text-text-medium mt-2">Point your camera at a LetLoyal merchant&apos;s QR code</p>
         </div>

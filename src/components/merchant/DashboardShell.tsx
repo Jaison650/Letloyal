@@ -10,6 +10,7 @@ import {
 import { clsx } from 'clsx';
 import Badge from '@/components/ui/Badge';
 import QRKioskOverlay from '@/components/merchant/QRKioskOverlay';
+import Logo, { LogoMark } from '@/components/ui/Logo';
 
 interface NavItem {
   label: string;
@@ -126,15 +127,7 @@ export default function DashboardShell({
         style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%)' }}
       >
         <div className="px-6 py-5 border-b border-white/10">
-          <Link href="/" className="flex items-center gap-2">
-            <svg width="28" height="28" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-              <line x1="13" y1="9" x2="13" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-              <line x1="13" y1="44" x2="34" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-              <line x1="22" y1="35" x2="46" y2="10" stroke="#CCFBF1" strokeWidth="5.5" strokeLinecap="round"/>
-              <polyline points="35,10 46,10 46,22" stroke="#CCFBF1" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span className="font-jakarta font-bold text-lg text-white tracking-tight"><span className="font-medium text-[#5EEAD4]">Let</span>Loyal</span>
-          </Link>
+          <Link href="/"><Logo variant="dark" size={26} /></Link>
         </div>
 
         <div className="px-4 py-4 border-b border-white/10">
@@ -177,14 +170,8 @@ export default function DashboardShell({
         style={{ background: 'linear-gradient(135deg, #134E4A, #0D9488)' }}
       >
         <div className="flex items-center gap-2">
-          <svg width="32" height="32" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-            <rect width="56" height="56" rx="13" fill="#0D9488"/>
-            <line x1="13" y1="9" x2="13" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-            <line x1="13" y1="44" x2="34" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-            <line x1="22" y1="35" x2="46" y2="10" stroke="#CCFBF1" strokeWidth="5.5" strokeLinecap="round"/>
-            <polyline points="35,10 46,10 46,22" stroke="#CCFBF1" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <span className="font-jakarta font-bold text-white text-sm">{merchantName}</span>
+          <Logo variant="dark" size={22} />
+          <span className="font-jakarta font-bold text-white/60 text-xs">· {merchantName}</span>
         </div>
         <button onClick={() => setMobileOpen(true)} aria-label="Open menu" className="p-2 text-white/80">
           <Menu size={22} />
@@ -200,15 +187,7 @@ export default function DashboardShell({
             style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%)' }}
           >
             <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <svg width="28" height="28" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-                  <line x1="13" y1="9" x2="13" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-                  <line x1="13" y1="44" x2="34" y2="44" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-                  <line x1="22" y1="35" x2="46" y2="10" stroke="#CCFBF1" strokeWidth="5.5" strokeLinecap="round"/>
-                  <polyline points="35,10 46,10 46,22" stroke="#CCFBF1" strokeWidth="5.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <span className="font-jakarta font-bold text-white"><span className="font-medium text-[#5EEAD4]">Let</span>Loyal</span>
-              </div>
+              <Logo variant="dark" size={24} />
               <button onClick={() => setMobileOpen(false)} className="text-white/70 hover:text-white">
                 <X size={22} />
               </button>

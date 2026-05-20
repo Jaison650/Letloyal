@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import HomeNav from '@/components/homepage/HomeNav';
 import FaqAccordion from '@/components/homepage/FaqAccordion';
+import Logo, { LogoMark } from '@/components/ui/Logo';
 
 // ── Animation helpers ──────────────────────────────────────────────────────
 const fadeUp = {
@@ -202,11 +203,7 @@ export default function HomePage() {
               className="relative w-32 h-32 shrink-0"
             >
               <div className="absolute inset-0 bg-gradient-brand rounded-full flex items-center justify-center shadow-xl animate-pulse-glow">
-                <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 8h6v18h10v5H10V8z" fill="white"/>
-                  <path d="M26 21l6 6-6 6" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M32 27H21" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
-                </svg>
+                <LogoMark variant="dark" size={44} />
               </div>
               <div className="absolute -top-3 -right-3 bg-accent text-white text-xs font-bold px-2 py-1 rounded-full">SCAN</div>
             </motion.div>
@@ -575,14 +572,8 @@ export default function HomePage() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.15"/>
-                  <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
-                  <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
-                </svg>
-                <span className="font-jakarta font-extrabold text-xl text-white">LetLoyal</span>
+              <div className="mb-2">
+                <Logo variant="dark" size={26} />
               </div>
               <p className="text-sm max-w-xs leading-relaxed">QR-first loyalty for local merchants.<br />No app. No hardware. Just loyal customers.</p>
             </div>

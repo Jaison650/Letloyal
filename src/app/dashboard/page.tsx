@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Camera, ChevronRight, CreditCard } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 import LoyaltyCard, { type Enrollment } from '@/components/customer/LoyaltyCard';
 import LogoutButton from '@/components/customer/LogoutButton';
 import NotificationBell from '@/components/customer/NotificationBell';
@@ -72,15 +73,7 @@ export default function CustomerDashboard() {
       {/* ── Header ───────────────────────────────────────────────── */}
       <header className="sticky top-0 z-30" style={{ background: 'linear-gradient(90deg, #134E4A, #0D9488)' }}>
         <div className="max-w-[480px] mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <svg width="26" height="26" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="40" height="40" rx="10" fill="white" fillOpacity="0.15"/>
-              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
-              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
-            </svg>
-            <span className="font-jakarta font-bold text-white text-sm tracking-tight">LetLoyal</span>
-          </Link>
+          <Link href="/"><Logo variant="dark" size={24} /></Link>
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
             <NotificationBell />

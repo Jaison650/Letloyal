@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Lock, Eye, EyeOff, ChevronDown, AlertCircle, Info } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 import Button from '@/components/ui/Button';
 
 const DEMO_MERCHANTS = [
@@ -53,17 +54,7 @@ export default function MerchantLoginPage() {
 
         {/* Logo */}
         <div className="text-center">
-          <Link href="/" className="inline-flex items-center gap-2.5">
-            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="40" height="40" rx="10" fill="#0D9488"/>
-              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
-              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="2.5" strokeLinecap="round"/>
-            </svg>
-            <span className="font-jakarta font-bold text-xl text-text-dark tracking-tight">
-              <span className="text-primary">Let</span>Loyal
-            </span>
-          </Link>
+          <Link href="/"><Logo variant="light" size={30} /></Link>
           <h1 className="font-jakarta font-bold text-[26px] mt-5 text-text-dark">Merchant Login</h1>
           <p className="text-text-medium mt-1.5 text-sm">Access your loyalty dashboard</p>
         </div>

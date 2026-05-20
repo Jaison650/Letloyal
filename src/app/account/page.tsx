@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, User, Clock, Lock } from 'lucide-react';
+import Logo from '@/components/ui/Logo';
 
 type Tab = 'profile' | 'history' | 'settings';
 
@@ -150,15 +151,7 @@ export default function AccountPage() {
           <Link href="/dashboard" className="p-1.5 -ml-1.5 text-text-medium hover:text-text-dark">
             <ArrowLeft size={20} />
           </Link>
-          <Link href="/" className="flex items-center gap-1.5 font-jakarta font-bold text-primary text-sm">
-            <svg width="18" height="18" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="40" height="40" rx="10" fill="#0D9488"/>
-              <path d="M12 10h5v16h9v4H12V10z" fill="white"/>
-              <path d="M26 22l5 5-5 5" stroke="#5EEAD4" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M31 27H20" stroke="#5EEAD4" strokeWidth="3" strokeLinecap="round"/>
-            </svg>
-            LetLoyal
-          </Link>
+          <Link href="/"><Logo variant="light" size={20} /></Link>
           <span className="text-text-light mx-1">/</span>
           <span className="font-jakarta font-bold text-sm text-text-dark">My Account</span>
         </div>
