@@ -129,4 +129,17 @@ declare module 'lucide-react' {
   export const Coins: LucideIcon;
   export const HandCoins: LucideIcon;
   export const QrCodeIcon: LucideIcon;
+  export const UserCheck: LucideIcon;
+  export const UserPlus: LucideIcon;
+  export const UserMinus: LucideIcon;
+  export const UserX: LucideIcon;
+  export const UserCog: LucideIcon;
+  export const CheckCircle: LucideIcon;
+  export const BadgeCheck: LucideIcon;
+  export const Lightbulb: LucideIcon;
+  export const Send: LucideIcon;
+  export const MessageSquare: LucideIcon;
+  export const MapPinned: LucideIcon;
+  export const ScanQrCode: LucideIcon;
+  export const ScanBarcode: LucideIcon;
 }

@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, Target, Users, CheckCircle2, BarChart3,
-  QrCode, LogOut, Menu, X, Zap, Star, Bell, ChevronRight
+  QrCode, LogOut, Menu, X, Zap, Star, Bell, ChevronRight,
+  MoreHorizontal, Maximize2
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import Badge from '@/components/ui/Badge';
@@ -23,18 +24,23 @@ interface DashboardShellProps {
   logoSvg: string;
   brandColor: string;
   children: React.ReactNode;
+  /** Optional: pass qrDataUrl so the mobile bottom-nav QR button can open the kiosk overlay */
+  qrDataUrl?: string;
+  qrOverlayNode?: React.ReactNode;
 }
 
 export default function DashboardShell({
-  slug, merchantName, planTier, logoSvg, brandColor, children
+  slug, merchantName, planTier, logoSvg, brandColor, children, qrDataUrl, qrOverlayNode,
 }: DashboardShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [demoToastDismissed, setDemoToastDismissed] = useState(false);
   const [clock, setClock] = useState('');
   const [greeting, setGreeting] = useState('');
   const [dateStr, setDateStr] = useState('');
+  const [qrOpen, setQrOpen] = useState(false);
 
   useEffect(() => {
     const dismissed = localStorage.getItem('letloyal_demo_dismissed') === '1';
@@ -54,7 +60,7 @@ export default function DashboardShell({
     return () => clearInterval(id);
   }, []);
 
-  const navItems: NavItem[] = [
+  const primaryNav: NavItem[] = [
     { label: 'Dashboard',  icon: <LayoutDashboard size={18} />, href: `/merchant/${slug}` },
     { label: 'Campaigns',  icon: <Target         size={18} />, href: `/merchant/${slug}/campaigns` },
     { label: 'Customers',  icon: <Users          size={18} />, href: `/merchant/${slug}/customers` },
@@ -74,9 +80,9 @@ export default function DashboardShell({
     router.push('/merchant/login');
   }
 
-  const NavLinks = ({ dark = false }: { dark?: boolean }) => (
+  const SidebarLinks = () => (
     <>
-      {navItems.map((item) => {
+      {primaryNav.map((item) => {
         const active = isActive(item.href);
         return (
           <Link
@@ -85,27 +91,18 @@ export default function DashboardShell({
             onClick={() => setMobileOpen(false)}
             className={clsx(
               'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer group',
-              dark
-                ? active
-                  ? 'bg-white/15 text-white font-semibold'
-                  : 'text-white/60 hover:text-white hover:bg-white/10'
-                : active
-                  ? 'bg-primary text-white font-semibold shadow-sm'
-                  : 'text-text-medium hover:bg-brand-bg hover:text-primary'
+              active
+                ? 'bg-white/15 text-white font-semibold'
+                : 'text-white/60 hover:text-white hover:bg-white/10'
             )}
-            aria-label={item.label}
           >
-            <span className={clsx(
-              'shrink-0 transition-transform duration-150 group-hover:scale-110',
-              dark ? (active ? 'text-white' : 'text-white/60') : (active ? 'text-white' : 'text-text-light')
-            )}>
+            <span className={clsx('shrink-0 transition-transform duration-150 group-hover:scale-110',
+              active ? 'text-white' : 'text-white/60')}>
               {item.icon}
             </span>
             <span className="flex-1">{item.label}</span>
-            {item.pulse && (
-              <span className={clsx('w-2 h-2 rounded-full animate-pulse shrink-0', dark ? 'bg-accent' : 'bg-accent')} />
-            )}
-            {active && !dark && <ChevronRight size={14} className="text-white/70 shrink-0" />}
+            {item.pulse && <span className="w-2 h-2 rounded-full bg-accent animate-pulse shrink-0" />}
+            {active && <ChevronRight size={14} className="text-white/40 shrink-0" />}
           </Link>
         );
       })}
@@ -116,10 +113,10 @@ export default function DashboardShell({
     <div className="min-h-screen bg-brand-bg flex">
 
       {/* ── Desktop Sidebar ─────────────────────────────────────────────── */}
-      <aside className="hidden lg:flex fixed left-0 top-0 h-full w-64 flex-col z-40"
+      <aside
+        className="hidden lg:flex fixed left-0 top-0 h-full w-64 flex-col z-40"
         style={{ background: 'linear-gradient(180deg, #012d38 0%, #014451 40%, #028090 100%)' }}
       >
-        {/* LetLoyal brand */}
         <div className="px-6 py-5 border-b border-white/10">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center">
@@ -129,7 +126,6 @@ export default function DashboardShell({
           </Link>
         </div>
 
-        {/* Merchant profile */}
         <div className="px-4 py-4 border-b border-white/10">
           <div className="flex items-center gap-3 px-2">
             <div
@@ -146,12 +142,10 @@ export default function DashboardShell({
           </div>
         </div>
 
-        {/* Nav links */}
         <nav className="flex-1 p-3 flex flex-col gap-0.5 overflow-y-auto">
-          <NavLinks dark />
+          <SidebarLinks />
         </nav>
 
-        {/* Footer */}
         <div className="p-3 border-t border-white/10 space-y-1">
           <div className="px-3 py-2 rounded-xl bg-white/5 text-center">
             <p className="text-[10px] text-white/40 font-medium">🎬 Demo Mode</p>
@@ -159,7 +153,6 @@ export default function DashboardShell({
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-white/50 hover:text-red-300 hover:bg-red-500/10 transition-all duration-150 font-medium"
-            aria-label="Sign out"
           >
             <LogOut size={18} className="shrink-0" />
             <span>Sign Out</span>
@@ -183,7 +176,7 @@ export default function DashboardShell({
         </button>
       </div>
 
-      {/* ── Mobile Drawer ────────────────────────────────────────────────── */}
+      {/* ── Mobile Drawer ─────────────────────────────────────────────────── */}
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
@@ -198,27 +191,23 @@ export default function DashboardShell({
                 </div>
                 <span className="font-sora font-bold text-white">LetLoyal</span>
               </div>
-              <button onClick={() => setMobileOpen(false)} aria-label="Close menu" className="text-white/70 hover:text-white">
+              <button onClick={() => setMobileOpen(false)} className="text-white/70 hover:text-white">
                 <X size={22} />
               </button>
             </div>
-
             <div className="px-4 py-3 border-b border-white/10">
               <div className="flex items-center gap-3">
-                <div
-                  className="w-9 h-9 rounded-xl overflow-hidden shrink-0"
+                <div className="w-9 h-9 rounded-xl overflow-hidden shrink-0"
                   style={{ background: `${brandColor}30` }}
-                  dangerouslySetInnerHTML={{ __html: logoSvg }}
-                />
+                  dangerouslySetInnerHTML={{ __html: logoSvg }} />
                 <div>
                   <p className="font-semibold text-sm text-white">{merchantName}</p>
                   <span className="text-[10px] font-bold text-accent/80">{planTier.toUpperCase()}</span>
                 </div>
               </div>
             </div>
-
             <nav className="flex-1 p-3 flex flex-col gap-0.5 overflow-y-auto">
-              <NavLinks dark />
+              <SidebarLinks />
             </nav>
             <div className="p-3 border-t border-white/10">
               <button onClick={handleLogout} className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-white/50 hover:text-red-300 hover:bg-red-500/10 transition-all">
@@ -231,22 +220,18 @@ export default function DashboardShell({
 
       {/* ── Main content ─────────────────────────────────────────────────── */}
       <main className="flex-1 lg:ml-64 pt-14 lg:pt-0 min-h-screen overflow-x-hidden">
-        {/* Demo banner */}
         {!demoToastDismissed && (
           <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5 flex items-center justify-between gap-3">
             <p className="text-xs text-amber-800 font-medium">
               🎬 <strong>Demo Mode</strong> — Merchant data is pre-seeded for demonstration purposes.
             </p>
-            <button
-              onClick={() => { setDemoToastDismissed(true); localStorage.setItem('letloyal_demo_dismissed', '1'); }}
-              className="text-amber-600 hover:text-amber-800 shrink-0"
-            >
+            <button onClick={() => { setDemoToastDismissed(true); localStorage.setItem('letloyal_demo_dismissed', '1'); }}
+              className="text-amber-600 hover:text-amber-800 shrink-0">
               <X size={14} />
             </button>
           </div>
         )}
 
-        {/* Desktop top bar */}
         <div className="hidden lg:flex items-center justify-between px-8 py-4 bg-white border-b border-brand-border sticky top-0 z-20">
           <div>
             <h2 className="font-sora font-bold text-xl text-text-dark">
@@ -255,9 +240,7 @@ export default function DashboardShell({
             <p className="text-sm text-text-medium mt-0.5">{dateStr}</p>
           </div>
           <div className="flex items-center gap-3">
-            <div className="text-right">
-              <p className="font-sora font-bold text-2xl text-primary tabular-nums tracking-tight">{clock}</p>
-            </div>
+            <p className="font-sora font-bold text-2xl text-primary tabular-nums tracking-tight">{clock}</p>
             <Link
               href={`/merchant/${slug}/validate`}
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-95"
@@ -268,34 +251,143 @@ export default function DashboardShell({
           </div>
         </div>
 
-        <div className="p-4 lg:p-8 max-w-7xl mx-auto">
+        <div className="p-4 lg:p-8 max-w-7xl mx-auto pb-28 lg:pb-8">
           {children}
         </div>
       </main>
 
-      {/* ── Mobile bottom nav ────────────────────────────────────────────── */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-brand-border px-1 py-2 flex justify-around">
-        {navItems.map((item) => {
-          const active = isActive(item.href);
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={clsx(
-                'flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-colors relative',
-                active ? 'text-primary' : 'text-text-light'
-              )}
-              aria-label={item.label}
+      {/* ── QR Kiosk Overlay (passed from parent) ───────────────────────── */}
+      {qrOverlayNode}
+
+      {/* ── Mobile Bottom Nav — 4 slots ─────────────────────────────────── */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-brand-border">
+        <div className="flex items-end justify-around px-2 pb-2 pt-1">
+
+          {/* Dashboard */}
+          <Link href={`/merchant/${slug}`}
+            className={clsx('flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors relative min-w-[52px]',
+              isActive(`/merchant/${slug}`) ? 'text-primary' : 'text-text-light')}>
+            {isActive(`/merchant/${slug}`) && (
+              <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
+            )}
+            <LayoutDashboard size={20} />
+            <span className="text-[9px] font-semibold">Home</span>
+          </Link>
+
+          {/* Validate */}
+          <Link href={`/merchant/${slug}/validate`}
+            className={clsx('flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors relative min-w-[52px]',
+              isActive(`/merchant/${slug}/validate`) ? 'text-primary' : 'text-text-light')}>
+            {isActive(`/merchant/${slug}/validate`) && (
+              <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
+            )}
+            <div className="relative">
+              <CheckCircle2 size={20} />
+              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-accent rounded-full animate-pulse" />
+            </div>
+            <span className="text-[9px] font-semibold">Validate</span>
+          </Link>
+
+          {/* ── QR CENTER BUTTON ── */}
+          <div className="flex flex-col items-center -mt-5">
+            <button
+              onClick={() => setQrOpen(true)}
+              className="w-16 h-16 rounded-2xl shadow-btn-hover flex flex-col items-center justify-center gap-0.5 text-white transition-all active:scale-95 hover:opacity-90"
+              style={{ background: 'linear-gradient(135deg, #014451, #028090)' }}
+              aria-label="Show QR code"
             >
-              {active && (
-                <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-0.5 w-8 h-1 bg-primary rounded-full" />
-              )}
-              {item.icon}
-              <span className="text-[9px] font-semibold">{item.label}</span>
-            </Link>
-          );
-        })}
+              <Maximize2 size={20} className="text-accent" />
+              <span className="text-[8px] font-bold text-white/80">SHOW QR</span>
+            </button>
+            <span className="text-[9px] font-semibold text-primary mt-1">QR Code</span>
+          </div>
+
+          {/* Customers */}
+          <Link href={`/merchant/${slug}/customers`}
+            className={clsx('flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors relative min-w-[52px]',
+              isActive(`/merchant/${slug}/customers`) ? 'text-primary' : 'text-text-light')}>
+            {isActive(`/merchant/${slug}/customers`) && (
+              <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
+            )}
+            <Users size={20} />
+            <span className="text-[9px] font-semibold">Customers</span>
+          </Link>
+
+          {/* More drawer */}
+          <button
+            onClick={() => setMoreOpen(true)}
+            className={clsx('flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors min-w-[52px] text-text-light hover:text-primary')}>
+            <MoreHorizontal size={20} />
+            <span className="text-[9px] font-semibold">More</span>
+          </button>
+        </div>
       </nav>
+
+      {/* ── "More" bottom sheet ──────────────────────────────────────────── */}
+      {moreOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 flex flex-col justify-end">
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setMoreOpen(false)} />
+          <div className="relative bg-white rounded-t-3xl px-4 pt-3 pb-8 space-y-1">
+            <div className="w-10 h-1 bg-brand-border rounded-full mx-auto mb-3" />
+            {[
+              { label: 'Campaigns', icon: <Target size={18} />, href: `/merchant/${slug}/campaigns` },
+              { label: 'Analytics', icon: <BarChart3 size={18} />, href: `/merchant/${slug}/analytics` },
+              { label: 'Feedback',  icon: <Star size={18} />,   href: `/merchant/${slug}/feedback` },
+              { label: 'Notify',    icon: <Bell size={18} />,   href: `/merchant/${slug}/notifications` },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMoreOpen(false)}
+                className={clsx(
+                  'flex items-center gap-3 px-4 py-3.5 rounded-xl font-medium text-sm transition-colors',
+                  isActive(item.href) ? 'bg-primary-light text-primary font-semibold' : 'text-text-dark hover:bg-brand-bg'
+                )}
+              >
+                <span className="text-text-medium">{item.icon}</span>
+                {item.label}
+                <ChevronRight size={16} className="ml-auto text-text-light" />
+              </Link>
+            ))}
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-3 w-full px-4 py-3.5 rounded-xl text-sm text-status-error hover:bg-red-50 font-medium transition-colors"
+            >
+              <LogOut size={18} /> Sign Out
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── QR Kiosk bottom sheet (mobile inline) ────────────────────────── */}
+      {qrOpen && !qrOverlayNode && (
+        <div className="lg:hidden fixed inset-0 z-50 flex flex-col justify-end">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setQrOpen(false)} />
+          <div className="relative bg-white rounded-t-3xl px-6 py-6 text-center max-h-[90dvh] overflow-y-auto">
+            <div className="w-10 h-1 bg-brand-border rounded-full mx-auto mb-4" />
+            <div
+              className="w-14 h-14 rounded-2xl mx-auto mb-3 overflow-hidden flex items-center justify-center"
+              style={{ background: `${brandColor}25` }}
+              dangerouslySetInnerHTML={{ __html: logoSvg }}
+            />
+            <h3 className="font-sora font-bold text-lg">{merchantName}</h3>
+            <p className="text-xs text-text-medium mb-4">Show this QR to your customers</p>
+            {qrDataUrl ? (
+              <img src={qrDataUrl} alt="QR" className="w-56 h-56 mx-auto rounded-2xl border-2"
+                style={{ borderColor: `${brandColor}30` }} />
+            ) : (
+              <div className="w-56 h-56 mx-auto rounded-2xl bg-brand-bg flex items-center justify-center text-text-light">
+                <p className="text-sm">No active campaign</p>
+              </div>
+            )}
+            <p className="text-xs text-text-medium mt-4">Scan to join the loyalty program</p>
+            <button onClick={() => setQrOpen(false)}
+              className="mt-4 w-full py-3 rounded-xl border border-brand-border text-sm font-semibold text-text-medium hover:bg-brand-bg transition-colors">
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
