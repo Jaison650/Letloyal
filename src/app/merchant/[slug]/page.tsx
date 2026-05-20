@@ -118,26 +118,25 @@ export default async function MerchantDashboard({ params }: { params: Promise<{ 
       {/* Main grid */}
       <div className="grid lg:grid-cols-3 gap-6">
 
-        {/* Left column: Insights + QR (desktop only) + Campaigns */}
+        {/* Left column: QR first, then Insights, then Campaigns */}
         <div className="lg:col-span-1 space-y-6">
-          <InsightsPanel merchantSlug={slug} />
 
-          {/* QR Panel — hidden on mobile (use the bottom nav QR button instead) */}
+          {/* QR Panel — top of the column on all screen sizes */}
           {primaryCampaign && (
-            <div className="hidden lg:block">
-              <QRPanel
-                merchantSlug={slug}
-                merchantName={merchant.business_name}
-                logoSvg={merchant.logo_svg}
-                campaignType={primaryCampaign.campaign_type as 'visit_based' | 'spend_based'}
-                campaignId={primaryCampaign.id}
-                rewardDescription={primaryCampaign.reward_description}
-                rewardThreshold={primaryCampaign.reward_threshold}
-                brandColor={merchant.brand_color}
-                staticQrDataUrl={staticQrDataUrl}
-              />
-            </div>
+            <QRPanel
+              merchantSlug={slug}
+              merchantName={merchant.business_name}
+              logoSvg={merchant.logo_svg}
+              campaignType={primaryCampaign.campaign_type as 'visit_based' | 'spend_based'}
+              campaignId={primaryCampaign.id}
+              rewardDescription={primaryCampaign.reward_description}
+              rewardThreshold={primaryCampaign.reward_threshold}
+              brandColor={merchant.brand_color}
+              staticQrDataUrl={staticQrDataUrl}
+            />
           )}
+
+          <InsightsPanel merchantSlug={slug} />
 
           {/* Campaigns — click to expand rules */}
           <div className="card">

@@ -188,34 +188,11 @@
   body { padding-top: env(safe-area-inset-top); }
 }
 
-/* ── Thermal print system (80mm receipt printer) ─────────────────────────────
-   #printable-qr-card is hidden at runtime and only visible during print.
-   Uses visibility (not display) so the card can override parent hiding.
+/* ── Print system ────────────────────────────────────────────────────────────
+   QR Kit prints via window.open() into a self-contained popup (QRPanel.tsx).
+   This @media print block is a fallback for any other print triggers.
 ────────────────────────────────────────────────────────────────────────── */
-
-/* Hide the print card at runtime — only show during @media print */
-#printable-qr-card {
-  display: none;
-}
-
 @media print {
-  /* Hide all page content using visibility so children can override */
-  body * { visibility: hidden; }
-
-  /* Reveal only the print card and all its children */
-  #printable-qr-card,
-  #printable-qr-card * {
-    visibility: visible;
-  }
-
-  /* Position the card at top-left of the page */
-  #printable-qr-card {
-    display: block !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-  }
 
   @page {
     margin: 3mm 4mm;

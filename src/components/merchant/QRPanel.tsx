@@ -3,7 +3,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { Download, Printer, Clock, RefreshCw, Maximize2 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import QRKioskOverlay from '@/components/merchant/QRKioskOverlay';
-import PrintableQRCard from '@/components/merchant/PrintableQRCard';
 import { QR_SPEND_EXPIRY_SECONDS } from '@/lib/constants';
 
 interface QRPanelProps {
@@ -31,12 +30,6 @@ export default function QRPanel({
   const [kioskOpen, setKioskOpen] = useState(false);
 
   const currentQr = campaignType === 'visit_based' ? staticQrDataUrl : spendQr?.dataUrl;
-
-  // Store URL shown on the printed card
-  const storeUrl =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}/store/${merchantSlug}`
-      : `letloyal.com/store/${merchantSlug}`;
 
   useEffect(() => {
     if (!spendQr) return;
@@ -71,12 +64,110 @@ export default function QRPanel({
   }, [merchantSlug]);
 
   function downloadQR() {
-    const qr = currentQr;
-    if (!qr) return;
+    if (!currentQr) return;
     const a = document.createElement('a');
-    a.href = qr;
+    a.href = currentQr;
     a.download = `letloyal-qr-${merchantSlug}.png`;
     a.click();
+  }
+
+  /** Open a self-contained popup window and print from it — works on all browsers */
+  function printQR() {
+    if (!currentQr) return;
+
+    const storeUrl = `${window.location.origin}/store/${merchantSlug}`;
+    const earnLine = campaignType === 'visit_based'
+      ? `Visit ${rewardThreshold}× → get your reward`
+      : `Spend €${rewardThreshold} → get your reward`;
+
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>${merchantName} – Loyalty QR</title>
+  <style>
+    @page { size: 80mm auto; margin: 3mm 4mm; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      width: 72mm;
+      color: #111;
+      text-align: center;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .header {
+      border-bottom: 2px solid ${brandColor};
+      padding-bottom: 4mm;
+      margin-bottom: 3mm;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .shop { font-size: 15pt; font-weight: 800; margin-bottom: 1mm; line-height: 1.2; }
+    .tag { font-size: 7pt; text-transform: uppercase; letter-spacing: 0.08em; color: #666; }
+    .reward {
+      font-size: 11pt; font-weight: 700; margin-bottom: 4mm; line-height: 1.3;
+      color: ${brandColor};
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .qr-box {
+      border: 1.5px solid ${brandColor};
+      border-radius: 3mm; padding: 2mm;
+      display: inline-block; margin-bottom: 3mm;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .qr { width: 54mm; height: 54mm; border-radius: 2mm; display: block; }
+    .earn { font-size: 8.5pt; font-weight: 600; color: #333; margin-bottom: 4mm; }
+    .steps {
+      text-align: left; border-top: 1px dashed #bbb;
+      padding-top: 3mm; margin-bottom: 3mm;
+      display: flex; flex-direction: column; gap: 2.5mm;
+    }
+    .step { display: flex; align-items: center; gap: 2.5mm; font-size: 8pt; color: #333; }
+    .dot {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 4.5mm; height: 4.5mm; border-radius: 50%;
+      font-size: 6.5pt; font-weight: 800; color: #fff;
+      background: ${brandColor};
+      flex-shrink: 0;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .footer { border-top: 1px dashed #bbb; padding-top: 2.5mm; }
+    .url { font-size: 7pt; color: #555; word-break: break-all; margin-bottom: 1mm; }
+    .powered { font-size: 6.5pt; color: #aaa; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="shop">${merchantName}</div>
+    <div class="tag">Loyalty Rewards Program</div>
+  </div>
+  <div class="reward">&#127873; ${rewardDescription}</div>
+  <div class="qr-box">
+    <img class="qr" src="${currentQr}" alt="Loyalty QR Code" />
+  </div>
+  <div class="earn">${earnLine}</div>
+  <div class="steps">
+    <div class="step"><span class="dot">1</span><span>Scan QR with your phone camera</span></div>
+    <div class="step"><span class="dot">2</span><span>Create free account in 60 seconds</span></div>
+    <div class="step"><span class="dot">3</span><span>Earn &amp; redeem your reward</span></div>
+  </div>
+  <div class="footer">
+    <div class="url">${storeUrl}</div>
+    <div class="powered">Powered by LetLoyal</div>
+  </div>
+  <script>
+    window.onload = function() {
+      setTimeout(function() { window.print(); }, 300);
+    };
+  </script>
+</body>
+</html>`;
+
+    const win = window.open('', '_blank', 'width=420,height=700,toolbar=0,scrollbars=0');
+    if (!win) { alert('Please allow pop-ups for this site to use Print Kit.'); return; }
+    win.document.write(html);
+    win.document.close();
   }
 
   const formatCountdown = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
@@ -84,7 +175,7 @@ export default function QRPanel({
 
   return (
     <>
-      {/* ── Kiosk overlay — rendered as portal-like sibling ── */}
+      {/* ── Kiosk overlay ── */}
       <QRKioskOverlay
         isOpen={kioskOpen}
         onClose={() => setKioskOpen(false)}
@@ -99,18 +190,6 @@ export default function QRPanel({
         rewardThreshold={rewardThreshold}
       />
 
-      {/* ── Print-only card — hidden at runtime, revealed by @media print ── */}
-      <PrintableQRCard
-        merchantName={merchantName}
-        brandColor={brandColor}
-        logoSvg={logoSvg}
-        rewardDescription={rewardDescription}
-        campaignType={campaignType}
-        rewardThreshold={rewardThreshold}
-        qrDataUrl={currentQr}
-        storeUrl={storeUrl}
-      />
-
       {/* ── Dashboard QR card ── */}
       <div className="card space-y-5">
         <div className="flex items-center justify-between">
@@ -120,7 +199,6 @@ export default function QRPanel({
               <button
                 onClick={() => setKioskOpen(true)}
                 className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border border-brand-border text-text-medium hover:bg-brand-bg transition-colors"
-                title="Show full-screen QR for customers to scan"
               >
                 <Maximize2 size={12} /> Kiosk Mode
               </button>
@@ -139,7 +217,6 @@ export default function QRPanel({
             className="rounded-2xl p-4 flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity relative group"
             style={{ background: `${brandColor}15`, border: `3px solid ${brandColor}30` }}
             onClick={() => currentQr && setKioskOpen(true)}
-            title="Click to expand"
           >
             {currentQr && (
               <div className="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center">
@@ -164,7 +241,6 @@ export default function QRPanel({
 
           <p className="text-sm text-text-medium text-center font-medium">{rewardDescription}</p>
 
-          {/* Countdown for spend QR */}
           {campaignType === 'spend_based' && countdown > 0 && (
             <div className={`flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full ${isExpiringSoon ? 'bg-red-50 text-status-error' : 'bg-primary-light text-primary'}`}>
               <Clock size={15} />
@@ -173,7 +249,7 @@ export default function QRPanel({
           )}
         </div>
 
-        {/* Spend dial buttons */}
+        {/* Spend dial */}
         {campaignType === 'spend_based' && (
           <div className="space-y-3">
             <p className="text-xs font-semibold text-text-medium uppercase tracking-wide">Purchase Amount</p>
@@ -218,15 +294,13 @@ export default function QRPanel({
             onClick={downloadQR}
             disabled={!currentQr}
             className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border border-brand-border text-sm font-semibold text-text-medium hover:bg-brand-bg disabled:opacity-40 transition-colors min-h-[44px]"
-            aria-label="Download QR"
           >
             <Download size={16} /> Download PNG
           </button>
           <button
-            onClick={() => window.print()}
+            onClick={printQR}
             disabled={!currentQr}
             className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border border-brand-border text-sm font-semibold text-text-medium hover:bg-brand-bg disabled:opacity-40 transition-colors min-h-[44px]"
-            aria-label="Print QR Kit"
           >
             <Printer size={16} /> Print Kit
           </button>
