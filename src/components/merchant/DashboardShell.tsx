@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, Target, Users, CheckCircle2, BarChart3,
   LogOut, Menu, X, Zap, Star, Bell, ChevronRight,
-  MoreHorizontal, Maximize2, Settings
+  MoreHorizontal, Maximize2, Settings, TrendingUp
 } from 'lucide-react';
 import { clsx } from 'clsx';
 import Badge from '@/components/ui/Badge';
@@ -74,6 +74,7 @@ export default function DashboardShell({
     { label: 'Customers',  icon: <Users          size={18} />, href: `/merchant/${slug}/customers` },
     { label: 'Validate',   icon: <CheckCircle2   size={18} />, href: `/merchant/${slug}/validate`, pulse: true },
     { label: 'Analytics',  icon: <BarChart3      size={18} />, href: `/merchant/${slug}/analytics` },
+    { label: 'Retention',  icon: <TrendingUp     size={18} />, href: `/merchant/${slug}/report` },
     { label: 'Feedback',   icon: <Star           size={18} />, href: `/merchant/${slug}/feedback` },
     { label: 'Notify',     icon: <Bell           size={18} />, href: `/merchant/${slug}/notifications` },
     { label: 'Settings',   icon: <Settings       size={18} />, href: `/merchant/${slug}/settings` },

@@ -148,4 +148,8 @@ declare module 'lucide-react' {
   export const ExternalLink: LucideIcon;
   export const Phone: LucideIcon;
   export const Clock: LucideIcon;
+  export const FileSpreadsheet: LucideIcon;
+  export const File: LucideIcon;
+  export const FileText: LucideIcon;
+  export const FileDown: LucideIcon;
 }
