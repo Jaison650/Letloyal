@@ -10,7 +10,7 @@ import {
 import { clsx } from 'clsx';
 import Badge from '@/components/ui/Badge';
 import QRKioskOverlay from '@/components/merchant/QRKioskOverlay';
-import Logo, { LogoMark } from '@/components/ui/Logo';
+import { PoweredBy } from '@/components/ui/Logo';
 
 interface NavItem {
   label: string;
@@ -126,21 +126,18 @@ export default function DashboardShell({
         className="hidden lg:flex fixed left-0 top-0 h-full w-64 flex-col z-40"
         style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%)' }}
       >
-        <div className="px-6 py-5 border-b border-white/10">
-          <Link href="/"><Logo variant="dark" size={26} /></Link>
-        </div>
-
-        <div className="px-4 py-4 border-b border-white/10">
-          <div className="flex items-center gap-3 px-2">
+        {/* Merchant identity — no LetLoyal branding */}
+        <div className="px-5 py-5 border-b border-white/10">
+          <div className="flex items-center gap-3">
             <div
-              className="w-9 h-9 rounded-xl overflow-hidden shrink-0 flex items-center justify-center"
-              style={{ background: `${brandColor}30` }}
+              className="w-11 h-11 rounded-xl overflow-hidden shrink-0 flex items-center justify-center"
+              style={{ background: `${brandColor}40` }}
               dangerouslySetInnerHTML={{ __html: logoSvg }}
             />
             <div className="min-w-0 flex-1">
-              <p className="font-semibold text-sm text-white truncate">{merchantName}</p>
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-accent/90 mt-0.5">
-                <Zap size={9} /> {planTier.toUpperCase()}
+              <p className="font-jakarta font-bold text-base text-white truncate leading-tight">{merchantName}</p>
+              <span className="inline-flex items-center gap-1 text-[10px] font-bold mt-0.5" style={{ color: '#5EEAD4' }}>
+                <Zap size={9} /> {planTier.toUpperCase()} PLAN
               </span>
             </div>
           </div>
@@ -151,9 +148,6 @@ export default function DashboardShell({
         </nav>
 
         <div className="p-3 border-t border-white/10 space-y-1">
-          <div className="px-3 py-2 rounded-xl bg-white/5 text-center">
-            <p className="text-[10px] text-white/40 font-medium">🎬 Demo Mode</p>
-          </div>
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-white/50 hover:text-red-300 hover:bg-red-500/10 transition-all duration-150 font-medium"
@@ -161,6 +155,10 @@ export default function DashboardShell({
             <LogOut size={18} className="shrink-0" />
             <span>Sign Out</span>
           </button>
+          {/* Powered by — subtle, at the very bottom */}
+          <div className="pt-1 pb-1 flex justify-center">
+            <PoweredBy />
+          </div>
         </div>
       </aside>
 
@@ -169,9 +167,13 @@ export default function DashboardShell({
         className="lg:hidden fixed top-0 left-0 right-0 z-40 px-3 h-14 flex items-center justify-between border-b border-white/10"
         style={{ background: 'linear-gradient(135deg, #134E4A, #0D9488)' }}
       >
-        <div className="flex items-center gap-2">
-          <Logo variant="dark" size={22} />
-          <span className="font-jakarta font-bold text-white/60 text-xs">· {merchantName}</span>
+        <div className="flex items-center gap-2.5">
+          <div
+            className="w-8 h-8 rounded-lg overflow-hidden shrink-0 flex items-center justify-center"
+            style={{ background: `${brandColor}40` }}
+            dangerouslySetInnerHTML={{ __html: logoSvg }}
+          />
+          <span className="font-jakarta font-bold text-white text-sm truncate max-w-[160px]">{merchantName}</span>
         </div>
         <button onClick={() => setMobileOpen(true)} aria-label="Open menu" className="p-2 text-white/80">
           <Menu size={22} />
@@ -187,21 +189,20 @@ export default function DashboardShell({
             style={{ background: 'linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%)' }}
           >
             <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
-              <Logo variant="dark" size={24} />
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-xl overflow-hidden shrink-0 flex items-center justify-center"
+                  style={{ background: `${brandColor}40` }}
+                  dangerouslySetInnerHTML={{ __html: logoSvg }}
+                />
+                <div>
+                  <p className="font-jakarta font-bold text-sm text-white">{merchantName}</p>
+                  <span className="text-[10px] font-bold" style={{ color: '#5EEAD4' }}>{planTier.toUpperCase()} PLAN</span>
+                </div>
+              </div>
               <button onClick={() => setMobileOpen(false)} className="text-white/70 hover:text-white">
                 <X size={22} />
               </button>
-            </div>
-            <div className="px-4 py-3 border-b border-white/10">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl overflow-hidden shrink-0"
-                  style={{ background: `${brandColor}30` }}
-                  dangerouslySetInnerHTML={{ __html: logoSvg }} />
-                <div>
-                  <p className="font-semibold text-sm text-white">{merchantName}</p>
-                  <span className="text-[10px] font-bold text-accent/80">{planTier.toUpperCase()}</span>
-                </div>
-              </div>
             </div>
             <nav className="flex-1 p-3 flex flex-col gap-0.5 overflow-y-auto">
               <SidebarLinks />

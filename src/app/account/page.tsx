@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, User, Clock, Lock } from 'lucide-react';
-import Logo from '@/components/ui/Logo';
 
 type Tab = 'profile' | 'history' | 'settings';
 
@@ -151,9 +150,7 @@ export default function AccountPage() {
           <Link href="/dashboard" className="p-1.5 -ml-1.5 text-text-medium hover:text-text-dark">
             <ArrowLeft size={20} />
           </Link>
-          <Link href="/"><Logo variant="light" size={20} /></Link>
-          <span className="text-text-light mx-1">/</span>
-          <span className="font-jakarta font-bold text-sm text-text-dark">My Account</span>
+          <span className="font-jakarta font-bold text-base text-text-dark">My Account</span>
         </div>
       </header>
 

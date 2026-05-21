@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Camera, AlertCircle, Coffee } from 'lucide-react';
-import Logo from '@/components/ui/Logo';
+import { PoweredBy } from '@/components/ui/Logo';
 
 const DEMO_STORES = [
   { slug: 'brewhouse-cafe', name: 'BrewHouse Café', color: '#6B3F2A' },
@@ -63,9 +63,8 @@ export default function ScanPage() {
       <div className="w-full max-w-sm space-y-6">
         {/* Header */}
         <div className="text-center pt-8">
-          <Link href="/"><Logo variant="light" size={26} /></Link>
-          <h1 className="font-jakarta font-bold text-2xl mt-5">Scan a QR Code</h1>
-          <p className="text-text-medium mt-2">Point your camera at a LetLoyal merchant&apos;s QR code</p>
+          <h1 className="font-jakarta font-bold text-2xl">Scan a QR Code</h1>
+          <p className="text-text-medium mt-2">Point your camera at a store&apos;s QR code to earn rewards</p>
         </div>
 
         {/* Camera area */}
@@ -136,6 +135,10 @@ export default function ScanPage() {
           <Link href="/dashboard" className="text-sm text-primary font-semibold hover:underline">
             ← Back to my cards
           </Link>
+        </div>
+
+        <div className="flex justify-center pt-2 pb-4">
+          <PoweredBy />
         </div>
       </div>
     </div>

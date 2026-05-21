@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Camera, ChevronRight, CreditCard } from 'lucide-react';
-import Logo from '@/components/ui/Logo';
+import { PoweredBy } from '@/components/ui/Logo';
 import LoyaltyCard, { type Enrollment } from '@/components/customer/LoyaltyCard';
 import LogoutButton from '@/components/customer/LogoutButton';
 import NotificationBell from '@/components/customer/NotificationBell';
@@ -73,7 +73,7 @@ export default function CustomerDashboard() {
       {/* ── Header ───────────────────────────────────────────────── */}
       <header className="sticky top-0 z-30" style={{ background: 'linear-gradient(90deg, #134E4A, #0D9488)' }}>
         <div className="max-w-[480px] mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/"><Logo variant="dark" size={24} /></Link>
+          <span className="font-jakarta font-bold text-white text-base tracking-tight">My Rewards</span>
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
             <NotificationBell />
@@ -186,6 +186,11 @@ export default function CustomerDashboard() {
             🎉 You&apos;re enrolled in all demo stores!
           </p>
         )}
+
+        {/* Powered by — subtle footer */}
+        <div className="flex justify-center pt-2 pb-2">
+          <PoweredBy />
+        </div>
 
       </div>
 

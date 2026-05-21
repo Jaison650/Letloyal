@@ -11,7 +11,7 @@ import {
   ChevronRight, CheckCircle2, AlertCircle, MapPin, Gift,
   Phone, Globe, Clock, ExternalLink,
 } from 'lucide-react';
-import { LogoMark } from '@/components/ui/Logo';
+import { PoweredBy } from '@/components/ui/Logo';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { getTranslations } from 'next-intl/server';
 
@@ -415,10 +415,7 @@ export default async function StorePage({ params, searchParams }: PageProps) {
 
         {/* Powered by */}
         <div className="flex items-center justify-between pt-1 pb-4">
-          <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-text-light hover:text-primary transition-colors opacity-70 hover:opacity-100">
-            <LogoMark variant="light" size={14} />
-            Powered by LetLoyal
-          </Link>
+          <PoweredBy />
           <LanguageSwitcher variant="light" />
         </div>
       </div>
