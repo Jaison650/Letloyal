@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   description: 'Turn every QR scan into a loyal customer. No app download needed. Live in 10 minutes.',
   keywords: ['loyalty program', 'QR code', 'rewards', 'local business', 'stamp card'],
   authors: [{ name: 'LetLoyal' }],
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: 'LetLoyal — QR Loyalty for Local Businesses',
     description: 'Turn every QR scan into a loyal customer.',
@@ -34,6 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={locale}>
       <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />

@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import HomeNav from '@/components/homepage/HomeNav';
 import FaqAccordion from '@/components/homepage/FaqAccordion';
-import Logo, { LogoMark } from '@/components/ui/Logo';
+import Logo from '@/components/ui/Logo';
 
 // ── Animation helpers ──────────────────────────────────────────────────────
 const fadeUp = {
@@ -197,13 +197,13 @@ export default function HomePage() {
               <p className="text-xs text-text-light mt-1">Campaign progress</p>
             </motion.div>
 
-            {/* Center QR orb */}
+            {/* Center logo orb */}
             <motion.div
               variants={fadeUp}
-              className="relative w-32 h-32 shrink-0"
+              className="relative shrink-0"
             >
-              <div className="absolute inset-0 bg-gradient-brand rounded-full flex items-center justify-center shadow-xl animate-pulse-glow">
-                <LogoMark variant="dark" size={44} />
+              <div className="bg-gradient-brand rounded-3xl px-6 py-5 flex items-center justify-center shadow-xl animate-pulse-glow">
+                <Logo variant="dark" size={38} />
               </div>
               <div className="absolute -top-3 -right-3 bg-accent text-white text-xs font-bold px-2 py-1 rounded-full">SCAN</div>
             </motion.div>
